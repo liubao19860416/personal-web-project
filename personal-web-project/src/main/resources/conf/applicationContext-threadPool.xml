@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+	default-autowire="byName">
+	
+	<!-- 组件扫描，用于控制层 -->
+	<!-- <context:component-scan base-package="yycg.**.action" /> -->
+	<context:component-scan base-package="thread.pool" /> 
+	
+	<!-- 快捷帮助类，就不用每次加载配置文件了，在总的spring配置文件中注入一次就够了 -->
+	<!-- <bean class="base.ApplicationContextHelper" scope="singleton" /> -->
+    
+	<bean id="myJobTaskBean1" class="base.quartz.BatchCallCenterService"/>
+	
+	<bean id="myJobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- <property name="targetObject" ref="batchCallCenterService" /> -->
+		<property name="targetObject" ref="myJobTaskBean1" />
+		<property name="targetMethod" value="work"/>
+	</bean>
+
+	<bean id="myTaskTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="myJobDetail1"/>
+		<property name="cronExpression" >
+			<value>0/1 * * ? * MON-FRI 2014</value>
+		</property>
+	</bean>
+	
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		
+		<!-- <property name="order" value="-1" /> -->
+		<!-- 注入线程池 -->
+		<property name="taskExecutor" ref="taskExecutor" />
+		
+		<property name="startupDelay" value="10" />
+		<property name="triggers">
+			<list>
+				<ref bean="myTaskTrigger1" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 线程池配置方式1：通过构造方法注入 -->
+	<bean id="myTaskExecutor" class="thread.pool.MyTaskExecutor">
+		<!--  线程池的名称 -->
+		<constructor-arg ref="taskExecutor" />
+	</bean> 
+	
+	<!-- 线程池配置方式2：通过属性的set方法注入 -->
+	<!-- 这里是配置了该类的方法的执行使用线程池操作 -->
+	<bean id="myTaskExecutor2" class="thread.pool.MyTaskExecutor2">
+		<!-- <property name="taskExecutor" ref="taskExecutor"/> -->
+		<!-- 该bean中的属性名称 -->
+		<property name="taskExecutor">
+			<!-- 线程池的名称 -->
+			<ref bean="taskExecutor"/>
+		</property> 
+	</bean>  
+	
+	<!-- 线程池设置 -->
+	<!-- spring线程池设置 ，对定时任务开启一个线程池进行控制，其中bean的id为taskExecutor，不能改变，它是SchedulerFactoryBean的一个属性，这样通过set方法就注入进去了-->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" >
+		<!-- 核心线程数，核心线程会一直存活，即使没有任务需要处理 -->
+        <property name="corePoolSize" value="5" />
+        <!-- 当线程数大于或等于核心线程，且任务队列已满时，线程池会创建新的线程，直到线程数量达到maxPoolSize。如果线程数已等于maxPoolSize，且任务队列queueCapacity已满，则已超出线程池的处理能力，线程池会拒绝处理任务而抛出异常 -->
+        <property name="maxPoolSize" value="10" />
+        <!-- 当线程空闲时间达到keepAliveTime，该线程会退出，直到线程数量等于corePoolSize。如果allowCoreThreadTimeout设置为true，则所有线程均会退出直到线程数量为0-->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 核心线程在allowCoreThreadTimeout默认值为false，被设置为true时，核心线程才会退出;默认为false-->
+        <property name="allowCoreThreadTimeOut" value="true" />
+        <!-- 任务队列容量 -->
+        <property name="queueCapacity" value="25" />
+    </bean> 
+
+</beans>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<!-- 待完成 -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_10</title>
+</head>
+<body>
+	<!-- 
+页面布局
+ -->
+	<script type="text/javascript">
+		
+	function moveToFirst(){
+		
+	}
+	</script>
+	
+	<form name="myform">
+		<select id="inputMethod" multiple="multiple" size=10
+			style="width: 150px">
+			<option>QQ拼音</option>
+			<option>搜狗</option>
+			<option selected="selected">智能五笔</option>
+			<option>拼音</option>
+			<option>飞讯</option>
+			<option>百度拼音</option>
+			<option>微软拼音</option>
+		</select> <br />
+		<input type="button" value="首行" onclick="moveToFirst()">
+		<input type="button" value="末行" onclick="moveToFirst()">
+		<input type="button" value="上移" onclick="moveToFirst()">
+		<input type="button" value="下移" onclick="moveToFirst()">
+		<input type="button" value="删除" onclick="moveToFirst()"><br />
+		
+		
+		文本内容：<input type="text" name="user" value=""/><br />
+		<input type="button" name="alert1" value="显示按钮" onclick="alert(document.myform.user.value)"/>
+	</form>
+</body>
+</html>

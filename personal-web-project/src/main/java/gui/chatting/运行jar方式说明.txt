@@ -1,0 +1,5 @@
+二、运行 jar 方法
+
+（1）cmd
+
+（2）java -jar d:\client.jar

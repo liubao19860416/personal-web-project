@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 模版文件代码，复习使用；
+xsd中的命名空间是自动生成的，然后将需要的内容拷贝到xml指定位置中即可； -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.example.org/newbook"
+	xmlns:tns="http://www.example.org/newbook" 
+	elementFormDefault="qualified">
+
+	<element name="bookstore">
+		<complexType>
+			<sequence>
+				<element name="book" maxOccurs="5" minOccurs="0">
+					<complexType>
+						<sequence>
+							<element name="name" type="string"></element>
+							<element name="age" type="int"></element>
+						</sequence>
+						<attribute name="id" type="string" use="required"></attribute>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

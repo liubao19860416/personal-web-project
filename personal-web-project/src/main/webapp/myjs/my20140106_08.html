@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_08</title>
+</head>
+<body>
+	<!-- 
+二维数组的使用举例
+解析：在js中唯一的容器是数组。
+ -->
+
+	<script type="text/javascript">
+		//var record=["张三,18,男,本科"];
+		// 一个字符串存储,兼容性和扩展性不好；
+		//判断方式使用的是string的indexOf方式判断。
+
+		//var record = [ "张三", "18", "男", "研究生" ];
+		//var record = [ "李四", "33", "女", "本科" ];
+		//var record = [ "王五", "26", "男", "专科" ];
+
+		var records = [];
+		records[0] = [ "张三", "18", "男", "研究生" ];
+		records[1] = [ "李四", "33", "女", "本科" ];
+		records[2] = [ "王五", "26", "男", "专科" ];
+
+		//alert(records[0][0]);//张三
+		//alert(records.length);//3
+		//alert(records[0].length);//4
+
+		printRecords(records);
+
+		getInforFromName();
+
+		function getInforFromName(name) {
+			for (var i = 0; i < records.length; i++)
+				if (records[i][0] == "李四1")
+					//console.debug(records[i]);
+					alert(i);
+		}
+
+		function printRecords(records) {
+			document.write("<table border='1' width='250'>");
+			for (var i = 0; i < records.length; i++) {
+				document.write("<tr>");
+				for (var j = 0; j < records[i].length; j++) {
+					//alert(records[i]);
+					document.write("<td>" + records[i][j] + "</td>");
+					//alert(records[i][j]);
+				}
+				document.write("</tr>");
+			}
+			document.write("</table>");
+		}
+	</script>
+</body>
+</html>

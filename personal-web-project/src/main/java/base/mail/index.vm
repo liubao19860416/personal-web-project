@@ -1,0 +1,15 @@
+<html> 
+<head> 
+<style type="text/css"> 
+h4{  
+color:red;  
+background:#efefef;  
+}  
+</style> 
+</head> 
+<body> 
+<h4>${user} </h4> 
+<p><p> 
+<i>${content}</i> 
+</body> 
+</html> 

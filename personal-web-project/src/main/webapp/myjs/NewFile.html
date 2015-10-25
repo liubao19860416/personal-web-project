@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：数组的定义和简单使用；
+循环语句；
+输出语句document.write语句；
+-->
+<script language="JavaScript">
+	var rows = 9;
+	var clos = 9;
+	var arr = new Array(9);
+
+	for (var k = 1; k <= arr.length; k++) {
+		arr[k - 1] = k;
+	}
+	document.write("<table  border=\"1\" >");
+	for (var i = 1; i <= rows; i++) {
+		document.write("<tr>");
+		for (var j = 1; j <= clos; j++) {
+			if (j <= i)
+				document.write("<td>" + arr[i - 1] + "&nbsp;</td>");
+			else
+				document.write("<td>" + "&nbsp;&nbsp;" + "</td>");
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+</script>
+</head>
+<body>
+
+</body>
+</html>

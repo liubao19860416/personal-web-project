@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>我的网页</title>
+<!--内容：window对象的常用方法；
+父子窗口模拟演示子窗口操作父窗口中的数据，使用opener进行操作；；
+-->
+<script lang="JavaScript">
+	function fu_ziUrl(thisurl) {
+		window.open(thisurl, "网页标题",
+				"width=500,height=300,scrollbars=yes,resizable=no",true);//重定向；
+	}
+</script>
+</head>
+<body>
+
+
+	<form action="#" method="post" name="fu_form">
+		<input type="button" value="打开URL"
+			onclick="fu_ziUrl('WindowDemo06_zi.html')"><br /> 返回结果：<input
+			type="text" value="" name="result"><br />
+	</form>
+
+
+</body>
+</html>

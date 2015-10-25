@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>表单测试网页</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<script type="text/javascript" src="">
+		//========================start=========================
+		//========================over=========================
+	</script>
+
+	<!-- 
+<form action="http://192.168.1.100:20011" method="GET">
+	<form action="a.html" method="post">
+	-->
+<form action="http://a.html" method="GET" enctype="multipart/form-data" gbcolor="black">
+		<table border=5  bordercolor="pink" cellpadding=4 cellspacing=2
+			width=450px>
+			<caption>表格化数据显示范例</caption>
+			<tbody>
+				<tr>
+					<th colspan="2">注册表单</th>
+				</tr>
+				<tr>
+					<td>
+							用户名称(<u>a<u/>):
+					</td>
+					//通过设置for属性为对应的id属性，可以设置快捷键；默认组合alt使用；
+					<td><label for="useerid" accesskey="a">
+						</lable>
+						<input type="text" name="user" id= "useerid" value="" maxlength="16" size=20 /></td>
+				</tr>
+				<tr>
+					<td>输入密码(b)：</td>
+					<label for="password" accesskey="b">
+						</lable>
+					<td><input type="password" name="password" id="password" value="" maxlength="16" size=21 /></td>
+				</tr>
+				<tr>
+					<td>确认密码：</td>
+					<label for="password1" accesskey="c">
+						</lable>
+					<td><input type="password" id="password1" name="password" value="" maxlength="16" size=21 /></td>
+				</tr>
+				<tr>
+					<td>选择性别：</td>
+					<td><input type="radio" name="sex" value="nan"
+						checked="checked" />男 <input type="radio" name="sex" value="nv" />女
+					</td>
+				</tr>
+				<tr>
+					<td>图片提交按钮：</td>
+					<td><input type="radio" name="sex" value="nan"
+						checked="checked" />男 <input type="image" name="map" value="nan"
+						src="111.jpg" width=20 height=20 /> <input type="radio"
+						name="sex" value="nv" />女 <input type="image" name="map"
+						value="nan" src="111.jpg" width=20 height=20 /></td>
+				</tr>
+				<tr>
+					<td>选择技术：</td>
+					<td><input type="checkbox" checked="checked" name="tech"
+						value="java" />JAVA <input type="checkbox" name="tech"
+						value="C++" checked="checked" />C++ <input type="checkbox"
+						name="tech" value="VB" />VB</td>
+				</tr>
+				<tr>
+					<td>选择国家：</td>
+					<td valign="top"><select size=2 multiple="multiple">
+							<option value="none" selected>--选择国家--</option>
+							<option value="cn" selected="selected">中国</option>
+							<option value="usa">美国</option>
+							<option value="en">英国</option>
+							<option value="en">日本</option>
+							<option value="en">韩国</option>
+					</select> <select >
+							<option value="none">--选择地区--</option>
+							<option value="cn">东部</option>
+							<option value="usa">西部</option>
+							<option value="en">北部</option>
+							<option value="en">中部</option>
+							<option value="en">南部</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="file" name="select" value="选择文件" >
+					</td>
+				</tr>
+				<tr>
+					<th colspan=2><input type="reset" name="reset" value="清除数据" />
+						<input type="submit" name="submit" value="提交数据" /></th>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>

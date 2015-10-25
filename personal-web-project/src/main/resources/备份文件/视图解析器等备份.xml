@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/mvc    
+          http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<mvc:annotation-driven />
+	<!-- 当使用mvc的interceptors拦截器标签配置拦截器栈的时候，需要打开该配置！ -->
+	
+	<!-- 方式1 -->
+	<!-- <mvc:default-servlet-handler/>
+	<bean id="defaultServletHttpRequestHandler" class="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler"/> -->
+
+	<!-- 方式2 -->
+	<mvc:resources mapping="/images/**" location="/images/**" />
+	<mvc:resources mapping="/css/**.css" location="/css/**" />
+	<mvc:resources mapping="/js/**.js" location="/js/**" />
+
+	<context:component-scan base-package="base.controller" />
+	<context:component-scan base-package="base.dwr" /> 
+	<context:component-scan base-package="base.**.interceptor" />
+	<context:component-scan base-package="base.controller" use-default-filters="true" />
+	<!-- 定义扫描根路径为base，不使用默认的扫描方式 -->
+	<context:component-scan base-package="base" use-default-filters="false">
+		<!-- TODO 主要是用在父容器中排除不扫描，在子容器中扫描，这样就避免了冲突.一般没用。扫描符合@Service @Repository的类 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 设置默认首页，也可以单独设置多个其他的映射 -->
+	<mvc:view-controller path="/index/ok.htm" view-name="redirect:/index.jsp" />
+	<!-- 只要请求符合web.xml的请求转发器配置，这里就写那个带后缀名的访问路径即可，name为Controller中的没有后缀的映射路径即可,默认为forward请求转发 -->
+	<mvc:view-controller path="/index/ok2.htm" view-name="/base/login" />
+	
+    <!--全剧异常处理方式1： 指定错误路径和错误页面，注意指定viewResolver ，定义一个错误页面的controller统一进行配置即可-->  
+    <mvc:view-controller path="/404" view-name="/error/404"/>  
+    <mvc:view-controller path="/500" view-name="/error/500"/>  
+    <mvc:view-controller path="/exception" view-name="/exception/uncaughtException"/>  
+	
+
+	<!-- 需要初始化属性参数的bean的定义 -->
+	<bean id="commonInterceptor" class="base.interceptor.CommonInterceptor">
+		<!-- <property name="urlRegex" value="^http://[a-zA-Z_0-9/:\\-]*/simpleUrl/\\d{1}\\.htm$" /> -->
+		<property name="urlRegex" value="^.+/simpleUrl/[0-9].htm$" />
+	</bean>
+	<bean id="workTimeInterceptor" class="base.interceptor.WorkTimeInterceptor">
+		<property name="openingTime" value="9" />
+		<property name="closingTime"  value="18" />
+		<property name="outsideOfficeHoursPage">
+			<!-- <value>http://localhost:8080/personal-web-project/outsideOfficeHours.jsp</value> -->
+			<value>/#{T(com.saike.grape.base.BaseEnvironment).PROJECT_NAME}/outsideOfficeHours.jsp</value>
+		</property>
+	</bean>
+	<!-- 对指定的URL进行放行，在拦截器里注入一个属性 List<String> unCheckURLs -->
+	<bean id="loginUnCheckURLsInterceptor2" class="base.interceptor.LoginUnCheckURLsInterceptor2">
+		<property name="unCheckURLs">
+			<list>
+				<!-- 如果请求中包含以下路径，则不进行拦截 -->
+				<value>/simpleUrl</value>
+				<value>/index</value>
+				<value>/login</value>
+				<value>/doLogin</value>
+				<value>/doLogOut</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 对指定的URL进行放行，在拦截器里注入一个数组 String[] unCheckURLs -->
+	<bean id="loginUnCheckURLsInterceptor3" class="base.interceptor.LoginUnCheckURLsInterceptor3">
+		<property name="unCheckURLs">
+			<list>
+				<!-- 如果请求中包含以下路径，则不进行拦截 -->
+				<value>/simpleUrl</value>
+				<value>/login</value>
+				<value>/js</value>
+				<value>/css</value>
+				<value>/image</value>
+				<value>/images</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 性能监控拦截器，记录运行时间大于临界值recordTimePoint的相应方法的信息到指定log文件中,单位为毫秒-->
+	<bean id="timeWatcherInterceptor" class="base.interceptor.TimeWatcherInterceptor">
+		<property name="recordTimePoint" value="100"/>
+	</bean>
+		
+	<!-- 不用初始化参数的几个bean的定义 -->
+	<bean id="loginUnCheckURLsInterceptor1" class="base.interceptor.LoginUnCheckURLsInterceptor1"/>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:exclude-mapping path="/simpleUrl/**" />
+			<ref bean="commonInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/work/work.htm" />
+			<mvc:exclude-mapping path="/**/simpleUrl/**" />
+			<ref bean="workTimeInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/order2/**" />
+			<mvc:exclude-mapping path="/**" />
+			<ref local="loginUnCheckURLsInterceptor2"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/order3/**" />
+			<mvc:exclude-mapping path="/*/**" />
+			<ref local="loginUnCheckURLsInterceptor3"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/simpleUrl/**" />
+			<mvc:mapping path="/order1/**" />
+			<mvc:mapping path="/**/*.json" />
+			<mvc:exclude-mapping path="/**/**" />
+			<ref local="loginUnCheckURLsInterceptor1"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/simpleUrl/**" />
+			<!-- <mvc:exclude-mapping path="/**/**" /> -->
+			<ref local="timeWatcherInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	
+	<!-- 配置中可以设置多个试图解析器 -->
+	<!--视图解析器1：通用视图解析器,视图解析器策略 和 视图解析器 ，对JSTL提供良好的支持-->
+	<bean  id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="-1"/>
+		<!-- 默认的viewClass,可以省略不用配置 -->
+		<!-- <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />  -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<!-- 设置编码 -->
+		<property name="contentType" value="text/html;charset=utf-8" />
+	</bean>
+	
+	<!--视图解析器2：freeMarker视图解析器 -->
+    <!-- <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="order" value="2"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="contentType" value="text/html;charset=utf-8"/>
+        <property name="cache" value="true" />
+        <property name="suffix" value=".ftl" />
+    </bean> -->
+    <!-- 配置freeMarker的模板路径 -->
+   <!--  <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="defaultEncoding" value="UTF-8" />  
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape" />
+            </map>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">3600</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/> -->
+
+	<!-- 视图解析器3：Velocity视图解析器,该解析器用于解析所有的HTML扩展名的文件，并设定文件编码为UTF-8，然后添加Velocity配置 -->
+	<!-- Velocity需要velocity.jar和commons-collections.jar这两个JAR包 -->
+	<!-- <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="order" value="3"/>
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".htm" />
+	</bean>
+	配置Velocity的模板路径
+	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		配置文件位置
+		<property name="configLocation" value="classpath:velocity.properties" />
+		视图资源位置
+		<property name="resourceLoaderPath" value="/" />
+	</bean> -->
+
+	<!-- 视图解析器4：它 本身并不自己去解析，他只是分配给其他的ViewResolver去解析。并选择一个看起来像是客户端请求需要返回的一种  View返回 -->
+	<!-- <bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="-1"/>
+		设置为true以忽略对Accept Header的支持(浏览器不同有可能不同)
+	    <property name="ignoreAcceptHeader" value="true"/>
+	  	  在没有扩展名时即: "/user/1" 时的默认展现形式
+	    <property name="defaultContentType" value="text/html"/>
+		设置需要哪种解析器进行匹配的规则
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />
+				<entry key="spring" value="text/html" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<ref bean="internalResourceViewResolver"/>
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property>
+	</bean>   -->
+	
+	
+	<!-- 处理Method方法级别上的@RequestMapping注解 ,主要用来解析JSON数据使用的-->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<!-- 开启注解扫描后，需要设置该order优先级属性 -->
+		<property name="order" value="-1" />
+		<property name="cacheSeconds" value="0" />
+		<!-- 进行json支持的处理 -->
+		<property name="messageConverters">
+			<util:list id="beanList">
+			<!-- Z这里可以设置多个bean，用来转化数据格式使用 -->
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+	<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 其中ExceptionHandlerExceptionResolver优先级最高1，ResponseStatusExceptionResolver第二，DefaultHandlerExceptionResolver第三。 -->
+	<!-- -全剧异常处理方式2：SimpleMappingExceptionResolver这个类用来处理全局异常 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="order" value="-1" />
+		<!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+    	<property name="exceptionAttribute" value="exception"/>
+		<!-- 优先级最低，为3，定义默认的异常处理页面，当该异常类型的注册时使用，是一个映射路径 -->  
+		<!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
+		<property name="defaultErrorView" value="/base/errorDefault"/>
+		<!-- 默认HTTP状态码 --> 
+		<property name="defaultStatusCode" value="404"/>
+		<!-- <property name="warnLogCategory">
+			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
+		</property> -->
+		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->  
+        <property name="warnLogCategory" value="warn"/>
+        <!-- 优先级最高，为1 -->
+		<property name="exceptionMappings">
+			<props>
+				<!-- 这里使用了redirect:/error.jsp方式，尝试forward:/error.jsp方式； -->
+				<!-- 在这里配置各种异常，对应的跳转页面信息 ，就不用写Controller了，替代前面的方式1-->
+				<!-- <prop key="base.exception.SessionTimeoutException">forward:/error.jsp</prop> -->
+				<!-- <prop key="base.exception.SessionTimeoutException">redirect:/error.jsp</prop> -->
+				<!-- 可以，多个同名的配置时，以最后一个有效 ,默认方式为forward转发方式；也可以写对应的URLMapping的映射地址，没有后缀信息-->
+				<!-- <prop key="base.exception.SessionTimeoutException">forward:/WEB-INF/jsp/base/error.jsp</prop> -->
+				<!-- <prop key="java.lang.NullPointerException">/base/login</prop> -->
+				<!-- <prop key="java.io.IOException">redirect:/error.jsp</prop>
+				<prop key="java.lang.NullPointerException">redirect:/404.html</prop> -->
+				<!-- <prop key="java.lang.NullPointerException">forward:/WEB-INF/jsp/base/login.jsp</prop> -->
+				<!-- 
+				<prop key="java.lang.RuntimeException">/500.html</prop>
+				<prop key="java.sql.SQLException">error.jsp</prop>
+				<prop key="org.springframework.dao.DataAccessException">error.jsp</prop>
+				<prop key="org.springframework.transaction.TransactionException">error.jsp</prop>
+				<prop key="base.controller.BusinessException">error.jsp</prop>
+				<prop key="base.exception.ParameterException">error.jsp</prop> -->
+			</props>
+		</property>
+		 <!-- 优先级居中，为2，如何使用？？？ -->
+		<property name="statusCodes">
+            <props>  
+                <prop key="/base/errorDefault">500</prop>  
+                <prop key="/base/errorDefault">404</prop>  
+            </props>  
+        </property>
+	</bean>
+	
+	
+	<!--视图解析器5：不使用。 ResourceBundleViewResolver通过basename所指定的ResourceBundle解析视图名。-->
+	<!-- 配置文件中的内容如下,里面的key-value是对应的class类和类路径，以及映射名称及对应的映射url路径等信息 -->
+	<!-- 例如：[视图名].class=类路径，参见messages2.properties文件 -->
+	<!-- 例如：[视图名].url=该视图所对应的URL -->
+	<bean id="resourceBundleViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<!-- 想要使用，需要将它的级别设置为当前最高即可 -->
+		<property name="order" value="5"/>
+		<property name="defaultParentView" value="modelView" />
+		<property name="basename" value="messages2" />
+	</bean>
+
+
+	<!-- 内部是直接使用java.util.ResourceBundle.getBundle() 来获取i18n文件信息的，而ResourceBundle是使用“.”来作为basename分隔符的； -->
+	<!-- basename的配置表示将从classes目录下的*.properties文件中获取资源,这样我们可以很方便的实现国际化与本地化; -->
+	<!-- defaultParentView表示所有的view都将从modelView中继承而来,这和log4j的配置很类似. -->
+	<bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!-- 获取不到value的时候，取该key值作为value，而不会抛出异常信息 -->
+        <!-- <property name="useCodeAsDefaultMessage" value="true" />   -->
+		<property name="defaultEncoding" value="UTF-8" />  
+        <!-- 属性资源文件间隔时间 -->
+        <property name="cacheSeconds" value="100"/>  
+		<property name="basenames">
+			<list>
+				<!-- properties文件的名称，不用后缀即可,多个文件 -->
+				<value>anonymousUrls</value>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean> 
+
+
+</beans>
+

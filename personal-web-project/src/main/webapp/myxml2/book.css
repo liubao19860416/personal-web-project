@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+bookname {
+	display:block;
+	width:200px;
+	background-color: black;
+	color: green;
+}
+author {
+	width:200px;
+	display:block;
+	background-color: blue;
+	color: black;
+}
+/*
+price {
+	width:200px;
+	display:block;
+	background-color: red;
+	color: yellow;
+}
+*/

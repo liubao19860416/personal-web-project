@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：window对象的常用方法；
+JS打开或者关闭窗口的时候，都会使用到window对象，因为其直接是一个对象，可以直接调用其方法；
+
+-->
+<script lang="JavaScript">
+	function openUrl(thisurl) {
+		window.open(thisurl, "窗口标题","width=800 height=400,scrollbars=yes,resizeable=no ");
+	}
+</script>
+</head>
+<!-- 
+	
+	自动打开一个自定义的窗口，显示指定的网页文件；
+ -->
+<body>
+<form action="test.html" method="post" name="myform">
+		部门： <select name="url" onchange="openUrl(this.value)">
+			<option value="请选择网页" selected="selected">请选择网页</option>
+			<option value="NewFile01.html">网页01</option>
+			<option value="NewFile02.html">网页02</option>
+			<option value="NewFile03.html" >网页03</option>
+		</select><br /> 
+	</form>
+	
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema  xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://www.example.org/XMLSchema01" 
+targetNamespace="http://www.example.org/XMLSchema01"
+	elementFormDefault="qualified">
+
+
+	<element name="books">
+		<complexType>
+			<sequence>
+				<element name="book" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+
+
+</schema>
+
+<!-- xmlns：引入官方的互联网上面的预定义的标签和模版；这样我们可以使用他们定义的那些标签； 
+targetNamespace：下面自定义的规范，给其他xml文件使用的时候，给出的名字； 
+	 xmlns:xsi：而在客户的xml文件那里的则是引入实例化当前xml的属性schemaLocation； 
+	xmlns:tns：后面那个tns是别名，引入自己的对象属性；格式为：“tns：”。
+	.xsd文件的位置； elementFormDefault： -->

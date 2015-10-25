@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>POI、DWR等及其他很多工具类集合</display-name>
+	
+	<!-- 一些配置说明 -->
+	<!-- Listener配置信息必须在Filter和Servlet配置之前，Listener的初始化（ServletContentListener初始化）比Servlet和Filter都优先，而销毁比Servlet和Filter都慢。 -->
+	<!-- 正确加载顺序：context-param -> listener -> filter -> servlet；与它们在 web.xml 文件中的先后顺序无关。即不会因为 filter 写在 listener 的前面而会先加载 filter。 -->
+	<!-- 同种类型的标签，依次按照先后顺序进行加载！ -->
+	
+	<!-- 必须做为第一个listener来配置 -->
+	<!-- 监听器：它主要负责处理由JavaBeans Introspector的使用而引起的缓冲和内存泄露；类库和框架往往会产生这个问题.例如:Struts和Quartz-->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<!-- 初始化参数的监听器-->
+	<listener>
+		<listener-class>base.listener.InitParamtersListener</listener-class>
+	</listener>
+	
+	<!-- 监听器：加载spring的配置文件 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:conf/springmvc-import.xml,
+		</param-value>
+	</context-param>
+	
+	<!-- 监听器：加载logback配置文件的一种方式 -->
+	<!-- <listener>
+		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:logback.xml</param-value>
+	</context-param> 
+	-->
+	
+	<!-- 在线监听人数的监听器 ,自定义一个Listener，放在Spring的Listener之后去完成我们的初始化-->
+	<!-- <listener>
+		<listener-class>base.listener.HttpSessionListenerImpl</listener-class>
+	</listener> -->
+	
+	<!-- 字符编码过滤器 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<!-- 两者选其一即可，映射的servlet的name -->
+		<url-pattern>/*</url-pattern>
+    	<!-- <servlet-name>springmvc</servlet-name> -->
+	</filter-mapping>
+	
+	<!-- 方式1：激活Tomcat的defaultServlet来处理静态文件，配置默认的servler对应的映射，不拦截默认的css，js等资源文件 -->
+	<!-- 在org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler中定义了该servlet的名称 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<!-- <url-pattern>/static/*</url-pattern> -->
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.ico</url-pattern>
+		<url-pattern>*.swf</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.jpeg</url-pattern>
+		<url-pattern>*.bmp</url-pattern>
+		<url-pattern>*.psd</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.crx</url-pattern>
+		<url-pattern>*.xpi</url-pattern>
+		<url-pattern>*.exe</url-pattern>
+		<url-pattern>*.ipa</url-pattern>
+		<url-pattern>*.apk</url-pattern>
+		<url-pattern>*.htc</url-pattern>
+	</servlet-mapping>
+	
+	<!-- springmvc请求转发的转发器（servlet） -->
+	<servlet>
+		<description>spring mvc servlet</description>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		 <!--  加载springmvc的转发配置文件，也可以在下面那里进行加载，不在这里指定的话，默认加载的名称必须为"该servlet的名称-servlet.xml"名称，且默认放在/WEB-INF/目录下 -->
+		<init-param>
+			<description>spring mvc 配置文件</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:conf/applicationContext-interceptors3.xml</param-value>
+			<!-- <param-value>classpath:conf/springmvc-servlet.xml</param-value> -->
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.json</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.do</url-pattern>
+		<!-- 不能同时使用！！！ -->
+		<!-- <url-pattern>/*</url-pattern> -->
+	</servlet-mapping>
+	
+	<!-- DWR请求相关的配置信息，实际上也是一个servlet -->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<!-- <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class> -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowScriptTagRemoting</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- <init-param>
+			<param-name>config-1</param-name>
+			<param-value>WEB-INF/dwr.xml</param-value>
+		</init-param> -->
+	</servlet>
+	<!-- 在这种配置下，param-name的值必须以config开头。param-name可以有大于等于0个。
+	如果没有param-name，那么将会读 取WEB-INF/dwr.xml。如果有大于零个param-name，
+	那么WEB-INF/dwr.xml文件将不会被读取。 多个servlet，
+	每个servlet对应一个或多个dwr.xml -->
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- URL重写filter,用于将访问静态资源http://localhost/foo.css 转为http://localhost/static/foo.css -->
+	<!-- <filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param>
+	</filter> -->
+
+	<!-- 默认的访问主页 -->
+	<!-- <welcome-file-list>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list> -->
+	
+	<!-- 两种错误类型异常页面配置,这里只能捕获异常，不能进行其他异常处理操作，采用的是请求转发的方式 -->
+	<!-- <error-page>   
+      <error-code>404</error-code>   
+      <location>/404.html</location>
+    </error-page>  
+	<error-page>   
+      <error-code>500</error-code>   
+      <location>/500.html</location>
+   </error-page>  
+   <error-page>   
+       <exception-type>java.lang.NullException</exception-type>   
+       <location>/error.jsp</location>   
+   </error-page>  -->
+	
+</web-app>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE books SYSTEM "book.dtd">
+<books>
+	<book>
+		<name>java</name>
+		<author>张孝祥</author>
+		<price>33.6</price>
+	</book>
+	<book>
+		<name>c++</name>
+		<author>liubao</author>
+		<price>55</price>
+	</book>
+</books>

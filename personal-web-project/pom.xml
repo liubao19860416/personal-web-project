@@ -1,0 +1,631 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.saik.project</groupId>
+	<artifactId>personal-web-project</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>personal-web-project</name>
+	<url>http://maven.apache.org</url>
+	<description>保存了所有的工具类方法的war工程</description>
+
+	<!-- 当前项目有效的中央仓库配置 -->
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://repo1.maven.org/maven2/</url>
+			<name>central</name>
+		</repository>
+	</repositories>
+
+	<!-- 编码及内存设置 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jdkLevel>1.7</jdkLevel>
+		<jvmargs>-XX:MaxPermSize=384m -Xms512m -Xmx1024m</jvmargs>
+		<hibernate.version>3.5.0-Final</hibernate.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
+		<struts.version>2.3.8</struts.version>
+		<servlet.version>2.5</servlet.version>
+		<logback.version>1.1.2</logback.version>
+		<junit.version>4.11</junit.version>
+		<mysql.version>5.1.29</mysql.version>
+		<oracle.version>10.2.0.4.0</oracle.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- 添加base依赖jar包 -->
+		<dependency>
+			<groupId>com.saike.project</groupId>
+			<artifactId>project-base</artifactId>
+			<version>1.1.0-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- 上汽图片上传 -->
+		<dependency>
+			<groupId>com.saic.ebiz.mediastorage</groupId>
+			<artifactId>mediastorage</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- 依赖的project-dao（+service）工程的jar包-->
+		<!-- <dependency>
+			<groupId>com.saike.project</groupId>
+			<artifactId>project-dao</artifactId>
+			<version>1.1.0-SNAPSHOT</version>
+			它没有依赖了公司的base工程jar包
+			<exclusions>
+				<exclusion>
+					<groupId>com.saike.grape</groupId>
+					<artifactId>grape-base</artifactId>
+					<version>1.1.0-SNAPSHOT</version>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		
+		<!-- 异常信息UnsupportedImplementationException支持类 -->
+		<!-- <dependency>
+		    <groupId>org.geotoolkit</groupId>
+		    <artifactId>utility</artifactId>
+		    <version>3.20-geoapi-3.0</version>
+		</dependency> -->
+		
+		<!-- DWR测试依赖jar包 -->
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>3.0.M1</version>
+		</dependency>
+		
+		<!-- 3des加解密 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
+			<version>1.46</version>
+		</dependency>
+
+		<!-- 执行bat文件等sql脚本依赖的ant的jar包 -->
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-jai</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		
+		<!--apache的email依赖 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-email</artifactId>
+		    <version>1.3.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>activation</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		<!-- springmvc 发送邮件依赖的包 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
+		</dependency>
+		<dependency>
+			<groupId>janino</groupId>
+			<artifactId>janino</artifactId>
+			<version>2.5.10</version>
+		</dependency>
+		
+		<!-- URL重写filter -->
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		
+		<!-- validation校验相关依赖 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+		
+		<!-- 定时器相关 -->
+		<!-- <dependency>
+			<groupId>org.quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.6.6</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.opensymphony.quartz</groupId>
+			<artifactId>quartz-all</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- 好像暂时无用 -->
+		<!-- <dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.1</version>
+		</dependency> -->
+		<!-- SimpleTriggerJob2依赖的包 -->
+		<!-- <dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency> -->
+		
+		<!-- xpp3是用来xml解析等使用的 -->
+		<dependency>
+			<groupId>xpp3</groupId>
+			<artifactId>xpp3_min</artifactId>
+			<version>1.1.4c</version>
+		</dependency>
+		<!-- PullHelper类依赖的下面的2个jar包，是用来xml解析的 -->
+		<dependency>
+			<groupId>xmlpull</groupId>
+			<artifactId>xmlpull</artifactId>
+			<version>1.1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.kxml</groupId>
+			<artifactId>kxml2</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
+		
+		<!-- *************************struts2***************************** -->
+		<!-- struts2 文件上传下载相关，获取文件格式信息 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ognl</groupId>
+			<artifactId>ognl</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
+		</dependency>
+		<!-- *************************struts2***************************** -->
+		
+		<!-- *************************freemarker视图解析***************************** -->
+		<dependency>
+			<groupId>freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.8</version>
+		</dependency>
+		<!-- *************************velocity视图解析***************************** -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		
+		
+		<!-- *************************spring***************************** -->
+		<!-- spring 基础开发jar包,前面2个是必须的，其他的是可选的 -->
+		<!-- 这个jar文件包含Spring框架基本的核心工具类，Spring其它组件要都要使用到这个包里的类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 这个jar文件是所有应用都要用到的，它包含访问配置文件、创建和管理bean以及进行（IoC/DI）操作相关的所有类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- 这个jar文件为Spring核心提供了大量扩展。可以找到使用Spring ApplicationContext特性时所需的全部类，JDNI所需的全部类，UI方面的用来与模板（Templating）引擎如 Velocity、FreeMarker、JasperReports集成的类，以及校验Validation方面的相关类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 这个jar文件包含支持缓存Cache（ehcache）、JCA、JMX、邮件服务（Java Mail、COS Mail）、任务计划Scheduling（Timer、Quartz）方面的类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- 包含Spring MVC框架相关的所有类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、 Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+
+		<!-- Spring对 DAO特性集进行了扩展，使其支持 iBATIS、JDO、OJB、TopLink。这个jar文件里大部分的类都要依赖 spring-dao.jar里的类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 包含Spring DAO、Spring Transaction进行数据访问的所有类。为了使用声明型事务支持，还需在自己的应用里包含spring-aop.jar -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-dao</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+
+
+		<!-- 把 spring-dao.jar 与 spring-jca.jar 结合在一起了-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring 表达式语言 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 这个jar包提供了对JMX 1.0/1.2的支持类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- Spring对 JDBC数据访问进行封装的所有类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- 使用基于AOP的Spring特性，如声明型事务管理-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- AspectJ 如果使用到了切面编程(AOP) -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+		<!-- @Inject,一个新的注入依赖规范，既能支持Google Gucie，还能支持Spring -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<!--提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+		
+		<!-- 模拟HttpServletRequest和HttpServletResponse类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-mock</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8.8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- *************************spring***************************** -->
+		
+		
+		<!-- *************************hibernate***************************** -->
+		<!-- hibernate核心包 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- hibernate注解包 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- hibernate事务包 -->
+		<dependency>
+			<groupId>org.jboss.narayana.jta</groupId>
+			<artifactId>jta</artifactId>
+			<version>5.0.2.Final</version>
+		</dependency>
+		<!-- ehcache缓存包 -->
+		<dependency>
+			<groupId>ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<!-- cglib包，Hibernate用它来实现PO(Persistent Object 持久化对象)字节码的动态生成 -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- *************************hibernate***************************** -->
+		
+		
+		
+		<!-- *************************框架整合jar包***************************** -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-struts</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-hibernate3</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jpa</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-ibatis</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+		<!-- spring依赖的mybatis的jar包 ,否则会报错-->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- *************************框架整合jar包***************************** -->
+		
+		<!-- mybatis依赖包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.7</version>
+		</dependency>
+		<!-- mysql依赖包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- oracle 依赖包-->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>${oracle.version}</version>
+			<scope>runtime</scope>
+			<type>pom</type>
+		</dependency>
+		<!-- <dependency>
+			<groupId>oracle</groupId>
+			<artifactId>oracle-jdbc</artifactId>
+			<version>11.2.0.4</version>
+			<scope>runtime</scope>
+		</dependency> -->
+		
+		
+		<!-- 将JavaBean序列化为XML，并能够将XML文件反向转换为JavaBean -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!-- commons-configuration，对XML和Properties的读取操作 -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<!-- mongodb依赖的jar包 -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+		<!-- OCR依赖的jar包 -->
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai_imageio</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swingx</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<!-- 转换json的工具类 -->
+		<dependency>
+			<groupId>com.meidusa.toolkit</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.3.17</version>
+		</dependency>
+		<!-- 转换gson的工具类 -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<!-- POI相关jar包 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<!-- 拷贝属性的工具类 -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+		<!-- servlet-api 及jstl相关的jar包，解析jsp文件必须的 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		
+		
+		<!-- mq依赖的jar包 -->
+		<!-- <dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<version>5.3.07</version>
+		</dependency> -->
+
+	</dependencies>
+
+	<!-- 编译打包设置 -->
+	<build>
+		<finalName>personal-web-project</finalName>
+		<plugins>
+			<!-- maven打包为war文件的插件-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<encoding>UTF-8</encoding>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+					<warName>${project.artifactId}-${project.version}-release-${timestamp}</warName>
+				</configuration>
+			</plugin>
+			
+			<!-- 编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<!-- 测试跳过插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<!-- install 跳过test测试 -->
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- 压缩zip包使用 -->
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <version>2.2.1</version> 
+				<configuration> <descriptors> <descriptor>src/assembly/web-resources-distribution.xml</descriptor> 
+				</descriptors> </configuration> </plugin> YUI Compressor Maven压缩插件, mvn yuicompressor:compress 
+				<plugin> <groupId>net.alchim31.maven</groupId> <artifactId>yuicompressor-maven-plugin</artifactId> 
+				<executions> <execution> <goals> <goal>compress</goal> </goals> </execution> 
+				</executions> <configuration> 读取js,css文件采用UTF-8编码 <encoding>UTF-8</encoding> 
+				不显示js可能的错误 <jswarn>false</jswarn> 若存在已压缩的文件，会先对比源文件是否有改动 有改动便压缩，无改动就不压缩 <force>false</force> 
+				在指定的列号后插入新行 <linebreakpos>-1</linebreakpos> 压缩之前先执行聚合文件操作 <preProcessAggregates>true</preProcessAggregates> 
+				压缩后保存文件后缀 <suffix>.min</suffix> 源目录，即需压缩的根目录 <sourceDirectory>${basedir}/src/main/webapp/assets</sourceDirectory> 
+				压缩js和css文件 <includes> <include>**/css/**/*.css</include> <include>**/fonts/**/*.css</include> 
+				<include>**/img/**/*.jpg</include> <include>**/img/**/*.png</include> <include>**/plugins/**/*.css</include> 
+				<include>**/scripts/**/*.css</include> </includes> 以下目录和文件不会被压缩 <excludes> 
+				<exclude>*.jsp</exclude> <exclude>*.ftl</exclude> </excludes> 压缩后输出文件目录 <outputDirectory>${basedir}/src/main/webapp/assets</outputDirectory> 
+				</configuration> </plugin> -->
+		</plugins>
+	</build>
+
+
+</project>

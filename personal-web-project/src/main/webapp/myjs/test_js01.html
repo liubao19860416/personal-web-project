@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>函数部分</title>
+<script type="text/javascript">
+	function getSum(x, y) {
+		if (arguments.length == 1) {
+			return x;
+		} else if (arguments.length == 2) {
+			return x + y;
+		}
+		return "您传递的参数长度不正确";
+	}
+	function getSum2(x, y) {
+		return x + y;
+	}
+	alert(getSum2());//NaN
+	//alert(getSum());//"您传递的参数长度不正确"
+	//alert(getSum(3));//3
+	//alert(getSum(3, 6));//9
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		alert(arguments.length);
+	</script>
+
+</body>
+</html>

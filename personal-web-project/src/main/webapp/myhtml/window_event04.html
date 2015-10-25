@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window.opener属性练习</title>
+<script type="text/javascript">
+	var myWindow;
+	function openNewWin() {
+		myWindow = window.open('', 'MyName', 'width=400,height=600');
+		myWindow.document.write("This is 'myWindow'");
+		myWindow.focus();
+
+	}
+	function writeToOldWin() {
+		//myWindow.opener.document.write("This is the parent window");
+		myWindow.opener.document.myform.text.value="This is the parent window";
+
+	}
+</script>
+
+</head>
+<!-- 
+ -->
+
+<body>
+
+<form action="" name="myform">
+<input type="button" onclick="openNewWin()" name="button1" value="打开子页面" style="width:80px;height:40px;color:red"/>
+<input type="button" onclick="writeToOldWin()" name="button2" value="写入父页面" style="width:80px;height:40px;color:yellow"/><br />
+数据显示区域：<br /><input type="text"  name="text" value="显示父页面数据区域" style="width:180px;height:30px;color:gray"/>
+
+</form>
+
+</body>
+</html>

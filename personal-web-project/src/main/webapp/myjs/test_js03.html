@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>函数参数传递部分</title>
+<script type="text/javascript">
+	function getSum(x, y) {
+		alert(arguments.length);
+	}
+	//测试输入数据长度的函数
+	function ArgTest() {
+		var i, s, numargs = arguments.length;
+		s = numargs;
+		if (numargs < 2)
+			s += " argument was passed to ArgTest. It was ";
+		else
+			s += " arguments were passed to ArgTest. They were ";
+		for (i = 0; i < numargs; i++) {
+			s += arguments[i] + " ";
+		}
+		return (s);
+	}
+
+	function getValueTest(defaultValue) {
+		return defaultValue || 4;
+	}
+
+	//alert(getValueTest(""));//4
+
+	//alert(getValueTest("hello"));//hello
+
+	alert(ArgTest());//arguments were passed to ArgTest. It was
+	//alert(ArgTest(4));//arguments were passed to ArgTest. It was 4
+	//alert(ArgTest(3, 4));//arguments were passed to ArgTest. They were 3 4
+
+	//typeof测试；
+	//alert(typeof NaN);//number
+	//alert(typeof undefined);//undefined
+	//alert(typeof null);//object
+	//alert(typeof (new Date()));//object
+	//alert(typeof (getValueTest));//function
+	//alert(typeof (getValueTest()));//number
+	//&&和||的测试；
+	//alert(undefined && "false");//undefined
+	//alert(undefined && false);//undefined
+	//alert(true && false);//false
+	//alert(undefined || "false");//false
+	//alert(undefined || "" || "false");//false
+	//alert(undefined || false);//false
+	//alert(false || undefined);//undefined
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		//alert(3*"2");//6
+		//alert(3+"2");//32
+		//alert(undefined + 2);//NaN
+	</script>
+
+</body>
+</html>

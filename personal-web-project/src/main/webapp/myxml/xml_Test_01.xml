@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ <!DOCTYPE bookstore SYSTEM "newbook.dtd">
+ -->
+<!DOCTYPE bookstore[
+<!ELEMENT bookstore (book+)>
+<!ELEMENT book (name,author,price,publisher)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT publisher (#PCDATA)>
+<!ATTLIST book id CDATA #REQUIRED>
+<!ENTITY STR "www.baidu.com">
+]>
+
+<bookstore>
+	<book id="computer1">
+		<name>JAVA基础编程</name>
+		<author>刘保</author>
+		<price>33元</price>
+		<publisher>&STR;</publisher>
+	</book>
+	<book id="computer1">
+		<name>C++精讲教程</name>
+		<author>王某</author>
+		<price>63元</price>
+		<publisher>&STR;</publisher>
+	</book>
+	<book id="forGradute">
+		<name>毕业论文指导</name>
+		<author>唐彭</author>
+		<price>34元</price>
+		<publisher>&STR;</publisher>
+	</book>
+</bookstore>

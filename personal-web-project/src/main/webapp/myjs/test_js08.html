@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>函数作为参数传递</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		var getSum = function() {
+			var sum = 0;
+			for (var i = 0; i < arguments.length; i++) {
+				sum += arguments[i];
+			}
+			return sum
+		}
+
+		var myfn = function(fn) {
+			alert(fn(3, 5, 7))
+		}
+
+		var arr=new Array("3.5");
+		
+		//函数作为参数值进行传递；
+		myfn(getSum);
+		//alert(myfn(getSum()));//报错；
+		
+	</script>
+
+</body>
+</html>

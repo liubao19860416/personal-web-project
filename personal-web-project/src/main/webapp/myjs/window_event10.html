@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom练习-getElementById</title>
+<!--程序是顺序执行的，这一点一定要注意程序加载的先后顺序问题！  -->
+
+</head>
+<body>
+	<h1 id="id1">明天休息</h1>
+	
+	<script type="text/javascript">
+		var value1 = document.getElementById("id1");
+		//alert(value1);
+		//alert(value1.innerHTML);
+		//alert(value1.nodeName);
+		//alert(value1.nodeType);
+		//alert(value1.nodeValue);
+		
+		//alert(value1.childNodes[0].nodeValue);
+		//alert(value1.childNodes.nodeValue);//错误的输出，undefined
+		//console.debug(value1.childNodes[0].nodeValue);
+		
+		//alert(value1.firstChild.nodeName+":" + value1.firstChild.nodeValue+"--------"
+		//+ value1.firstChild.nodeType);
+		alert(value1.lastChild.nodeName+":" + value1.lastChild.nodeValue+"--------"
+		+ value1.lastChild.nodeType);
+	</script>
+</body>
+</html>

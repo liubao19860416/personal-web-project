@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!--九九乘法表
+注意事项：一定要注意foe循环中的变量i和j的定义使用var声明，而不是int，否则怎么运行也没有结果；
+-->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+
+function fun(){
+	document.write("<table border=\"1\">");
+	for (var i = 1; i <= 9; i++) {
+		document.write("<tr>");
+		for (var j = 1; j <= 9; j++) {
+			if (i >= j) {
+				document.write("<td>" + i + "*" + j + "=" + i * j + "</td>");
+			} else {
+				document.write("<td>&nbsp;&nbsp;&nbsp;</td>");
+			}
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+	
+	return();//null
+	return("");//""
+	return("liubao");//liubao
+}
+
+
+alert(fun());//undefined
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.ltd.uk/dwr/dwr30.dtd">
+<dwr>
+	<allow>
+	<!-- javascript对应jsp中需要引用的js文件名，而param对应过的value是在js中可以使用的变量名 -->
+		<create creator="spring" javascript="dwrService">
+			<param name="beanName" value="dwrService" />
+		</create>
+	</allow>
+	<!-- <allow>
+		<create creator="new" javascript="dwrService">
+			<param name="beanName" value="dwrService" />
+		</create>
+	</allow> -->
+</dwr>

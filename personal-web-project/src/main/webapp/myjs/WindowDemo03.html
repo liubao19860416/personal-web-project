@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：window对象的常用方法；
+删除确认选择对话框；
+-->
+<script lang="JavaScript">
+	function delUrl(thisurl) {
+		if (window.confirm("确认删除？")) {
+			alert("您选择的是“是”！");
+		} else {
+			alert("您选择的是“否”！");
+		}
+	}
+</script>
+</head>
+<!-- 
+	自动打开一个自定义的窗口，显示指定的网页文件；
+	<form action="test.html" method="post" name="myform">
+		部门： <select name="url" onchange="openUrl(this.value)">
+			<option value="请选择网页" selected="selected">请选择网页</option>
+			<option value="NewFile01.html">网页01</option>
+			<option value="NewFile02.html">网页02</option>
+			<option value="NewFile03.html" >网页03</option>
+		</select><br /> 
+	</form>
+ -->
+<body>
+	<a href="#" onclick="delUrl()">删除邮件</a>
+	<br />
+	<form action="test.html" method="post" name="myform">
+		<input type="button" name="delButton" value="删除" onclick="delUrl()"><br />
+	</form>
+</body>
+</html>

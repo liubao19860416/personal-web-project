@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+	<book category="CHILDREN">
+		<title lang="en">Harry Potter</title>
+		<author>迪士尼</author>
+		<year>2005</year>
+		<price>200.0</price>
+	</book>
+	<book category="PARANT">
+		<title lang="zh">xxxx</title>
+		<author>J K. Rowling</author>
+		<year>2005</year>
+		<price>129.99</price>
+	</book>
+	<book category="CHILDREN">
+		<title lang="zh">Harry xxx</title>
+		<author>老李</author>
+	</book>
+	<book category="CHILDREN">
+		<title lang="zh">天方夜谭</title>
+		<author>老黎</author>
+	</book>
+</bookstore>

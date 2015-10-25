@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户信息插入删除系统，实时显示数据</title>
+<script type="text/javascript">
+	window.onload = function() {
+		//eval(alert("hello world"));
+	}
+</script>
+
+<style type="text/css">
+td,th {
+	border: solid 1px red;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table {
+	
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		//eval("hello world")
+
+		function addUsers() {
+			var name1 = document.getElementsByName("name")[0].value;
+			var email1 = document.getElementsByName("email")[0].value;
+			var phone1 = document.getElementsByName("phone")[0].value;
+			
+			//alert(name1);
+
+			//进行添加一行数据的操作；
+			var newTr = document.createElement("tr");
+			
+			var a_str="<a href='javascript:void(0)'; onclick='deleUser(this)'>Delete</a>"
+			
+			newTr.innerHTML = "<td>" + name1 + "</td><td>" + email1
+					+ "</td><td>" + phone1 + "</td><td>"+a_str+"</td>";
+
+			//var table1 = document.getElementById("mytable");
+			var table1 = document.getElementsByTagName("table")[0];
+			//table1.appendChild(newTr);
+			table1.innerHTML +="<tr>"+"<td>" + name1 + "</td><td>" + email1
+			+ "</td><td>" + phone1 + "</td><td>"+a_str+"</td></tr>";
+
+		}
+
+		function deleUser(e1) {
+			var table1=document.getElementById("mytable");
+			
+			var delTr=e1.parentNode.parentNode.parentNode;
+			table1.removeChild(delTr);
+
+		}
+	</script>
+
+	<form>
+		<p align="left">添加用户</p>
+		姓名： <input type="text" name="name" value="" /> Email： <input
+			type="text" name="email" value="" /> 电话： <input type="text"
+			name="phone" value="" /> <br />
+		<h1 align="left">
+			<input type="button" name="button" value="提交" onclick="addUsers()" />
+			<input type="reset" name="reset" value="清除" />
+		</h1>
+		<hr />
+	</form>
+
+	<table id="mytable">
+		<tr>
+			<th>姓名</th>
+			<th>Email</th>
+			<th>电话</th>
+			<th>其他</th>
+		</tr>
+
+	</table>
+
+
+
+
+
+</body>
+</html>

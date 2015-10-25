@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：window对象的常用方法；
+父子窗口模拟演示子窗口操作父窗口中的数据，使用opener进行操作；；
+-->
+<script lang="JavaScript">
+	function closeWin() {
+		window.close();//关闭窗口；
+		window.opener.location.reload();//刷新父窗口；
+	}
+</script>
+</head>
+<body>
+	<h1>
+		<a href="#" onclick="closeWin()">关闭窗口</a>
+	</h1>
+	<br />
+
+
+</body>
+</html>

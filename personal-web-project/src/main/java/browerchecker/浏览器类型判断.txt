@@ -1,0 +1,81 @@
+1. /**  
+ * 判断浏览器类型是否是IE,是则返回true,不是返回false  
+ * ServletActionContext是struts2上下文对象  
+ * @author 李英夫(2010-6-20 上午09:36:48)  
+ * @return boolean  
+ */   
+public   static   boolean  isIE(){  
+    return  ServletActionContext.getRequest().getHeader( "USER-AGENT" ).toLowerCase().indexOf( "msie" ) >  0  ?  true  :  false ;  
+}  
+2.js代码：
+如何判断浏览器的类型和版本？ -- 使用JavaScript的内置对象 navigator 的属性userAgent的值来判断（navigator.userAgent）。
+navigator是javascript的内置对象，通常用于检测浏览器与操作系统的版本。 常用的属性有
+
+    appCodeName -- 浏览器代码名的字符串表示
+    appName -- 官方浏览器名的字符串表示
+    appVersion -- 浏览器版本信息的字符串表示
+    cookieEnabled -- 如果启用cookie返回true，否则返回false
+    javaEnabled -- 如果启用java返回true，否则返回false
+    platform -- 浏览器所在计算机平台的字符串表示
+    plugins -- 安装在浏览器中的插件数组
+    taintEnabled -- 如果启用了数据污点返回true，否则返回false
+    userAgent -- 用户代理头的字符串表示（就是包含浏览器版本信息等的字符串）
+
+
+
+
+<script language="javascript">   
+var ua = navigator.userAgent.toLowerCase();  
+function check(r){  
+  return r.test(ua);  
+}  
+/** 
+ * return IE,IE6,IE7,IE8,IE9,Chrome,Firefox,Opera,WebKit,Safari,Others 
+*/  
+function getBrowserName()  
+{  
+  var browserName;  
+  var isOpera = check(/opera/);  
+  var isChrome = check(/chrome/);  
+  var isFirefox = check(/firefox/);  
+  var isWebKit = check(/webkit/);  
+  var isSafari = !isChrome && check(/safari/);  
+  var isIE = !isOpera && check(/msie/);  
+  var isIE7 = isIE && check(/msie 7/);  
+  var isIE8 = isIE && check(/msie 8/);  
+  if(isIE8)  
+  {  
+    browserName = "IE8";    
+  }else if(isIE7)  
+  {  
+    browserName = "IE7";  
+  }else if(isIE)  
+  {  
+    browserName = "IE";  
+  }else if(isChrome)  
+  {  
+    browserName = "Chrome";  
+  }else if(isFirefox)  
+  {  
+    browserName = "Firefox";  
+  }else if(isOpera)  
+  {  
+    browserName = "Opera";  
+  }else if(isWebKit)  
+  {  
+    browserName = "WebKit";  
+  }else if(isSafari)  
+  {  
+    browserName = "Safari";  
+  }else  
+  {  
+    browserName = "Others";  
+  }  
+  return browserName;  
+}   
+  
+</script>
+
+
+
+3.参见项目中的java程序判断代码；

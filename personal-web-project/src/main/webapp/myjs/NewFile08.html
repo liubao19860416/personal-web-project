@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<!-- 基础语法熟练
+	 字符串string对象扩展添加新功能 -->
+	<script type="text/javascript">
+		//========================start=========================
+
+		function js_trim() {//去除开头和结尾的空格函数；
+			var start = 0;
+			var end = this.length - 1;
+
+			while (start <= end && this.charAt(start) == ' ') {
+				start++;
+			}
+			while (start <= end && this.charAt(end) == " ") {
+				end--;
+			}
+
+			return this.substring(start, end + 1);
+
+		}
+		var str="  klafjlaf  ";
+		String.prototype.len=100;//这样可以给所有的字符串原型添加一个len的属性，
+		//所以可以认为prototype是对对象的圆形进行扩展添加功能或属性使用的；
+		str.len=200;
+		document.write(str.len+"<br />" );
+		String.prototype.trim=js_trim;
+		alert("="+str+"=");
+		alert("="+str.trim()+"=");
+		
+		document.write(str.trim()+"<br />" );
+
+		//========================over=========================
+	</script>
+
+
+</body>
+</html>

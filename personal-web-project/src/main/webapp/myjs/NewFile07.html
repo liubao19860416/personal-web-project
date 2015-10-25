@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<!-- 基础语法熟练
+	 字符串string是关键 -->
+	<script type="text/javascript">
+		//========================start=========================
+		function methods_01() {
+			var y = 0;
+		}
+		//alert(methods_01());
+		//alert(methods_01);
+
+		for (var z = 0; z < 2; z++) {
+		}
+		var x = 0, y;
+		var y = 2;
+		//alert(x + ":::" + y + "==" + z);
+
+		arr = [ 1, 5, 32, 54, 9, 12, 0 ];
+		for (var i = 0; i < arr.length; i++) {
+			document.write(arr[i] + ",");
+		}
+		var str = "  avblaksfjslaf  ";
+		alert(str.fontcolor("red"));
+		alert(typeof ("red"));
+		//这样可以查看对应的方法的底层的实现原理；
+		//然后使用document.write就可以将浏览器能解析的数据泄出去了；
+
+		document.write("<br />" + "字符串".link("http://192.168.1.100:80")+"<br />" );
+
+		function js_trim(str) {//去除开头和结尾的空格函数；
+			var start = 0;
+			var end = str.length - 1;
+
+			while (start <= end && str.charAt(start) == ' ') {
+				start++;
+			}
+			while (start <= end && str.charAt(end) == " ") {
+				end--;
+			}
+
+			return str.substring(start, end + 1);
+
+		}
+		document.write(js_trim(str)+"<br />" );
+
+		//========================over=========================
+	</script>
+
+
+</body>
+</html>

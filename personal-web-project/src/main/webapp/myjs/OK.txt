@@ -1,0 +1,21 @@
+test_js01.html:函数中的arguments的使用；
+test_js02.html:getSum(x, y)函数参数不同的调用情况；
+test_js03.html:测试输入数据长度的函数，以及基本类型的测试；
+test_js04.html:九九乘法表；
+test_js05.html:九九乘法表（升级版）；
+test_js05.html:九九乘法表（在table和div内显示输出内容）；
+test_js06.html:简单用户信息查询界面；
+test_js07.html:函数作为参数值进行传递；
+test_js08.html:函数作为参数传递；
+
+window_event05.html：练习-窗口打开关闭操作；
+window_event06.html：在窗体文本区域中单击，颜色交替发生变化的例子；
+window_event07.html：给普通变量扩展属性（这样是不可以的）；
+window_event08.html：练习-prototype的使用解析；
+window_event09.html：增加对节点类型(nodeType)的判断语句，从而针对不同的节点类型，使用不同的输出语句
+window_event10.html：getElementById
+window_event11.html：select标签遍历输出(文本节点的数据遍历输出方式使用innerHTML)
+window_event12.html：节点替换或移动替换操作
+window_event13.html：用户信息插入删除系统，实时显示数据
+window_event14.html：输入法操作界面
+

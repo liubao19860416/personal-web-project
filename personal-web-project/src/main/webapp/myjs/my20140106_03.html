@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_03</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person() {
+		}
+
+		var p = new Person();
+		p.name = "zhangsan";
+		p.age = 18;
+		p["country"] = "CN";
+		p.say = function() {
+			alert("speaking……")
+		}
+
+		function Person(name, age, country) {
+			this.age = age;
+			this.name = name;
+			this.country = country;
+
+			this.say = function() {
+				var str=name + "    speaking……";
+				return str;//没有这个语句的话，被调用后返回的是undefined
+			}
+		}
+
+		var p1 = new Person("zhangsan", 33, "cn");
+		//初始化的时候，say属性只是赋值过程，赋值的函数体不会被执行；
+
+		//console.debug(p1.constructor);
+
+		//console.debug(p1);
+
+		alert(p.toString())//[object Object]
+		alert(p1)//[object Object]
+		alert(p.country)//
+
+		alert(p1.say())
+
+		//alert(p.say())//返回值类型为speaking和undefined两个
+	</script>
+
+</body>
+</html>

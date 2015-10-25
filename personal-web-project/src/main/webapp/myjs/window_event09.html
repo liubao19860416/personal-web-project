@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom练习nodeName,nodeValue,nodeType-</title>
+<!-- 
+增加对节点类型(nodeType)的判断语句，从而针对不同的节点类型，使用不同的输出语句； -->
+<script type="text/javascript">
+	window.onload = function() {
+		var e = document.getElementById("bj");
+		for (var i = 0; i < e.childNodes.length; i++) {
+			//document.write();
+			var temp = e.childNodes[i];
+			console.debug(temp.nodeName + ":" + temp.nodeValue + ":"
+					+ temp.nodeType);
+			//增加对节点类型的判断语句，从而针对不同的节点类型，使用不同的输出语句；
+			if (temp.nodeType == 1) {
+				//alert(temp.innerHTML);
+				document.write(temp.innerHTML);
+			} else {
+				//alert(temp.nodeValue);
+				document.write(temp.nodeValue);
+			}
+
+		}
+	}
+</script>
+
+</head>
+<body>
+
+	<ul>
+		<li id="bj" value="beijing">北京
+			<p>海淀</p>奥运
+		</li>
+		<!-- 解析过程：产生3个对象；第一个是文本节点，内容是：北京+空格(多个空格算一个+回车)部分；
+		第二个是元素节点，内容是：<p>标签包含的部分；
+		第三个文本节点，内容是：P标签之后的奥运文字+空格+回车； -->
+		<li id="sh" value="shanghai">上海</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!ELEMENT books (book+ )>
+		<!ELEMENT book ((name|author|price),(name|author|price),(name|author|price))>
+		<!--
+		<!ELEMENT book (name,author,price)>和上面的表示方式是有区别的；
+		-->
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT author (#PCDATA)>
+		<!ELEMENT price (#PCDATA)>
+		
+		

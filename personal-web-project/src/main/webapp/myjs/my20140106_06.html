@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_06</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		function Tr() {
+			//1、定义一个用于临时存储输入数据（字符串）的的数组；其长度是可变的；
+			this.tds = [];
+			//声明addTd函数；
+			this.addTd = function(str) {
+				this.tds[this.tds.length] = "<td >" + str + "</td>"
+			}
+
+			this.toString = function() {
+				return "<tr>" + this.tds.join("") + "</tr>";
+			}
+		}
+
+		var tr1 = new Tr();
+		tr1.addTd("张三");
+		tr1.addTd("26");
+		tr1.addTd("河北");
+		var tr2 = new Tr();
+		tr2.addTd("李四");
+		tr2.addTd("28");
+		tr2.addTd("山东");
+		var tr3 = new Tr();
+		tr3.addTd("王五");
+		tr3.addTd("22");
+		tr3.addTd("上海");
+		var tr4 = new Tr();
+		tr4.addTd("刘保");
+		tr4.addTd("27");
+		tr4.addTd("深圳");
+
+		//var html = tr.toString();
+		//alert(html);
+
+		function Table() {
+			this.trs = [];
+			//声明addTr函数；
+			this.addTr = function(tr) {
+				this.trs[this.trs.length] = tr.toString();
+			}
+
+			this.toString = function() {
+				return "<table border='1' width='130' bordercolor='red' collspadding='0' cellspacing='0'>" + this.trs.join("") + "</table>";
+			}
+		}
+
+		var tab = new Table();
+
+		tab.addTr(tr1);
+		tab.addTr(tr2);
+		tab.addTr(tr3);
+		tab.addTr(tr4);
+
+		//alert(tab.toString());
+
+		document.write(tab);//将对应的表格样式数据转换成能识别的具体格式的内容；
+	</script>
+</body>
+</html>

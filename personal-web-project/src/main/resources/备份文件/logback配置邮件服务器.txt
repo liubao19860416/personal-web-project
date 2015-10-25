@@ -1,0 +1,171 @@
+ <property file="src/com/ttpod/mail/gmailSSL.properties" />
+
+ 
+
+<!-- 目的指定向email的appender -->
+
+<appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+
+<SMTPHost>${SMTPHOST}</SMTPHost><!-- 邮件服务器地址 -->
+
+<SMTPPort>${SMTPPORT}</SMTPPort><!--SMTPPORT端口-->
+
+<SSL>true</SSL>
+
+<Username>${EMAIL_USERNAME}</Username><!-- 用户名 -->
+
+<Password>${EMAIL_PASSWORD}</Password><!-- 密码 -->
+
+ 
+
+<To>${EMAIL-DESTINATION}</To><!-- 目标接收人 -->
+
+<To>${ANOTHER_EMAIL_DESTINATION}</To> <!-- additional destinations are possible -->
+
+<From>${EMAIL_USERNAME}</From><!-- 发件人 -->
+
+<Subject>TESTING: %logger{20} - %m</Subject><!-- 主题 -->
+
+<encoder><!-- 一般采用这种方式格式化输出 -->
+
+    <layout class="ch.qos.logback.classic.html.HTMLLayout">
+
+        <!-- 采用什么渲染方式，这采取的是HTML方式 -->
+
+        <Pattern>%date %-5level %logger - %message%n</Pattern>
+
+    </layout>
+
+</encoder> 
+
+
+
+
+
+
+说明：
+1.logback中，按照日期自动生成文件，是在有日志生成的时候，且触发器符合触发条件，就会触发生成新的日志文件。。。
+2.获取当前日期时间属性值：
+日志调用所发生的时间，日期格式在其后跟着的大括号内的格式指定如%d{yyyy-MM-dd HH:mm:ss}，
+我现在输出的结果是2011-07-11 21:05:22，推荐使用的是log4j本身提供的日期格式，
+如%d{ISO8601}，%d{ABSOLUTE}，%d{DATE}
+方式2：<timestamp key="DATE_FORMAT_DEFAULT" datePattern="yyyy-MM-dd"/>
+
+
+
+
+<configuration>
+
+<!-- 基于时间与大小的归档 -->
+<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+ 
+<!-- 指定属性文件路径 -->
+<property file="src/com/ttpod/file/variables.properties" />
+
+ 
+<!-- 基于时间与大小的归档 -->
+
+<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+<file>${USER_HOME}/mylog.txt</file>
+
+<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+<!-- 每天滚动
+
+<fileNamePattern>${USER_HOME}/mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+
+-->
+
+<minIndex>1</minIndex>
+
+<maxIndex>3</maxIndex>
+
+<!-- 每分钟滚动 -->
+
+<fileNamePattern>${USER_HOME}/mylog-%d{yyyy-MM-dd_HH-mm}.%i.txt</fileNamePattern>
+
+ 
+<!-- 限制文件最大保存时间为30天-->
+
+<maxHistory>30</maxHistory>
+
+<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+
+<!-- 当文件大小超过5kB时触发滚动,这里设置5kb只是便于测试 -->
+
+<maxFileSize>5kB</maxFileSize>
+
+</timeBasedFileNamingAndTriggeringPolicy>
+
+</rollingPolicy>
+
+<encoder>
+
+<pattern>%msg%n</pattern>
+
+</encoder>
+
+</appender>
+
+ 
+
+<root level="debug">
+
+<appender-ref ref="ROLLING" />
+
+</root>
+
+</configuration> 
+
+
+
+
+
+需要导入jar包：janino.jar
+
+<property name="smtpHost" value="smtp.163.com" /><property name="smtpPort" value="25" /><property name="username" value="xxx@163.com" /><property name="password" value="xxx" /><property name="SSL" value="false" /><property name="email_to" value="EMAIL-DESTINATION,ANOTHER_EMAIL_DESTINATION" /><property name="email_from" value="xxx@163.com" /><property name="email_subject" value="【Error】: %logger" /><appender name="EMAIL"><smtpHost>${smtpHost}</smtpHost><smtpPort>${smtpPort}</smtpPort><username>${username}</username><password>${password}</password><SSL>${SSL}</SSL><asynchronousSending>false</asynchronousSending><to>${email_to}</to><from>${email_from}</from><subject>${email_subject}</subject><layout ><pattern>%date%level%thread%logger{0}%line%message</pattern></layout><filter><evaluator><expression><!-- & encoded as &amp; -->if(level > WARN &amp;&amp; null != throwable) {return true;}return false;</expression></evaluator><onMatch>ACCEPT</onMatch><onMismatch>DENY</onMismatch></filter></appender><root level="INFO"><appender-ref ref="EMAIL"/></root>
+
+
+    <property name="smtpHost" value="smtp.163.com" />
+    <property name="smtpPort" value="25" />
+    <property name="username" value="xxx@163.com" />
+    <property name="password" value="xxx" />
+    <property name="SSL" value="false" />
+    <property name="email_to" value="EMAIL-DESTINATION,ANOTHER_EMAIL_DESTINATION" />
+    <property name="email_from" value="xxx@163.com" />
+    <property name="email_subject" value="【Error】: %logger" />
+
+	<appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>${smtpHost}</smtpHost>
+		<smtpPort>${smtpPort}</smtpPort>
+		<username>${username}</username>
+		<password>${password}</password>
+		<SSL>${SSL}</SSL>
+		<asynchronousSending>false</asynchronousSending>
+		<to>${email_to}</to>
+		<from>${email_from}</from>
+		<subject>${email_subject}</subject>
+		<layout class="ch.qos.logback.classic.html.HTMLLayout" >
+			<pattern>%date%level%thread%logger{0}%line%message</pattern>
+		</layout>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">  
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>
+                	<!-- & encoded as &amp; -->
+                	if(level > WARN &amp;&amp; null != throwable) {
+                		return true;
+                	}
+                	return false;
+                </expression>  
+            </evaluator>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>    
+        </filter>
+</appender>
+<root level="INFO">
+     <appender-ref ref="EMAIL"/>
+</root>
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_05</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		function Car() {
+
+		}
+
+		Car.prototype.color = "黄色";
+		Car.prototype.wheel = "4";
+		Car.prototype.brand = "BMW";
+		Car.prototype.run = function() {
+			alert(this.color + "   running^^^^^^^");
+		}
+
+		var car1 = new Car();
+		car1.run();
+		car1.color = "红色";
+		car1.wheel = "5";
+		car1.brand = "AUDI";
+		car1.run();
+
+		//console.debug("Car:", Car.prototype);
+		//console.debug("car1:", car1.prototype);
+
+		//console.debug("Car:", Car);
+		//console.debug("car1:", car1);
+		//console.debug(car1.constructor);
+		alert(car1.wheel);
+		alert(car1.brand);
+	</script>
+</body>
+</html>

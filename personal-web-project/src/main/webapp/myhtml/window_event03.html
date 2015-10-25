@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>带暂停和继续等按钮的小时钟和一个计时器</title>
+<!-- //点击多次，会启动多次计时器；考虑button的disabled属性进行操作； -->
+<!-- 问题：计时器中的暂停和继续是有问题的，计时器的时间不应该使用date对象获取，而是自定义加数运算； -->
+</head>
+<!-- 
+	<p>带暂停和继续等按钮的小时钟！</p>
+ -->
+<body>
+	<form>
+		<!-- 时钟显示小程序；更新时间为50ms启动按钮，暂停按钮，更新按钮 -->
+		<!--t=t.toLocaleTimeString();-->
+		TIME：<input type="text" id="clockid" size="35" value="请点击相应的查看时间按钮。" />
+		<script lang=javascript>
+			var timeFlagValue;
+			var startFlag = true, continueFlag = false, pauseFlag = false, clearFlag = true;
+			function clock() {
+				var t = new Date();
+				t = t.toLocaleString();
+				document.getElementById("clockid").value = t;
+			}
+			function StartTime() {
+				if (startFlag) {
+					startFlag = false;
+					timeFlagValue = self.setInterval("clock()", 50);
+				}
+			}
+			function PauseTime() {
+				if (!startFlag || continueFlag) {
+					pauseFlag = true;
+					self.clearInterval(timeFlagValue);
+				}
+			}
+			function continueTime() {
+				if (pauseFlag) {
+					continueFlag = true;
+					timeFlagValue = self.setInterval("clock()", 50);
+				}
+			}
+			function clearTime() {
+				startFlag = true;
+				pauseFlag = false;
+				continueFlag = false;
+				self.clearInterval(timeFlagValue);
+				document.getElementById("clockid").value = "请点击相应的查看时间按钮。";
+			}
+
+			var countFlag = true;
+			var timeOutFlag;//定义清除计数器的标记；
+			var buttonDisabledObj;//定义接受button对象的变量；
+			
+			function startTimer1(e) {
+				//alert(buttonDisabledObj.disabled);
+				this.buttonDisabledObj=e;//使屏蔽按钮功能生效，不能连续点击；
+				buttonDisabledObj.disabled=true;//使屏蔽按钮功能生效，不能连续点击；
+				//alert(buttonDisabledObj.disabled);
+				
+				
+				var timerTime;
+				timerTime = document.getElementById("timer1").value;
+				if (timerTime != 0 || timerTime != "") {
+					StartTime();
+					document.getElementById("timerStart").value = (new Date())
+							.toLocaleString();
+					document.getElementById("timerEnd").value = "";
+					document.getElementById("timerPause").value = "";
+				}
+				Timer1(timerTime);
+				
+				
+				//buttonDisabledObj.disable=false;
+				//alert(buttonDisabledObj.disabled);
+			}
+
+			var timeOutFlag = true;
+			function Timer1(timerValue1) {
+				if (timerValue1 != 0) {
+					if (timeOutFlag) {
+						timeOutFlag = self.setTimeout("counter()",
+								timerValue1 * 1000);
+						timeOutFlag = false;
+					} else {
+						alert("已经有定时器正在启动！");//点击多次，会启动多次计时器，这个问题未解决；
+					}
+				} else {
+					alert("您输入的定时时间为0！");
+				}
+				timeOutFlag = true;
+			}
+			
+			
+			function counter() {
+				document.getElementById('timerEnd').value = (new Date())
+						.toLocaleString();
+				alert("您的定时时间到了！");
+				buttonDisabledObj.disabled=false;//使屏蔽按钮功能生效，不能连续点击；
+			}
+
+			function pauseTimer1() {
+				//alert(document.getElementById("timerEnd").value);
+				if (document.getElementById("timerStart").value != 0
+						&& document.getElementById("timerEnd").value == 0) {
+					document.getElementById("timerPause").value = (new Date())
+							.toLocaleString();
+				}
+			}
+
+			function stopTimer1() {
+				document.getElementById("timerStart").value = "";
+				document.getElementById("timerPause").value = "";
+				document.getElementById("timerEnd").value = "";
+				document.getElementById("timer1").value = "";
+				clearTimeout(timeOutFlag);
+				clearTimeout(timeFlagValue);
+				document.getElementById("clockid").value = "";
+			}
+		</script>
+	</form>
+	<button onclick="StartTime()" style="width: 80px; height: 30px">Start</button>
+	<button onclick="PauseTime()" style="width: 80px; height: 30px">Pause</button>
+	<button onclick="continueTime()" style="width: 80px; height: 30px">Continue</button>
+	<input onclick="clearTime()" type="submit" name='submit'
+		value="清除时间(Stop)" style="width: 120px; height: 30px">
+	<br />
+	<br />
+	<br />
+	<form name="myform">
+		请输入计时时间（秒）： <input type="text" name='timer1' id="timer1" value=""
+			style="width: '200px'; height: '20px'"> <br />
+		<button onclick="startTimer1(this)" style="width: 80px; height: 30px">开始计时</button>
+		<button onclick="pauseTimer1()" style="width: 80px; height: 30px">暂停计时</button>
+		<button onclick="stopTimer1()" style="width: 80px; height: 30px">清除计时</button>
+		<br /> 开始时间： <input type="text" name='timerStart' id="timerStart"
+			value="" style="width: 200px; height: 20px"> <br /> 暂停时间： <input
+			type="text" name='timerPause' id="timerPause" value=""
+			style="width: 200px; height: 20px"> <br /> 结束时间： <input
+			type="text" name='timerEnd' id="timerEnd" value=""
+			style="width: 200px; height: 20px"> <br />
+	</form>
+
+
+</body>
+</html>

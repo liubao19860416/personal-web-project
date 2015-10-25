@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/mvc    
+          http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	
+	<!-- 注意事项：修改了spring-mvc-3.0.xsd从3.0版本到3.2版本，用以支持mvc:exclude-mapping标签  -->
+	
+	
+	<!-- 默认的注解映射的支持 ,它会自动注册DefaultAnnotationHandlerMapping 与AnnotationMethodHandlerAdapter，不建议开启； -->
+	<!-- 在xml中注册的DefaultAnnotationHandlerMapping，没有真正覆盖掉DispatcherServlet注册的默认DefaultAnnotationHandlerMapping -->
+	<!-- 它默认已经注册了DefaultAnnotationHandlerMapping，AnnotationMethodHandlerAdapter 。所以去掉它后，两种方式都运行正常；也可以通过"Order"属性就行调整 -->
+	<mvc:annotation-driven />
+	
+	
+	<!-- 方式2：处理静态资源；默认的拦截器处理，需要在web.xml中设置default名称的的servlet映射配置，下面两者配合使用；id属性可以省略 -->
+	<mvc:default-servlet-handler/>
+	<bean id="defaultServletHttpRequestHandler" class="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler"/>
+
+	<!-- 方式3：配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd -->
+	<mvc:resources mapping="/img/**" location="/img/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/**" />
+
+	<!-- 自动扫描注解的Controller ，SpringMVC的Controller类是单实例的，和struts2的action不一样的-->
+	<!-- <context:component-scan base-package="base.controller" />
+	<context:component-scan base-package="base.dwr" /> 
+	<context:component-scan base-package="base.**" />
+	<context:component-scan base-package="base.**.interceptor" /> -->
+	
+	<!-- 隐式地向 Spring容器注册,但是使用了context:component-scan包扫描后，他就可以省略了 -->
+	<!-- <context:annotation-config /> -->
+	
+	<!-- 设置默认首页，也可以单独设置多个其他的映射 -->
+	<mvc:view-controller path="/index/ok.htm" view-name="redirect:/index.jsp" />
+	<!-- 只要请求符合web.xml的请求转发器配置，这里就写那个带后缀名的访问路径即可，name为Controller中的没有后缀的映射路径即可,默认为forward请求转发 -->
+	<mvc:view-controller path="/index/ok2.htm" view-name="/base/login" />
+
+	<!-- HandlerMapping可以配置多个！！！里面可以配置多个拦截器 -->
+	
+	
+	<!-- 拦截器设置方式1 ，同时进行初始化对应的属性值，其他位置进行id引用即可-->
+	<!-- 如果不定义mappingURL，则默认放行所有的Controller的请求 ; 可以使用正则表达式对url进行匹配，从而更细粒度的进行拦截; -->
+	<bean id="commonInterceptor" class="base.interceptor.CommonInterceptor">
+		<!-- 正则表达式，一定要注意是正则表达式！！！匹配需要拦截的URL信息,配置的URL不匹配或者为空时，则进行放行； -->
+		<!-- <property name="urlRegex" value="^http://[a-zA-Z_0-9/:\\-]*/simpleUrl/\\d{1}\\.htm$" /> -->
+		<property name="urlRegex" value="^.+/simpleUrl/[0-9].htm$" />
+	</bean>
+	<!--工作时间校验的拦截器设置 -->
+	<bean id="workTimeInterceptor" class="base.interceptor.WorkTimeInterceptor">
+		<!--openingTime 属性指定上班时间 -->
+		<property name="openingTime" value="9" />
+		<!--closingTime属性指定下班时间 -->
+		<property name="closingTime"  value="18" />
+		<!--outsideOfficeHoursPage属性指定提示页面的URL -->
+		<property name="outsideOfficeHoursPage">
+			<!-- <value>http://localhost:8080/personal-web-project/outsideOfficeHours.jsp</value> -->
+			<value>/#{T(com.saike.grape.base.BaseEnvironment).PROJECT_NAME}/outsideOfficeHours.jsp</value>
+		</property>
+	</bean>
+	<!-- 对指定的URL进行放行，在拦截器里注入一个属性 List<String> unCheckURLs -->
+	<bean id="loginUnCheckURLsInterceptor2" class="base.interceptor.LoginUnCheckURLsInterceptor2">
+		<property name="unCheckURLs">
+			<list>
+				<value>/simpleUrl</value>
+				<value>/index</value>
+				<value>/login</value>
+				<value>/doLogin</value>
+				<value>/doLogOut</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 对指定的URL进行放行，在拦截器里注入一个数组 String[] unCheckURLs -->
+	<bean id="loginUnCheckURLsInterceptor3" class="base.interceptor.LoginUnCheckURLsInterceptor3">
+		<property name="unCheckURLs">
+			<list>
+				<!-- 如果请求中包含以下路径，则不进行拦截 -->
+				<value>/simpleUrl</value>
+				<value>/login</value>
+				<value>/js</value>
+				<value>/css</value>
+				<value>/image</value>
+				<value>/images</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="simpleUrlController" class="base.controller.SimpleUrlController"/>
+	
+	<!-- 拦截器栈设置方式1，不建议使用！！！ -->
+	<!-- HandlerMapping2 ，-简单的URL映射处理器，根据下面配置的url路径和对应的类名进行映射-->
+	<!-- <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		提高HandlerMapping的优先级别，将被优先调用，相当于排序功能
+		默认值为Integer的最大值，优先级最低
+		<property name="order" value="-1"/>
+		<property name="mappings">
+			<props>
+				对单一访问URL路径进行映射，不能使用*等模糊匹配！
+				<prop key="/simpleUrl/0.htm">simpleUrlController</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref bean="commonInterceptor"/>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 性能监控拦截器，记录运行时间大于临界值recordTimePoint的相应方法的信息到指定log文件中,单位为毫秒-->
+	<bean id="timeWatcherInterceptor" class="base.interceptor.TimeWatcherInterceptor">
+		<property name="recordTimePoint" value="100"/>
+	</bean>
+	
+	<bean id="loginUnCheckURLsInterceptor1" class="base.interceptor.LoginUnCheckURLsInterceptor1"/>
+	
+	<!-- 拦截器栈设置方式2 ，建议使用！！！2和3组合使用的时候，需要设置2的order级别高于0（数值比0小即可，如-1）-->
+	<!-- 通过调整 order的值，设置当前生效的HandlerMapping对象；注意：1的优先级高于2，-1的优先级高于0，0的优先级高于1-->
+	<!-- HandlerMapping1，处理在Controller类级别上的@RequestMapping注解 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<!-- 其默认值为0，提高HandlerMapping的优先级别，将被优先调用，相当于排序功能； -->
+		<property name="order" value="-1"/>
+		<property name="interceptors">
+			<!-- 注册拦截器，多个拦截器,顺序执行 -->
+			<list>
+				<!-- <ref local="timeWatcherInterceptor" /> -->
+				<!-- <ref bean="commonInterceptor" /> -->
+				<!-- <ref local="workTimeInterceptor" />
+				<ref bean="loginUnCheckURLsInterceptor1" />
+				<ref bean="loginUnCheckURLsInterceptor2" />
+				<ref bean="loginUnCheckURLsInterceptor3" /> -->
+				<bean class="base.interceptor.LoginUnCheckURLsInterceptor1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 拦截器栈设置方式3，建议使用！！！ -->
+	<!-- 多个拦截器,顺序执行 ；同时，一个拦截器可以有多个mapping path的配置；mapping的path相同则按照配置先后形成拦截器链 -->
+	<mvc:interceptors>
+		<!-- 方式1：普通的测试用拦截器 -->
+		<mvc:interceptor>
+			<!-- 对符合mvc:mapping的映射地址，进入拦截器的规则校验；如果不配置,则直接放行 -->
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<!-- 对符合mvc:exclude-mapping的映射地址，该拦截器的对其直接放行 -->
+			<mvc:exclude-mapping path="/simpleUrl/**" />
+			<!-- 引用的拦截器bean的引用 -->
+			<ref bean="commonInterceptor"/>
+		</mvc:interceptor>
+		<!--方式1：工作时间校验的拦截器设置 ，使用bean的引用-->
+		<mvc:interceptor>
+			<!--设置拦截的路径，目录的层次级别一定要匹配！！！ -->
+			<!-- 两者的顺序不能交叉排列，必须mvc:exclude-mapping在mvc:mapping后面 -->
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/work/work.htm" />
+			<!-- 推荐使用的匹配格式 -->
+			<mvc:exclude-mapping path="/**/simpleUrl/**" />
+			<!-- <mvc:exclude-mapping path="/**/**" /> -->
+			<!-- <mvc:exclude-mapping path="/*/**" /> -->
+			<!-- <mvc:exclude-mapping path="/**" /> -->
+			<!-- 下面的不可以 ，目录的层次级别一定要匹配！！！-->
+			<mvc:exclude-mapping path="**/**" />
+			<mvc:exclude-mapping path="*/**" />
+			<mvc:exclude-mapping path="**/*" />
+			<mvc:exclude-mapping path="*/*" />
+			<mvc:exclude-mapping path="**/" />
+			<mvc:exclude-mapping path="/*" />
+			<mvc:exclude-mapping path="/" />
+			<ref bean="workTimeInterceptor"/>
+		</mvc:interceptor>
+		<!--方式1： 对指定的URL进行放行，在拦截器里注入一个属性 List<String> unCheckURLs -->
+		<mvc:interceptor>
+			<!--设置拦截的路径，目录的层次级别一定要匹配！！！ -->
+			<!-- 两者的顺序不能交叉排列，必须mvc:exclude-mapping在mvc:mapping后面 -->
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/order2/**" />
+			<mvc:exclude-mapping path="/**" />
+			<ref local="loginUnCheckURLsInterceptor2"/>
+		</mvc:interceptor>
+		<!-- 方式1：对指定的URL进行放行，在拦截器里注入一个数组 String[] unCheckURLs -->
+		<mvc:interceptor>
+			<!--设置拦截的路径，目录的层次级别一定要匹配！！！ -->
+			<!-- 两者的顺序不能交叉排列，必须mvc:exclude-mapping在mvc:mapping后面 -->
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:mapping path="/order3/**" />
+			<mvc:exclude-mapping path="/*/**" />
+			<ref local="loginUnCheckURLsInterceptor3"/>
+		</mvc:interceptor>
+		<!-- 方式2:通过读取配置文件，获取需要放行的URL信息，进行放行； 且直接引用bean的class路径-->
+		<mvc:interceptor>
+			<!-- 对符合mvc:mapping的映射地址，该拦截器进行相应的拦截校验判断等操作 -->
+			<!--设置拦截的路径，目录的层次级别一定要匹配！！！ -->
+			<!-- 两者的顺序不能交叉排列，必须mvc:exclude-mapping在mvc:mapping后面 -->
+			<mvc:mapping path="/simpleUrl/**" />
+			<mvc:mapping path="/order1/**" />
+			<!-- <mvc:mapping path="/**" />
+			<mvc:mapping path="/**/*.json" /> -->
+			<mvc:exclude-mapping path="/**/**" />
+			<!-- 这里直接通过class属性引用对应的拦截器bean -->
+			<ref local="loginUnCheckURLsInterceptor1"/>
+			<!-- <bean class="base.interceptor.LoginUnCheckURLsInterceptor1"/> -->
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/simpleUrl/**" />
+			<!-- <mvc:exclude-mapping path="/**/**" /> -->
+			<ref local="timeWatcherInterceptor"/>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+
+	<!-- 处理Method方法级别上的@RequestMapping注解 ,主要用来解析JSON数据使用的-->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="order" value="-1" />
+		<property name="cacheSeconds" value="0" />
+		<!-- 进行json支持的处理 -->
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+	<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 视图解析器策略 和 视图解析器 ，对JSTL提供良好的支持-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 默认的viewClass,可以不用配置 -->
+		<property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" /> 
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF8" />
+	</bean>
+
+	
+	<!-- TODO 下面的需要进行查看 -->
+	
+	<!-- ResourceBundleViewResolver通过basename所指定的ResourceBundle解析视图名。 对每个待解析的视图，
+	ResourceBundle里的[视图名].class所对应的值就是实现该视图的类。 同样，[视图名].url所对应的值是该视图所对应的URL。 
+	可以指定一个parent view，其它的视图都可以从parent view扩展。 用这种方法，可以声明一个默认的视图。 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<!-- <property name="basename" value="welcome" /> -->
+		<property name="basenames">
+			<list>
+				<!-- <ref local="basename"/>
+				<ref bean="welcome"/>
+				<value>message01</value> -->
+				<value>message03</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<!-- 自定义异常处理，SimpleMappingExceptionResolver这个类可以是个空类，但是要写，方便在java代码里面使用 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+			<!-- 这里使用了redirect:/error.jsp方式，尝试forward:/error.jsp方式； -->
+				<prop key="com.ziyou.platform.interceptor.SessionTimeoutException">redirect:/error.jsp</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>
+

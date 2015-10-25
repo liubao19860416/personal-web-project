@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+div {
+	background-color: blue;
+	color: black;
+}
+
+div.class01 {
+	background-color: blue;
+	color: black;
+}
+
+#id01 {
+	background-color: blue;
+	color: black;
+}
+
+<!--
+三种方式，设定class样式名称，实现动态加载；-->
+
+.class01 {
+	background-color: blue;
+	color: black;
+}
+
+p {
+	background-color: blue;
+	color: maroon;
+}

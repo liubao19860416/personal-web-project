@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_02</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = new Array(4, 8, 2, 65, 33, 9,99, 22);
+
+		function getMax(arr) {
+			var max = arr[0];
+			for (var i = 1; i < arr.length; i++) {
+				//javascript中，只有在自定义函数体内声明的变量才是局部变量，
+				//其他的都是全局变量。
+				if (max < arr[i])
+					max = arr[i];
+			}
+			return max
+		}
+		//console.debug(arr);
+
+		//alert("max=" + getMax(arr));
+		//alert(getMax instanceof Function);//true
+		//alert(typeof (getMax(arr)));//number
+		//alert(typeof (getMax));//function类型
+	</script>
+
+</body>
+</html>

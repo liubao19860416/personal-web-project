@@ -1,0 +1,138 @@
+(0)我的方法是，定义一个@Auth，可以加些自定义的属性，比如访问这个方法所需要的权限。@Auth加在需要验证的controller方法上。
+然后定义个AuthorizationInterceptor，实现 HandlerInterceptor接口中的preHandle方法，该方法中有个handler参数，
+对于一般的请求，该参数是HandlerMethod类型，可以从中获取到controller方法上的annotation，如果有@Auth则验证权限，否则放行；
+
+(1)SpringMVC?中的Interceptor?拦截请求是通过HandlerInterceptor?来实现的。在SpringMVC?中定义一个Interceptor?非常简单，
+主要有两种方式，
+第一种方式是要定义的Interceptor类要实现了Spring的HandlerInterceptor接口，或者是这个类继承实现了HandlerInterceptor 接口的类，
+比如Spring?已经提供的实现了HandlerInterceptor接口的抽象类HandlerInterceptorAdapter；
+第二种方式是实现Spring的WebRequestInterceptor接口，或者是继承实现了WebRequestInterceptor的类
+
+(2)preHandle(HttpServletRequest?request,?HttpServletResponse?response,Object?handle)方法。该方法将在请求处理之前进行调用。
+SpringMVC中的Interceptor是链式的调用的，在一个应用中或者说是在一个请求中可以同时存在多个Interceptor。每个Interceptor
+的调用会依据它的声明顺序依次执行，而且最先执行的都是Interceptor中的preHandle方法，
+可以在这个方法中进行一些前置初始化操作或者是对当前请求的一个预处理，
+也可以在这个方法中进行一些判断来决定请求是否要继续进行下去。
+该方法的返回值是布尔值Boolean类型的，当它返回为false时，表示请求结束，后续的Interceptor和Controller都不会再执行；
+当返回值为true?时就会继续调用下一个Interceptor的preHandle方法，
+如果已经是最后一个Interceptor的时候就会是调用当前请求的Controller方法。
+
+(3)postHandle(HttpServletRequest request, HttpServletResponse response, Object handle, ModelAndView modelAndView)方法，
+由preHandle方法的解释我们知道这个方法包括后面要说到的afterCompletion方法都只能是在当前所属的Interceptor的preHandle
+方法的返回值为true时才能被调用。
+postHandle方法，顾名思义就是在当前请求进行处理之后，也就是Controller方法调用之后执行，
+但是它会在DispatcherServlet进行视图返回渲染之前被调用，
+我们可以在这个方法中对Controller处理之后的ModelAndView对象进行操作。
+postHandle方法被调用的方向跟preHandle是相反的，也就是说先声明的Interceptor的postHandle方法反而会后执行，
+这和Struts2里面的Interceptor的拦截器栈执行过程有点类型。Struts2里面的Interceptor的执行过程也是链式的，只是在Struts2
+里面需要手动调用ActionInvocation的invoke方法来触发对下一个Interceptor或者是Action的调用，然后每一个Interceptor中
+在invoke方法调用之前的内容都是按照声明顺序执行的，而invoke方法之后的内容就是反向的。
+
+(4)afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handle, Exception ex) 方法，
+该方法也是需要当前对应的Interceptor的preHandle方法的返回值为true时才会执行。
+顾名思义，该方法将在整个请求结束之后，也就是在DispatcherServlet渲染了对应的视图之后执行。
+这个方法的主要作用是用于进行资源清理工作的。我们的系统日志的拦截在这个方法中，可以记录日志的相关的参数，检测方法的执行
+
+(5)xml标签解析说明：
+每个<mvc:interceptor>都会被解析成MappedInterceptor。
+其中子标签<mvc:mapping path="/**"/>会被解析成MappedInterceptor的includePatterns属性；
+<mvc:exclude-mapping path="/**"/>会被解析成MappedInterceptor的excludePatterns属性；
+<bean/>会被解析成MappedInterceptor的interceptor属性。
+<mvc:interceptors>这个标签是被InterceptorsBeanDefinitionParser类解析。
+
+(6)DispatcherServlet说明:
+使用Spring MVC,配置DispatcherServlet是第一步。DispatcherServlet是一个Servlet,所以可以配置多个DispatcherServlet。
+DispatcherServlet是前置控制器，配置在web.xml文件中的。拦截匹配的请求，Servlet拦截匹配规则要自已定义，把拦截下来的请求，
+依据某某规则分发到目标Controller(我们写的Action)来处理。
+
+(7)Spring会创建一个全局的WebApplicationContext上下文，称为根上下文 ，保存在 ServletContext中，key是WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE属性的值。
+可以使用工具类取出上下文：WebApplicationContextUtils.getWebApplicationContext(ServletContext);
+DispatcherServlet是一个Servlet,可以同时配置多个，每个 DispatcherServlet有一个自己的 WebApplicationContext上下文，
+这个上下文继承了 根上下文 中所有东西。 保存在 ServletContext中，key是"org.springframework.web.servlet.FrameworkServlet.CONTEXT"+Servlet名称。
+当一个Request对象产生时，会把这个WebApplicationContext上下文保存在Request对象中，key是DispatcherServlet.class.getName() + ".CONTEXT"。
+可以使用工具类取出上下文：RequestContextUtils.getWebApplicationContext(request);
+
+
+(8)关于几个重定向和转发的几个问题：
+ public String handle() {  
+// return "redirect:/hello";  重定向到 /hello 资源  (不建议使用)
+// return "forward:/hello" => 转发到能够匹配 /hello 的 controller 上  
+// return "hello" => 实际上还是转发，只不过是框架会找到该逻辑视图名对应的 View 并渲染  
+   return "/hello" => 同 return "hello"  
+} 
+导致的问题如下：
+使用return new ModelAndView("/person/test");语句时在index.html中点Submit按钮能正确显示test.jsp文件中得内容。
+如果使用return new ModelAndView(new RedirectView("/person/test"));
+或return "redirect:/person/test";
+语句则点Submit按钮后系统提示“The requested resource (/person/test) is not available.”。
+
+(9)关于拦截器无效的一个说明（<mvc:annotation-driven/>解决方法）：
+如果不为HandlerMapping明确指定order，那么默认值为Integer.MAX_VALUE，对应最低优先级。
+所以，拥有order值为1的SimpleUrlHandlerMapping较之BeanNameUrlHandlerMapping优先被调用。
+例子：
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+  <property name="order" value="-1"/>
+  <property name="interceptors">
+    <bean class="package.interceptor.XXInterceptor"/>
+  </property>  
+</bean>
+在这里有个属性order，配成了-1。其实是Spring提供了一个Order接口，主要是排序用的。我们这里使用的AbstractHandlerMapping
+抽象类也实现了这个接口。DispatcherServlet初始化HandlerMapping集合的代码：因此，如果读者又配置了:
+<mvc:annotation-driven/>
+ 那么就会有2只HandlerMapping，所以我们配置RequestMappingHandlerMapping的时候设置order为-1，
+ 就是为了让这个HandlerMapping的优先级高于<mvc:annotation-driven/>配置的RequestMappingHandlerMapping级别。
+ 对于视图解析器，也是同样的道理：
+ <!-- 上面没匹配到则会使用这个视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="order" value="1" />-->
+        <!--注意：1的优先级高于2，-1的优先级高于0，0的优先级高于1-->
+        <property name="order" value="2" />
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /></bean>
+同理，引申到了其他的spring类中，也是这样的道理：
+<bean id="propertyConfigurerForProject1" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+    <property name="order" value="1" />  
+    <property name="ignoreUnresolvablePlaceholders" value="true" />  
+    <property name="location">  
+       <value>classpath:/spring/include/dbQuery.properties</value>  
+    </property>  
+</bean> 
+
+(10)关于： <context:annotation-config>等说明：
+ <context:annotation-config> 是用于激活那些已经在spring容器里注册过的bean（无论是通过xml的方式还是通过package sanning的方式）上面的注解。
+<context:component-scan>除了具有<context:annotation-config>的功能之外，还可以在指定的package下扫描以及注册javabean 。
+<mvc:annotation-driven /> 会自动启动Spring MVC的注解功能；是一种简写形式，完全可以手动配置替代这种简写形式，
+简写形式可以让初学都快速应用默认配置方案。<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与
+AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。
+并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。
+后面，我们处理响应ajax请求时，就使用到了对json的支持。
+后面，对action写JUnit单元测试时，要从spring IOC容器中取DefaultAnnotationHandlerMapping与
+AnnotationMethodHandlerAdapter 两个bean，来完成测试，取的时候要知道是<mvc:annotation-driven />
+这一句注册的这两个bean；
+<mvc:annotation-driven  />开启了之后它给AnnotationMethodHandlerAdapter初始化7个转换器，
+可以通过调用AnnotationMethodHandlerAdapter类的getMessageConverts()方法来获取转换器的一个集合List<HttpMessageConverter>
+
+(11)补充说明
+分别实现预处理、后处理（调用了Service并返回ModelAndView，但未进行页面渲染）、返回处理（已经渲染了页面） 
+在preHandle中，可以进行编码、安全控制等处理； 
+在postHandle中，有机会修改ModelAndView； 
+在afterCompletion中，可以根据ex是否为null判断是否发生了异常，进行日志记录。 
+参数中的Object handler是下一个拦截器。
+Spring MVC并没有总的拦截器，不能对所有的请求进行前后拦截。
+Spring MVC的拦截器，是属于HandlerMapping级别的，可以有多个HandlerMapping ，每个HandlerMapping可以有自己的拦截器。
+当一个请求按Order值从小到大，顺序执行HandlerMapping接口的实现类时，哪一个先有返回，那就可以结束了，后面的HandlerMapping就不走了，
+本道工序就完成了。就转到下一道工序了。
+拦截器会在什么时候执行呢？ 一个请求交给一个HandlerMapping时，这个HandlerMapping先找有没有处理器来处理这个请求，如何找到了，
+就执行拦截器，执行完拦截后，交给目标处理器。如果没有找到处理器，那么这个拦截器就不会被执行
+
+
+
+
+
+
+
+
+
+
+

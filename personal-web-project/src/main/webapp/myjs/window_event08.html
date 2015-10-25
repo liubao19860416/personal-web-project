@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习-prototype的使用解析</title>
+<script type="text/javascript">
+	function Person() {
+		this.name = "pers";
+		//this.age = 33;
+	}
+	Person.prototype.name = "zs";//这个语句有用；
+
+	var p = new Person();
+	var p1 = new Person();
+
+	//alert(p['age']);
+	//alert(Person.__proto__.name);//undefined
+	//alert(p.__proto__.name);//zs
+
+	//alert(Person.__proto__);//function(){}
+	//alert(p.__proto__);//[object Object]
+
+	console.debug("p:");
+	console.debug(p);//Person { name="pers"}
+	console.debug("p1:");
+	console.debug(p1);//Person { name="pers"}
+
+	Person.__proto__.name = "ls";//这个语句，没用；
+	var p2 = new Person();
+
+	console.dubug(p.prototype);undefined
+	
+	console.debug("------------Person.__proto__------------------");
+	console.debug("Person.__proto__:");
+	console.debug(Person.__proto__);//function()
+	console.debug("p.__proto__:");
+	console.debug(p.__proto__);//Person { name="zs"}
+	console.debug("p1.__proto__:");
+	console.debug(p1.__proto__);//Person { name="zs"}
+	console.debug("p2.__proto__:");
+	console.debug(p2.__proto__);//Person { name="zs"}
+
+	console.debug("p:");
+	console.debug(p);//Person { name="pers"}
+	console.debug("p1:");
+	console.debug(p1);//Person { name="pers"}
+	console.debug("p2:");
+	console.debug(p2);//Person { name="pers"}
+
+	console.debug("------------p.__proto__------------------");
+	p.__proto__.name = "ls1";
+	console.debug("Person.__proto__:");
+	console.debug(Person.__proto__);//function()
+	console.debug("p.__proto__:");
+	console.debug(p.__proto__);//Person { name="ls1"}
+	console.debug("p:");
+	console.debug(p);//Person { name="pers"}
+	console.debug("p1:");
+	console.debug(p1);//Person { name="pers"}
+	console.debug("p2:");
+	console.debug(p2);//Person { name="pers"}
+
+	//alert(p.__proto__);
+	//alert(typeof Person.prototype);
+	//alert(typeof Person.__proto__);
+</script>
+
+</head>
+<body>
+</body>
+</html>

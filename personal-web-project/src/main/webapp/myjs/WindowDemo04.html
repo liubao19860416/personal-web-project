@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：window对象的常用方法；
+重定向，页面重新连接到一个新的位置上；
+-->
+<script lang="JavaScript">
+	function locateUrl(thisurl) {
+		window.location = thisurl;//重定向；
+		//alert("hello test");
+	}
+</script>
+</head>
+<!-- 
+	自动打开一个自定义的窗口，显示指定的网页文件；
+ -->
+<body>
+	<form action="#" method="post" name="myform">
+		网站： <select name="url" onchange="locateUrl(this.value)">
+			<option value="#" selected="selected">--请选择网页--</option>
+			<option value="http://www.baidu.com">百度</option>
+			<option value="NewFile01.html">网页01</option>
+			<option value="NewFile02.html">网页02</option>
+			<option value="NewFile03.html">网页03</option>
+		</select> <br />
+
+	</form>
+</body>
+</html>

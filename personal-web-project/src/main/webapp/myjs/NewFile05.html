@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：将获取的变化的多选框内容显示到指定的文本框区域；
+-->
+<script language="JavaScript">
+	function show(val) {
+		document.myform.result.value = val;
+		alert("所属部门：" + val);
+	}
+</script>
+</head>
+<!-- 
+ -->
+<body>
+	<form action="test.html" method="post" name="myform">
+		部门： <select name="dept" onchange="show(this.value)">
+			<option value="请选择部门" selected="selected">请选择部门</option>
+			<option value="技术部">技术部</option>
+			<option value="销售部">销售部</option>
+			<option value="软件部" selected="selected">软件部</option>
+		</select><br /> 
+		结果：<input type="text" name="result" value="">
+	</form>
+
+</body>
+</html>

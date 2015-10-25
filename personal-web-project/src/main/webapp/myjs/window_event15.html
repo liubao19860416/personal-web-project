@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>密码判断界面</title>
+<!-- 密码判断验证界面 -->
+
+<style type="text/css">
+input{
+
+color:red
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+	function checkFormResult(){
+		
+		if(document.getElementsByName("user")[0].value.length==0){
+			//document.getElementsByName("user")[0].value='姓名不能为空！';
+			alert("姓名不能为空！");
+			return false;
+		}
+		if(document.getElementsByName("username")[0].value.length>8){
+			//document.getElementsByName("user")[0].value='用户名过长不能超过8位！';
+			alert("用户名过长不能超过8位！");
+			return false;
+		}
+		if(document.getElementsByName("username")[0].value.length==0){
+			//document.getElementsByName("user")[0].value='用户名不能为空！';
+			alert("用户名不能为空！");
+			return false;
+		}
+		if(document.getElementsByName("psw")[0].value.length==0){
+			//document.getElementsByName("psw")[0].value="第一个密码不能为空！";
+			alert("第一个密码不能为空！");
+			return false;
+		}
+		/*正则判断 
+		if(document.getElementsByName("psw")[0].value.regex("\s+")){
+			//document.getElementsByName("psw")[0].value="第一个密码不能为空！";
+			alert("第一个密码不能为空！");
+			return false;
+		} */
+		if(document.getElementsByName("psw")[1].value.length==0){
+			//document.getElementsByName("psw")[1].value="第二个密码不能为空！";
+			alert("第二个密码不能为空！");
+			return false;
+		}
+		if(document.getElementsByName("psw")[1].value!=document.getElementsByName("psw")[0].value){
+			//document.getElementsByName("psw")[1].value="两次密码不一致！";
+			alert("两次密码不一致！");
+			return false;
+		}
+		
+		
+		return true;
+	}
+	
+	</script>
+<form id="myform" action="1.html" method="get" onsubmit="return checkFormResult();">
+
+姓名：
+<input type="text" name="user" value="" size=25 /><br />
+登录名：
+<input type="text" name="username" value="" size=22 /><br />
+密码：
+<input type="password" name="psw" value="" size=27 /><br />
+确认密码：
+<input type="password" name="psw" value="" size=21 /><br />
+性别：
+<input type="radio" name="sex" value="" checked/>男
+<input type="radio" name="sex" value="" />女<br />
+身份证：
+<input type="text" name="idcard" value="" size=21 /><br />
+<input type="submit" name="submit" value="提交" />
+
+
+</form>
+</body>
+</html>

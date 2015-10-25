@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  模版文件代码，复习使用；
+定义命名空间的位置和具体的3个参数的含义需要掌握； -->
+<bookstore
+xmlns="http://www.example.org/newbook"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.example.org/newbook newbook.xsd"
+
+
+
+
+>
+	<book id="computer1">
+		<name>JAVA基础编程</name>
+		<age>28</age>
+	</book>
+	<book id="computer1">
+		<name>C++精讲教程</name>
+		<age>24</age>
+	</book>
+</bookstore>

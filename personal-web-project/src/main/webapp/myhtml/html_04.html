@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>iframe标签的使用</title>
+</head>
+<body>
+
+	<table border="1" bordercolor="yellow" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="html_01.html" target="rightFile">点击更新内容1</a>
+			<td><a href="html_04.html" target="rightFile">点击更新内容2</a></td></td>
+		</tr>
+		<tr>
+			<td colspan="2"><iframe name="rightFile" src="html_03.html"></iframe></td>
+		</tr>
+	</table>
+	
+
+	<form action="#" method="GET">
+		<table width="300" border="1" bordercolor="red" cellpanding="0"
+			cellspacing="0">
+			<tr>
+				<td>Username：</td>
+				<td><input type="text" name="name" value="请输入注册姓名" size="20"></td>
+			</tr>
+			<tr>
+				<td>password：</td>
+				<td><input type="password" name="password" value="" size="22"></td>
+			</tr>
+			<tr>
+				<td>repassword：</td>
+				<td><input type="password" name="repassword" value="" size="22"></td>
+			</tr>
+			<tr>
+				<td>sex：</td>
+				<td><input type="radio" name="sex" value="nan" checked>男
+				<input type="radio" name="sex" value="nv">女</td>
+			</tr>
+			<tr>
+				<td>hobbies:</td>
+				<td><input type="checkbox" name="checkbox" value="read">读书
+					<input type="checkbox" name="check" value="write">写字 
+					<input type="checkbox" name="check" value="movies">电影 </td>
+			</tr>
+			<tr>
+				<td>籍贯：</td>
+				<td><select name="province">
+						<option>请选择</option>
+						<option value="HB" selected>河北</option>
+						<option value="SH">上海</option>
+						<option value="BJ">北京</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>自我描述：</td>
+				<td><textarea rows="10" clos="15" name="self_describe">默认显示数据内容</textarea></td>
+			</tr>
+			<tr>
+				<td>上传照片：</td>
+				<td><input type="file" name="updata" value="选择"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="reset" value="重置">
+					<input type="submit" value="提交">
+				</td>
+			</tr>
+
+		</table>
+			</form>
+
+</body>
+</html>

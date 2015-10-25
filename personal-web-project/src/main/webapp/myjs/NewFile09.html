@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<!-- 基础语法熟练
+	日期对象Date 
+	定义语句块；-->
+	<script type="text/javascript">
+		//========================start=========================
+
+		var d = new Date();
+		document.write(d.toDateString() + "<br />");
+		document.write(d.toLocaleDateString() + "<br />");
+		document.write(d.toLocaleString() + "<br />");
+
+		var pp = {
+			"name" : "zhangsan",
+			"age" : 27,
+			"getAge" : function() {
+				return this.age
+			}
+		}
+
+		//alert(pp.name+":"+pp["age"]);
+		document.write(pp["name"] + ":" + pp.age + "<hr>");
+
+		//========================特殊的循环遍历语句 格式：（for in 遍历对象）｛｝=========================
+		var arr = [ "fsaf", "afasf", "1312312" ];
+		document.write("[");
+		for (i in arr) {
+			if (i == arr.length - 1) {
+				document.write(arr[i] + "");
+			} else {
+				document.write(arr[i] + ",");
+			}
+		}
+		document.write("]<hr>");
+
+		//========================自定义kong构造器对象=========================
+		function Person() {
+			document.write("Person run! <hr>");
+		}
+
+		var p = new Person();
+		p.name = "zhangsan";
+		p.age = 34;
+		p.show = function() {
+			return (p.name + "==" + p.age);
+		}
+
+		document.write(p.name + ":" + p.age + "<br />");
+		document.write(p["name"] + ":" + p["age"] + "<br>");
+		document.write(p.show() + "<br>");
+		document.write(p.show + "<hr>");
+
+		for (i in p) {
+			document.write(i + ":" + p[i] + "<br>");
+		}
+		document.write("<hr />");
+
+		//========================自定义带参数的构造对象=========================
+
+		function Person2(name, age) {
+			this.name = name;
+			this.age = age;
+			this.show = function() {
+				document.write(this.name + "**" + this.age);
+			}
+		}
+
+		var p2 = new Person2("lisi", 46);
+		for (i in p2) {
+			document.write(i + ":" + p2[i] + "<br />");
+		}
+		document.write("<hr>");
+
+		//========================over=========================
+	</script>
+
+
+</body>
+</html>

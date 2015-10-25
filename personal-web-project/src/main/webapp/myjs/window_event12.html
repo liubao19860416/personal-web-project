@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>节点替换或移动替换操作</title>
+<script type="text/javascript">
+	window.onload = function() {
+	}
+</script>
+
+<style type="text/css">
+li {
+	color: red;
+}
+#ZD {
+background: yellow;
+width: 100px;
+height:30px;
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function replaced1() {
+			var e1 = document.getElementById("HB");
+			var e2 = document.getElementById("SJZ");
+			var temp = e2.innerHTML;
+			e1.innerHTML = temp;
+
+		}
+		function replaced2() {
+			var e1 = document.getElementById("SD");
+			var e2 = document.getElementById("QD");
+			var temp = e2.innerHTML;
+			e1.innerHTML = temp;
+
+		}
+		function replaced3() {
+			var e1 = document.getElementById("GD");
+			var e2 = document.getElementById("SZ");
+			var temp = e2.innerHTML;
+			e1.innerHTML = temp;
+
+		}
+	</script>
+
+	<ul>
+		<li id="HB" value="hebei" onclick="replaced1()">河北</li>
+		<li id="SD" value="shandong" onclick="replaced2()">山东</li>
+		<li id="GD" value="guangdong" onclick="replaced3()">广东</li>
+	</ul>
+
+	<!-- 点击上面数据后，使用下面的位置的内容替换上面的对应的位置的内容； -->
+	<ul>
+		<li id="SJZ" value="shijiazhuang">石家庄
+			<p id="ZD">正定机场</p>
+		</li>
+		<li id="QD" value="qingdao">青岛</li>
+		<li id="SZ" value="shenzhen">深圳</li>
+	</ul>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试代码--九九乘法表</title>
+<script type="text/javascript">
+	function myMethod(value) {
+		var ROWS = value;
+		var str = "";
+		str += "<table border='1' bordercolor='red' cellspacing='0' cellpadding='8' >";
+		for (var i = 1; i <= ROWS; i++) {
+			str += "<tr>" + "<td bgcolor='blue'>" + i + "</td>";
+			for (var j = 1; j <= i; j++) {
+				str += "<td bgcolor='yellow'>" + i + "*" + j + "=" + i * j
+						+ "</td>";
+			}
+			str += "</tr>";
+		}
+		str += "</table>";
+
+		//将数据显示在div中；
+		document.getElementById("divFlag").innerHTML = str;
+		//document.getElementsByTagName("div")[0].innerHTML = str;
+		//将数据显示在table的td中；
+		document.getElementsByTagName("td")[0].innerHTML= str;
+		//alert(str);
+		console.debug(str);
+		//document.getElementById("textareaid").innerHTML = document.write(str);
+		
+		//将数据显示在指定的text或textarea的不能在里面嵌套标签的类型区域；是不能直接实现的；必须将需要显示的数据，放到能够嵌套html标签的标签中才可以；
+		//所以这里采用div显示和table的td显示，都没有问题；
+	}
+</script>
+</head>
+<body>
+
+
+	<form name="myform">
+		数据显示区域：<br />
+		<textarea name="textarea" cols="50" rows="1" id="textareaid">
+			</textarea>
+		<br /> 请输入乘法表阶数：<input type="text" name="text1" value="9" /> <br />
+		<br /> <input type="button" name="button" value="显示乘法表"
+			onclick="myMethod(document.myform.text1.value)" /> <input
+			type="reset" name="reset" value="重置"><br />
+	</form>
+	
+	Table数据显示区域：<br /><table border="1" id="table1" style="align:top;width:500px;height:300px">
+	<tr><td id="td1" style="bordercolor:black"></td></tr>
+	</table>
+	DIV数据显示区域:<br /><div id="divFlag" >DIV数据
+	</div>
+
+</body>
+</html>

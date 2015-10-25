@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>练习-更改窗口大小</title>
+<script type="text/javascript">
+	function resetWinSmall() {
+		window.resizeTo('400', '200');
+
+		//多行注释快捷键：ctrl+shift+/即可；
+		/* 
+		var flag = false;
+		if (flag) {
+			window.resizeTo('800px', '600px');
+			//flag = false;
+		} else {
+			window.resizeTo('100px', '200px');
+			//flag = true;
+		} */
+	}
+
+	function resetWinBig() {
+		window.resizeTo('1200', '900');
+	}
+
+	function resetWinClose() {
+		window.close();
+	}
+</script>
+</head>
+<!-- 
+ -->
+<body>
+
+	<input type="button" name="button1" value="大窗口" onclick="resetWinBig()"
+		style="width: 60px; height: 30px" />
+	<input type="button" name="button1" value="小窗口"
+		onclick="resetWinSmall()" style="width: 60px; height: 30px" />
+	<input type="button" name="button1" value="关闭窗口"
+		onclick="resetWinClose()" style="width: 60px; height: 30px" />
+
+</body>
+</html>

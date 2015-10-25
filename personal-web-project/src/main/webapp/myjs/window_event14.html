@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>输入法操作界面</title>
+<!-- 向下移动，可以考虑使用倒叙遍历，进行判断 -->
+</head>
+<body>
+	<script type="text/javascript">
+		function moveToFirst() {
+			var obj = document.getElementById("inputMethod");
+			var sub_obj = document.getElementsByTagName("option");
+
+			for (var i = 0; i < sub_obj.length; i++) {
+				if (sub_obj[i].selected) {
+					if (i == 0) {
+						//alert(sub_obj[i]);
+						break;
+					} else {
+						obj.insertBefore(sub_obj[i], obj.firstChild);
+					}
+				}
+			}
+
+		}
+		function moveToLast() {
+			var obj = document.getElementById("inputMethod");
+			var sub_obj = document.getElementsByTagName("option");
+
+			for (var i = sub_obj.length - 1; i >=0; i--) {
+				if (sub_obj[i].selected) {
+					if (i == sub_obj.length - 1) {
+						break;
+					} else {
+						obj.appendChild(sub_obj[i]);
+					}
+				}
+			}
+		}
+
+		function removeOne() {
+			var obj = document.getElementById("inputMethod");
+			var sub_obj = document.getElementsByTagName("option");
+
+			for (var i = 0; i < sub_obj.length; i++) {
+				if (sub_obj[i].selected) {
+					obj.removeChild(sub_obj[i]);
+					i--;
+				}
+			}
+		}
+		function moveToUp() {
+			var obj = document.getElementById("inputMethod");
+			var sub_obj = document.getElementsByTagName("option");
+
+			for (var i = 0; i < sub_obj.length; i++) {
+				if (sub_obj[i].selected) {
+					if (i != 0) {
+						obj.insertBefore(sub_obj[i], sub_obj[i - 1]);
+					} else {
+						break;
+					}
+				}
+			}
+		}
+		//有问题；
+		function moveToDown() {
+			var obj = document.getElementById("inputMethod");
+			var sub_obj = document.getElementsByTagName("option");
+
+			//这里需要逆序实现；
+			for (var i = sub_obj.length - 1; i >= 0; i--) {
+				if (sub_obj[i].selected) {
+					if (i == sub_obj.length - 1) {//最后一个元素
+						break;
+					}
+					if (i == sub_obj.length - 2) {//倒数第2个元素；
+						obj.appendChild(sub_obj[i]);
+						//obj.insertBefore(sub_obj[i], sub_obj[i + 2]);
+						//alert(sub_obj.length);
+						continue;
+					}
+					obj.insertBefore(sub_obj[i], sub_obj[i + 2]);
+				}
+			}
+		}
+	</script>
+
+	<form id="myform" name="myform">
+		<select id="inputMethod" multiple="multiple" size=10
+			style="width: 150px">
+			<option>QQ拼音</option>
+			<option>搜狗</option>
+			<option selected="selected">智能五笔</option>
+			<option>拼音</option>
+			<option>飞讯</option>
+			<option>百度拼音</option>
+			<option>微软拼音</option>
+		</select> <br /> <input type="button" value="首行" onclick="moveToFirst()">
+		<input type="button" value="末行" onclick="moveToLast()"> <input
+			type="button" value="上移" onclick="moveToUp()"> <input
+			type="button" value="下移" onclick="moveToDown()"> <input
+			type="button" value="删除" onclick="removeOne()">
+	</form>
+</body>
+</html>

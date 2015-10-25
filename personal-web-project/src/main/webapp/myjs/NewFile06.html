@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+	var add = function(x, y) {
+		return x + y;
+	}
+
+	//alert(add(3,6));
+</script>
+</head>
+<!-- 匿名函数的使用；
+ -->
+<body>
+	<script type="text/javascript">
+		//========================求最大值=========================
+		function getMax(arr) {
+			var max = arr[0];
+			for (var i = 1; i < arr.length; i++) {
+				if (max < arr[i]) {
+					max = arr[i];
+				}
+			}
+			return max;
+		}
+
+		var arr = new Array(1, 74, 123, 76, 98, 45, 1, 3, 1, 62, 33);
+		//alert("最大值为：" + getMax(arr));
+		document.write("数组中的元素最大值为：" + getMax(arr));
+
+		//========================从小到大排序=========================
+
+		function js_sort(arr) {
+			for (var i = 0; i < arr.length - 1; i++) {
+				for (var j = i + 1; j < arr.length; j++) {
+					if (arr[i] > arr[j]) {
+						js_swap(arr, i, j);
+					}
+				}
+			}
+			return arr;
+		}
+
+		function js_swap(arr, i, j) {
+			var temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+
+		var key = 62;
+		document.write("<br />排序前数组为：" + arr);
+		document.write("<br />元素" + key + "排序前顺序查找结果是：" + js_search1(arr, key));
+		key = 333;
+		document.write("<br />元素" + key + "排序前顺序查找结果是：" + js_search1(arr, key));
+		arr = js_sort(arr);
+		document
+				.write("<br />数组长度为：" + arr.length + ",<br />从小到大排序后数组为：" + arr);
+		//alert("数组长度为：" + arr.length + ",\n从小到大排序后数组为：" + arr);
+
+		//========================顺序查找元素数组=========================
+		function js_search1(arr, key) {
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] == key) {
+					return i;//返回查找到的数组元素角标；
+				}
+			}
+			return -1;
+		}
+
+		document.write("<br />元素" + key + "排序后顺序查找结果是：" + js_search1(arr, key));
+		//========================二分法查找有序元素数组=========================
+
+		function binary_search(arr, key) {
+			var mid, min, max;//定义3个角标；
+			max = arr.length - 1;
+			min = 0;
+			while (min <= max) {//1001
+				mid = (min + max) >> 1;//使用左移语句，避免小数的出现，这个语句是二分法查找的最关键点；
+				//alert(mid + ":" + arr[mid]);
+				if (key < arr[mid]) {
+					max = mid - 1;
+				} else if (key > arr[mid]) {
+					min = mid + 1;
+				} else {
+					return mid;//返回的是相同元素最后一个的位置；
+				}
+			}
+			return -1;
+		}
+		key = 33;
+		document.write("<br />排序后二分法查找元素" + key + "结果："
+				+ binary_search(arr, key));
+		//========================数组反转=========================
+
+		function reversrArray(arr) {
+			for (var start = 0, end = arr.length-1; start < end; start++, end--) {
+				js_swap(arr, start, end);
+			}
+		}
+		reversrArray(arr);
+		document.write("<br />反转后数组元素为：" + arr);
+		//========================over=========================
+			
+			
+			
+			
+			
+	</script>
+
+
+</body>
+</html>

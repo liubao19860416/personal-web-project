@@ -1,0 +1,35 @@
+<input onclick="document.all.WebBrowser.ExecWB(1,1)" type="button" value="打开" name="Button1">
+<input onclick="document.all.WebBrowser.ExecWB(4,1)" type="button" value="另存为" name="Button2">
+<input onclick="document.all.WebBrowser.ExecWB(10,1)" type="button" value="属性" name="Button3">
+<input onclick="document.all.WebBrowser.ExecWB(6,1)" type="button" value="打印" name="Button">
+<input onclick="document.all.WebBrowser.ExecWB(8,1)" type="button" value="页面设置" name="Button4">
+<input onclick="window.location.reload()" type="button" value="刷新" name="refresh">
+<input onClick="window.external.ImportExportFavorites(true,'');" type="button" value="导入收藏夹" name="Button5">
+<input onClick="window.external.ImportExportFavorites(false,'');" type="button" value="导出收藏夹" name="Button32">
+<input onClick="window.external.AddFavorite(location.href, document.title)" type="button" value="加入收夹"name="Button22">
+<input onClick="window.external.ShowBrowserUI('OrganizeFavorites', null)" type="button" value="整理收藏夹" name=" Submit2">
+<input onclick='window.location="view-source:" + window.location.href' type="button" value="查看源文件" name="Button7">
+<input onClick="window.external.ShowBrowserUI('LanguageDialog', null)" type="button" value="语言设置" name="Button6">
+<input onClick="document.execCommand('Cut')" type="button" value="剪切">
+<input onClick="document.execCommand('Copy')" type="button" value="拷贝">
+<input onClick="document.execCommand('Paste')" type="button" value="粘贴">
+<input onClick="document.execCommand('Undo')" type="button" value="撤消">
+<input onClick="document.execCommand('Delete')" type="button" value="删除">
+<input onClick="document.execCommand('Bold')" type="button" value="黑体">
+<input onClick="document.execCommand('Italic')" type="button" value="斜体">
+<input onClick="document.execCommand('Underline')" type="button" value="下划线">
+<input onClick="document.execCommand('stop')" type="button" value="停止">
+<input onClick="document.execCommand('SaveAs')" type="button" value="保存">
+<input onClick="document.execCommand('Saveas',false,'c://Autorun.inf')" type="button" value="另存为">
+<input onClick="document.execCommand('FontName',false,fn)" type="button" value="字体">
+<input onClick="document.execCommand('FontSize',false,fs)" type="button" value="字体大小">
+<input onClick="document.execCommand('refresh',false,0)" type="button" value="刷新">
+<input onclick="window.location.reload()" type="button" value="刷新">
+<input onclick="history.go(1)" type="button" value="前进">
+<input onclick="history.go(-1)" type="button" value="后退">
+<input onclick="history.forward()" type="button" value="前进">
+<input onclick="history.back()" type="button" value="后退">
+<input type="button" value="弹出固定窗口" onClick="javascript:window.open('#','','scrollbars=yes,width=600,height=200')" >
+<input type="button" value="没有提示关闭" onclick="window.opener=null;window.close();" />
+<input type="button" value="点击进入另一页面" onclick="window.location.href=''" />
+<input type="button" value="返回上一页" onclick="javascript:history.go(-1);" />

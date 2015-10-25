@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+	default-autowire="byName">
+	
+	<!-- 配置执行定时任务的类和方法1 -->
+	<bean id="myQuartzJob1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<bean class="base.quartz.MyQuartzJob1"/>
+		</property>
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+
+	<!-- 配置方法1对应的触发器1 -->
+	<bean id="myJobTrigger1" name="myJobTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="myQuartzJob1" />
+			<!-- 触发器触发的 执行定时任务的bean -->
+		</property>
+		<!--cron表达式中，总共7个字段，其中日期（日，不是年）和周必须是互斥的，即必须有且只有一个要指定值，另一个不指定   -->
+		<property name="cronExpression">
+			<!-- 定时任务执行的间隔 ，每隔5秒钟执行一次-->
+			<value>0/5 * * * * ? *</value>
+		</property>
+	</bean>
+
+	<!-- 配置执行定时任务的类和方法2 -->
+	<bean id="myQuartzJob2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<bean class="base.quartz.MyQuartzJob2"/>
+		</property>
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+
+	<!-- 配置方法2对应的触发器2 -->
+	<bean id="myJobTrigger2" name="myJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 触发器触发的 执行定时任务的bean -->
+			<ref bean="myQuartzJob2" /> 
+		</property>
+		<!-- cron表达式中，总共7个字段，其中日期（日，不是年）和周必须是互斥的，即必须有且只有一个要指定值，另一个不指定   -->
+		<property name="cronExpression">
+			<!-- 在每分钟的第10秒的时候执行 -->
+			<value>10 * * * * ? *</value>
+		</property>
+	</bean>
+	
+	<!-- 配置执行定时任务的类和方法3 -->
+	<!-- 这里使用一个不一样的id，bean使用spring注解中的bean的引用 -->
+	<bean id="testDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		
+		<!-- 这里bean使用spring注解中的bean的引用 -->
+		<!-- <property name="targetObject" ref="myQuartzJob3"/> -->
+		
+		<property name="targetObject">
+			<!-- 这里bean使用spring注解中的bean的引用 -->
+			<ref bean="myQuartzJob3" /> 
+		</property>
+		
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
+	</bean>
+
+	<!-- 配置方法3对应的触发器3 -->
+	<bean id="myJobTrigger3" name="myJobTrigger3" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<!-- 触发器触发的 执行定时任务的bean -->
+		<property name="jobDetail" ref="testDetail"/>
+		<!-- cron表达式中，总共7个字段，其中日期（日，不是年）和周必须是互斥的，即必须有且只有一个要指定值，另一个不指定   -->
+		<property name="cronExpression">
+			<!-- 每分钟执行一次 -->
+			<value>* 0/1 * * * ? *</value>
+		</property>
+	</bean>
+	
+	<!-- 触发器 统一管理的配置方式1：（触发器列表，可以配置多个任务），autowire="no"必须进行配置，否则spring的自动注入会导致错误 -->
+	<bean name="quartzScheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 必须，QuartzScheduler 延时10秒后再启动，应用启动后 QuartzScheduler 再启动 -->
+		<property name="startupDelay" value="10" />
+		<property name="triggers">
+			<list>
+			<ref local="myJobTrigger1" />
+			<!-- local指关联当前xml的bean-->
+			<ref local="myJobTrigger2" />
+			<!-- 寻找全局中的 bean -->
+			<ref bean="myJobTrigger3" /> 
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置方式2，备用OK -->
+	<!-- <bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="startupDelay" value="10" />
+		<property name="triggers">
+			<list>
+				这里可以设置多个执行任务
+				<ref bean="myJobTrigger1" />
+				<ref bean="myJobTrigger2" />
+				<ref bean="myJobTrigger3" />
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 线程池设置 -->
+	<!-- spring线程池设置 ，对定时任务开启一个线程池进行控制，其中bean的id为taskExecutor，不能改变，它是SchedulerFactoryBean的一个属性，这样通过set方法就注入进去了-->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数，核心线程会一直存活，即使没有任务需要处理 -->
+        <property name="corePoolSize" value="3" />
+        <!-- 当线程数大于或等于核心线程，且任务队列已满时，线程池会创建新的线程，直到线程数量达到maxPoolSize。如果线程数已等于maxPoolSize，且任务队列queueCapacity已满，则已超出线程池的处理能力，线程池会拒绝处理任务而抛出异常 -->
+        <property name="maxPoolSize" value="5" />
+        <!-- 当线程空闲时间达到keepAliveTime，该线程会退出，直到线程数量等于corePoolSize。如果allowCoreThreadTimeout设置为true，则所有线程均会退出直到线程数量为0-->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 核心线程在allowCoreThreadTimeout默认值为false，被设置为true时，核心线程才会退出;默认为false-->
+        <property name="allowCoreThreadTimeOut" value="true" />
+        <!-- 任务队列容量 -->
+        <property name="queueCapacity" value="25" />
+    </bean> 
+
+</beans>

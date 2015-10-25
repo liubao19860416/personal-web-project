@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<!-- 会化工厂，将对应的资源，交给spring管理 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:test/mybatis.cfg.xml" />
+		<!-- 也可以在mybatis.cfg.xml中配置 -->
+		<property name="typeAliasesPackage"  value="com.saick.base.dao.entiy" />
+		<!-- 对于mapperLocations两种形式都可以使用如下，也可以在mybatis.cfg.xml中配置 -->
+		<property name="mapperLocations">
+			<!-- 可以配置多个Mapper扫描路径 -->
+			<list>
+				<value>classpath:../classes/**/mapper/*Mapper.xml</value>
+				<value>com.saick.base.dao.**.*Mapper.xml</value>
+			</list>
+			<!-- <array>
+				<value>classpath:../classes/**/mapper/*Mapper.xml</value>
+			</array> -->
+		</property>
+		
+		
+		<!-- <property name="mapperLocations" value="classpath:../classes/**/mapper/*Mapper.xml" /> -->
+		<!-- <property name="mapperLocations" value="com.saick.base.dao.**.*Mapper.xml" /> -->
+		<!-- <property name="mapperLocations" value="classpath:../classes/project/base/poi/dao/**/*Mapper.xml" /> -->
+	</bean>
+	
+	<!-- mapper映射的bean对象自动扫描 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.saick.base.dao.mapper" />
+		<!-- optional unless there are multiple session factories defined -->
+		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> -->
+	</bean>
+
+
+
+</beans>

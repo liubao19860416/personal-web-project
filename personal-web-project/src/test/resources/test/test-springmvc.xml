@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+	<!-- 启用注解 -->
+	<mvc:annotation-driven />
+	
+	<!-- 组件扫描，用于控制层 -->
+	<context:component-scan base-package="com.saick.base.dao" />
+	<context:component-scan base-package="com.saick.base.service" />
+	<context:component-scan base-package="com.saick.base.controller" />
+
+	<mvc:default-servlet-handler/>
+	<bean id="defaultServletHttpRequestHandler" class="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler"/>
+	
+	<mvc:view-controller path="/index/ok.htm" view-name="redirect:/index.jsp" />
+	<mvc:view-controller path="/index/ok2.htm" view-name="/base/login" />
+    <mvc:view-controller path="/404" view-name="/error/404"/>  
+    <mvc:view-controller path="/exception" view-name="/exception/uncaughtException"/>  
+    
+	<mvc:resources mapping="/images/**" location="/images/**" cache-period="31556926"/>
+	<mvc:resources mapping="/css/**.css" location="/css/**" cache-period="31556926" />
+	<mvc:resources mapping="/js/**.js" location="/js/**" cache-period="31556926"/>
+	
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="-1"/>
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF8" />
+	</bean>
+	
+	<!-- activeUser 参数解析器 -->
+	<!-- <mvc:annotation-driven conversion-service="conversionService">
+		<mvc:argument-resolvers>
+			<bean class="base.converters.UserArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven> -->
+	
+	<!-- 自定义注册属性编辑器 -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="base.converters.DateConverter" />
+				<bean class="base.converters.DatetimeConverter" />
+				<bean class="base.converters.StringTrimConverter" />
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- DefaultAnnotationHandlerMapping，处理在Controller类级别上的@RequestMapping注解 -->
+	<!-- 处理Method方法级别上的@RequestMapping注解 ,主要用来解析JSON数据使用的-->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<!-- 覆盖注解驱动自动注册的AnnotationMethodHandlerAdapter -->
+		<property name="order" value="-1" />
+		<property name="cacheSeconds" value="0" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 全局异常处理器1:自定义-->
+	<!-- <bean id="handlerExceptionResolver1" class="base.controller.handler.MyHandlerExceptionResolver">
+		<property name="order" value="-2" />
+		<property name="jsonMessageConverter" ref="mappingJacksonHttpMessageConverter" />
+	</bean> -->
+	<!-- Http messageConverters，用于将对象输出到客户端 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 全局异常处理器2:系统自带-->
+	<bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="order" value="-1" />
+    	<property name="exceptionAttribute" value="exception"/>
+		<property name="defaultErrorView" value="/base/errorDefault"/>
+		<property name="defaultStatusCode" value="404"/>
+        <property name="warnLogCategory" value="warn"/>
+		<property name="exceptionMappings">
+			<props>
+				<!-- 下面的4种url写法-->
+				<prop key="base.controller.exception.SessionTimeoutException">redirect:/error.jsp</prop>
+				<prop key="java.lang.NumberFormatException">forward:/error.jsp</prop>
+				<prop key="java.io.IOException">forward:/WEB-INF/jsp/base/error.jsp</prop>
+				<prop key="java.lang.NullPointerException">/base/login</prop>
+			</props>
+		</property>
+		 <!--  TODO 优先级居中，为2，如何使用？？？ -->
+		<property name="statusCodes">
+            <props>  
+                <prop key="/base/errorDefault">500</prop>  
+                <prop key="/base/errorDefault">404</prop>  
+            </props>  
+        </property>
+	</bean>
+	
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize" value="5242880" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+
+</beans>

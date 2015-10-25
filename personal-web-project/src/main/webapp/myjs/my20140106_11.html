@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>my20140106_11</title>
+<!-- 
+ //这是一个时钟程序 ☆☆☆☆☆☆☆☆☆☆☆☆☆
+ -->
+<script type="text/javascript">
+	function startTime() {
+		var today = new Date()
+		//alert(today.valueOf());//返回原始的毫秒值
+
+		var h = today.getHours()
+		var m = today.getMinutes()
+		var s = today.getSeconds()
+		// add a zero in front of numbers<10
+		m = checkTime(m)
+		s = checkTime(s)
+		document.getElementById('txt').innerHTML = h + ":" + m + ":" + s
+		t = setTimeout('startTime()', 500)
+	}
+
+	function checkTime(i) {
+		if (i < 10) {
+			i = "0" + i
+		}
+		return i
+	}
+</script>
+</head>
+
+<body onload="startTime()">
+	<div id="txt"></div>
+
+</body>
+</html>

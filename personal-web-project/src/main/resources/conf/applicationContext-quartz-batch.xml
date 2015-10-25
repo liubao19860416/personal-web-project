@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+	default-autowire="byName">
+    
+	<!-- TODO 要调用的工作类,这里通过注解扫描了 -->
+	<bean id="quartzJobBean" class="base.quartz.BatchCallCenterService"/>
+	
+	<!-- TODO 定义调用目标对象和调用目标对象的方法 -->
+	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<!-- <property name="targetObject" ref="batchCallCenterService" /> -->
+		<property name="targetObject" ref="quartzJobBean" />
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod" value="work"/>
+	</bean>
+
+	<!-- 定义CronTrigger触发时间规则 -->
+	<bean id="doTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobtask"/>
+		<!-- cron表达式中，总共7个字段，其中日期（日，不是年）和周必须是互斥的，即必须有且只有一个要指定值，另一个不指定   -->
+		<!-- 其中日和星期字段，不能同时指定，选择其一即可 -->
+		<!-- 格式为： 1秒 2分3 时 4日5 月 6星期 7年-->
+		<property name="cronExpression" >
+			<!-- 在2014年的MON-FRI的23:59:59秒执行 -->
+			<value>59 59 23 ? * MON-FRI 2014</value>
+			<!-- <value>59 59 23 * * 3 *</value> -->
+			<!-- 每隔5秒钟调用一次 -->
+			<!-- <value>0/5 * * * * ? *</value> -->
+			<!-- 每隔1秒钟调用一次 -->
+			<!-- <value>0 0/1 * * * ?</value> -->
+			<!--  在2015-2018年的每天的0:15，0:30和0:45,各调用1次 -->
+			<!-- <value>0 15,30,45 0 ? * SUN-SAT 2015-2018</value> -->
+			<!-- 在2015-2018年的4月15日的13:15，13:53和13:55,各调用1次 -->
+			<!-- <value>0 15,53,55 13 15 4 ? 2015-2018</value> -->
+			<!-- 在2015-2018年的1月1日当天0:15点和0:30,各调用1次 -->
+			<!-- <value>0 15,30 0 1 1 ? 2015-2018</value> -->
+			<!-- 在2015-2018年的12月31日当天23:45,调用1次 -->
+			<!-- <value>0 30,45 23 L 12 2015-2018</value> -->
+			<!-- <value>0 30,45 23 31 12 ? 2015-2018</value> -->
+		</property>
+	</bean>
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 ，autowire="no"必须进行配置，否则spring的自动注入会导致错误-->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 必须，QuartzScheduler 延时10秒后再启动，应用启动后 QuartzScheduler 再启动 -->
+		<property name="startupDelay" value="10" />
+		<property name="triggers">
+			<list>
+				<!-- 这里可以设置多个执行任务 -->
+				<ref bean="doTime" />
+			</list>
+		</property>
+		
+		<!-- 这里是配置了该类的方法的执行使用线程池操作 -->
+		<!-- <property name="taskExecutor" ref="taskExecutor"/>  -->
+		
+	</bean>
+	
+	<!-- 线程池设置 -->
+	<!-- spring线程池设置 ，对定时任务开启一个线程池进行控制，其中bean的id为taskExecutor，不能改变，它是SchedulerFactoryBean的一个属性，这样通过set方法就注入进去了-->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数，核心线程会一直存活，即使没有任务需要处理 -->
+        <property name="corePoolSize" value="3" />
+        <!-- 当线程数大于或等于核心线程，且任务队列已满时，线程池会创建新的线程，直到线程数量达到maxPoolSize。如果线程数已等于maxPoolSize，且任务队列queueCapacity已满，则已超出线程池的处理能力，线程池会拒绝处理任务而抛出异常 -->
+        <property name="maxPoolSize" value="5" />
+        <!-- 当线程空闲时间达到keepAliveTime，该线程会退出，直到线程数量等于corePoolSize。如果allowCoreThreadTimeout设置为true，则所有线程均会退出直到线程数量为0-->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 核心线程在allowCoreThreadTimeout默认值为false，被设置为true时，核心线程才会退出;默认为false-->
+        <property name="allowCoreThreadTimeOut" value="false" />
+        <!-- 任务队列容量 -->
+        <property name="queueCapacity" value="25" />
+        <property name="rejectedExecutionHandler">  
+	       <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />  
+	    </property> 
+    </bean> 
+
+</beans>

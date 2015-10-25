@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+	<!-- 用于区分不同应用程序的记录，每个logger都关联到logger上下文，默认上下文名称为“default” -->
+	<contextName>myAppName</contextName> 
+	<!-- 获取时间戳字符串,获取当前时间，方式一  -->
+	<timestamp key="DATE_FORMAT_DEFAULT" datePattern="yyyy-MM-dd"/>
+	<!-- 方式2 -->
+	<!-- <property name="DATE_FORMAT_DEFAULT" value="${DATE_FORMAT_DEFAULT}" /> -->
+	<property name="MAX_FILE_SIZE" value="5MB" />
+	<property name="MAX_ZIP_NUM" value="10" />
+	<!--日志文件保留天数-->
+	<property name="LOG_MAX_HISTORY" value="30" />
+	
+	<!--======================================= 本地变量 ========================================-->
+	<!--在没有定义${LOG_HOME}系统变量的时候，可以设置此本地变量。提交测试、上线时，要将其注释掉，使用系统变量。 -->
+	<!--<property name="LOG_HOME" value="${user.home}/data/applogs" /> -->
+	<!-- <property file="src/main/resources/logback.properties" /> -->
+	<property resource="logback.properties" />
+	
+	<!-- 应用名称：和统一配置中的项目代码保持一致（小写） -->
+	<!-- <property name="LOG_HOME" value="d:/data/applogs" /> -->
+	<property name="LOG_HOME" value="${LOG_HOME}" />
+	<!-- 应用名称：和统一配置中的项目代码保持一致（小写），根目录下面写死了，其他环境的从配置文件读取 -->
+	<property name="APP_NAME" value="grape-csc" />
+	
+	<!--应用日志文件保存路径-->
+	<property name="LOG_APP_HOME" value="${LOG_HOME}/${APP_NAME}/app" />
+	<property name="LOG_SYS_HOME" value="${LOG_HOME}/${APP_NAME}/sys" />
+	<property name="LOG_ERROR_HOME" value="${LOG_HOME}/${APP_NAME}/error" />
+	
+	
+	<!--=========================== 按照每天生成日志文件：控制台输出 ===================================-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：主项目日志=============================== -->
+	<appender name="APP"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_APP_HOME}/${APP_NAME}-service.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<!-- 添加了字符和文件编码格式，以及最大文件设置 -->
+	<!--=========================== 按照每天生成系统日志文件：ROOT根目录日志=========================== -->
+	 <appender name="ROOT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	 	<!-- 添加输出文件字符编码 -->
+	 	<Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--  日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_APP_HOME}/${APP_NAME}.root.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--  日志文件保留天数 -->
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <!-- 添加输出格式字符编码 -->
+            <charset>UTF-8</charset>
+        </encoder>
+        
+		<!-- 下面这段注释的代码可以在日志文件超过 10MB 时进行归档，并且归档文件后缀只要是 .zip 或 .gz 就会自动压缩日志归档 -->
+        <!-- <file>d:/data/applogs/grape-csc/app/grape-csc.root.2014-11-25.log</file> -->
+        <file>${LOG_APP_HOME}/${APP_NAME}.root.${DATE_FORMAT_DEFAULT}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+          <!-- <fileNamePattern>d:/data/applogs/grape-csc/app/grape-csc.root.2014-11-25.log.%i.zip</fileNamePattern> -->
+          <fileNamePattern>${LOG_APP_HOME}/${APP_NAME}.root.${DATE_FORMAT_DEFAULT}.log.%i.zip</fileNamePattern>
+          	<minIndex>1</minIndex>
+          	<maxIndex>${MAX_ZIP_NUM}</maxIndex>
+        </rollingPolicy>
+        <!--日志文件最大的大小-->
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<!-- <MaxFileSize>10MB</MaxFileSize> -->
+			<MaxFileSize>${MAX_FILE_SIZE}</MaxFileSize>
+		</triggeringPolicy>
+		<!--日志文件最大的大小,无用-->
+		<!-- <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+			<MaxFileSize>3KB</MaxFileSize>
+			<MaxFileSize>${MAX_FILE_SIZE}</MaxFileSize>
+		</TimeBasedFileNamingAndTriggeringPolicy>  -->
+		
+    </appender>
+    
+    
+    <!--=========================== 按照每天生成系统日志文件：主项目error日志========================= -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter> 
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_ERROR_HOME}/${APP_NAME}.error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+        </encoder>
+    </appender>
+	<!--======================= 按照每天生成日志文件：业务定制：发送邮件业务日志=========================-->
+	<appender name="SEND"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_APP_HOME}/saic-mail-send.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--======================= 按照每天生成日志文件：framework基础业务日志=========================-->
+	<appender name="FRAMEWORK"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_APP_HOME}/saic-framework.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：MQ相关日志=========================== -->
+	<appender name="MQ"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_APP_HOME}/saic-csc-mq.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：统一配置日志========================== -->
+	<appender name="UCM"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_SYS_HOME}/saic-ucm.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：VENUS日志========================== -->
+	<appender name="VENUS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_SYS_HOME}/saic-venus.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：venus-performance日志============= -->
+	<appender name="VENUS-PERFORMANCE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_SYS_HOME}/saic-venus-performance.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：VENUS跟踪日志====================== -->
+	<appender name="VENUS-TRACER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<FileNamePattern>${LOG_SYS_HOME}/saic-venus-tracer.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!--日志文件保留天数-->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：service-invoker跟踪日志============ -->
+	<appender name="SERVICE-INVOKER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_APP_HOME}/saic-service-invoker.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：VENUS心跳日志====================== -->
+	<appender name="VENUS-HEARTBEAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件输出的文件名 -->
+			<FileNamePattern>${LOG_SYS_HOME}/saic-venus-heartbeat.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!-- 日志文件保留天数 -->
+			<MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--
+			格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符
+			-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!--=========================== 按照每天生成系统日志文件：MYBATIS配置====================== -->
+    <appender name="MYBATIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_SYS_HOME}/saic-mybatis.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+        </encoder>
+    </appender>
+	<!--=========================== 按照每天生成系统日志文件：interceptors拦截器配置====================== -->
+    <appender name="INTERCEPTORS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_APP_HOME}/saic-interceptors.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>${LOG_MAX_HISTORY}</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    
+    
+    <!--===============================  目的指定向email的appender ============================-->
+	<appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+		<!-- 设置触发规则：根据error记录条数进行触发 -->
+		<Evaluator class="base.logback.CounterBasedEvaluator" />
+		<!-- 邮件发送过滤器 -->
+		<!-- <filter class="ch.qos.logback.core.filter.EvaluatorFilter">  
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>
+                	& encoded as &amp;
+                	if(level > INFO &amp;&amp; null != throwable) {
+                		return true;
+                	}
+                	return false;
+                </expression>  
+            </evaluator>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>    
+        </filter> -->
+        <!-- 缓存大小 -->
+		<BufferSize>512</BufferSize>
+		<!--  加密套接字协议层 -->
+		<SSL>false</SSL>
+		<!-- 异步发送 -->
+		<asynchronousSending>false</asynchronousSending>
+		<!-- 邮件服务器地址 -->
+		<SMTPHost>${MAIL.QQ.RECEIVE.HOST}</SMTPHost>
+		<!--SMTPPORT端口 -->
+		<SMTPPort>${MAIL.QQ.RECEIVE.PORt}</SMTPPort>
+		<SSL>true</SSL>
+		<!-- 用户名 -->
+		<Username>${MAIL.QQ.USERNAME}</Username>
+		<!-- 密码 -->
+		<Password>${MAIL.QQ.PASSWORD}</Password>
+		<!-- 目标接收人,可以多个 -->
+		<To>${MAIL.163.USERNAME}</To>
+		<!-- 发件人 -->
+		<From>${MAIL.QQ.USERNAME}</From>
+		<!-- 主题 -->
+		<Subject>测试=TESTING: %logger{20} - %m</Subject>
+		<encoder>
+			<!-- 一般采用这种方式格式化输出 -->
+			<layout class="ch.qos.logback.classic.html.HTMLLayout">
+				<!-- 采用什么渲染方式，这采取的是HTML方式 -->
+				<Pattern>%date %-5level %logger - %message%n</Pattern>
+			</layout>
+		</encoder> 
+	</appender>
+	
+	
+	
+	
+	<!--===============================  日志输出: FRAMEWORK业务 ============================-->
+	<logger name="com.saic.framework" additivity="true">
+		<level value="info" />
+		<appender-ref ref="FRAMEWORK" />
+	</logger>
+	<logger name="com.ibm.framework" additivity="true">
+		<level value="info" />
+		<appender-ref ref="FRAMEWORK" />
+	</logger>
+	<!--===============================  日志输出: 发送邮件业务 ================================-->
+	<logger name="com.saic.framework.service.mail.impl.MailSendServiceImpl" additivity="true">
+		<level value="info" />
+		<appender-ref ref="SEND" />
+	</logger>
+	<logger name="com.saic.framework.service.mail.task.MailSendTask" additivity="true">
+		<level value="info" />
+		<appender-ref ref="SEND" />
+	</logger>
+	<!--===============================  日志输出: VENUS系统业务===============================-->
+	<logger name="com.meidusa.toolkit.net.ConnectionAcceptor" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS" />
+	</logger>
+	<logger name="com.meidusa.toolkit.common.heartbeat" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS-HEARTBEAT" />
+	</logger>
+	<logger name="venus.backend.performance" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS-PERFORMANCE" />
+	</logger>
+	<logger name="venus.client.performance" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS-PERFORMANCE"/>
+	</logger>
+	<logger name="com.meidusa.toolkit.net" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="VENUS" />
+	</logger>
+	<logger name="venus.service.invoker" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="SERVICE-INVOKER"/>
+	</logger>
+	<logger name="venus.report.queue" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS" />
+	</logger>
+	<logger name="com.meidusa.venus" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="VENUS"/>
+	</logger>
+	<logger name="venus.tracer" additivity="true">
+		<level value="info"/>
+		<appender-ref ref="VENUS-TRACER" />
+	</logger>
+	<!--===============================  日志输出: MQ业务 =====================================-->
+	<logger name="com.ibm.mq" additivity="true">
+		<level value="info" />
+		<appender-ref ref="MQ" />
+	</logger>
+    <!--===============================  日志输出: 统一配置业务 ================================-->
+	<logger name="com.gagu.ucm.core.utils.ConfigUtils" additivity="false">
+		<level value="info" />
+		<appender-ref ref="UCM" />
+	</logger>
+    <!--===============================  日志输出: MYBATIS业务 ================================-->
+    <logger name="org.apache.ibatis" additivity="true">
+        <level value="debug" />
+        <appender-ref ref="MYBATIS" />
+    </logger>
+    <logger name="org.mybatis" additivity="true">
+        <level value="debug" />
+        <appender-ref ref="MYBATIS" />
+    </logger>
+    <logger name="java.sql" additivity="true">
+        <level value="debug" />
+        <appender-ref ref="MYBATIS" />
+    </logger>
+    <!--===============================  日志输出: 默认APP主项目 ================================-->
+    <logger name="base" additivity="true">
+        <level value="info" />
+        <appender-ref ref="APP" />
+    </logger>
+    <!--===============================  日志输出: 性能拦截器输出的warn级别的日志信息================================-->
+    <logger name="base.interceptor" additivity="true">
+        <level value="info" />
+        <appender-ref ref="INTERCEPTORS" />
+         <!-- 发送指定类型的邮件，如错误提示邮件 -->
+        <appender-ref ref="EMAIL" />
+    </logger>
+     <logger name="base.controller" additivity="true">
+        <level value="info" />
+        <!-- 发送指定类型的邮件，如错误提示邮件 -->
+        <appender-ref ref="EMAIL" />
+    </logger>
+    
+	<!--===============================  日志输出: 根目录输出统一设置 ============================-->
+	 <root level="info">
+        <appender-ref ref="ROOT" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="STDOUT" />
+    </root>
+	
+</configuration>

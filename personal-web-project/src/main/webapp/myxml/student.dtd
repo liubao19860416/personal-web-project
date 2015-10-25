@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!ELEMENT schools (classroom+)>
+<!ELEMENT classroom (student+)>
+<!ELEMENT student (name,age,province,school)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT province (#PCDATA)>
+<!ELEMENT school (#PCDATA)>
+<!ATTLIST classroom id CDATA #REQUIRED>
+<!ENTITY SCHOOLNAME "上海传智播客">
+<!ENTITY SCHOOLNAME1 "上海传智播客1">

@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：数组的定义和简单使用；
+循环语句；
+输出语句document.write语句；
+-->
+<script language="JavaScript">
+	function show(f) {
+		if (!/^\w+@\w+.\w+$/.test(f.email.value)) {
+			alert("您输入的email地址不正确！");
+			f.email.focus();
+			f.email.select();
+			return false;
+		}
+		alert(f.email.value);
+		return true;
+	}
+	
+</script>
+</head>
+<!-- 
+<body onLoad="hello()" onUnload="byebye()">
+ -->
+<body>
+	<!--将输入的email地址信息，郑则判断后，合法的提交到指定页面-->
+	<form action="NewFile01.html" method="post" name="myform"
+		onsubmit="return show(this)">
+		Email地址：<input type="text" name="email" />
+		<input type="submit" value="提交">
+		
+	</form>
+
+</body>
+</html>

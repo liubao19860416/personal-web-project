@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习-窗口打开关闭操作</title>
+<!-- 对于input中的text类型等类型的数据访问，不能跨级访问，必须提供它的正确的访问目录层次，才能正确的对其进行访问； -->
+<script type="text/javascript">
+	var myWindow;
+	function checkWin() {
+		//document.write(myWindow.name)
+
+		//self.document.text1.value = myWindow.name;//错误的语句
+
+		self.document.myform.text1.value = myWindow.name;
+	}
+</script>
+
+
+</head>
+<body>
+	<script type="text/javascript">
+		function openZiWin() {
+			myWindow = window.open('', 'ZiWinName', 'width=200,height=100')
+			myWindow.document.write("This is 'ZiWinName'")
+		}
+	</script>
+
+	<!-- 
+	 -->
+	 <form name="myform">
+	<input type="button" value="Open ZiWin" onclick="openZiWin()">
+	<input type="button" value="What's the name of 'ZiWinName'?"
+		onclick="checkWin()">
+	<br />
+	<input type="text" value="返回的子窗口名字" name="text1" id="text1"
+		style="width: 390px; height: 60px" />
+	<br />
+	<input type="submit" value="Clear Content" name="submit"
+		style="width: 150px; height: 30px" />
+	</form>
+	<!-- 
+	 -->
+
+
+</body>
+</html>

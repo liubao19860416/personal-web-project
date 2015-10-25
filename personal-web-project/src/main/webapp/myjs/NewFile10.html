@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		//========================start=========================
+
+		//========================自定义带参数的构造对象=========================
+
+		function Person2(name, age) {
+			this.name = name;
+			this.age = age;
+			this.show = function() {
+				document.write(this.name + "**" + this.age);
+			}
+		}
+
+		var p2 = new Person2("lisi", 46);
+		for (i in p2) {
+			//alert(i);
+			document.write( i + ":" + p2[i] + "<br />");
+			//document.write( i + ":" + p2.i + "<hr />");//这是不可以的；
+		}
+		document.write("<hr>");
+
+		//========================over=========================
+	</script>
+
+
+</body>
+</html>

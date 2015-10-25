@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?> 
+
+<!-- 注释：
+<?xml-stylesheet type="text/css" href="book.css" ?> 
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+与：&amp; 小于：&lt; 大于：&gt; 双引号：&quot; 单引号：&apos;特殊符号后面都有分号结尾；
+<书架>
+	<书>
+		<书名>Java就业&amp;“培训”&apos;指导</书名>
+		<作者>张孝祥</作者>
+		<售价>54</售价>
+	</书>
+	<img href="111.jpg">一张图片</img>
+	<书>
+		<书名>C++就业培训指导</书名>
+		<作者>刘保</作者>
+		<售价>33</售价>
+	</书>
+	<书>
+		<书名>Java就业培训指导</书名>
+		<作者>毕向东</作者>
+		<售价>32</售价>
+	</书>
+</书架>
+-->
+
+<bookstore>
+	<book>
+		<bookname>&lt;就业指导书&gt;</bookname><br />
+		<author>Liubao&#x000A;</author><br />
+		<price>33元</price><br />
+	</book>
+	
+	<book>
+		<bookname>&lt;就业指导书&gt;</bookname>
+		<author>Liubao</author>
+		<price>33元</price>
+	</book>
+</bookstore>
+

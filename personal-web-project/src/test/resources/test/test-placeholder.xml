@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:oxm="http://www.springframework.org/schema/oxm" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/oxm 
+	  http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+	
+	<!-- 统一配置 -->
+	<bean id="propertyPlaceholderConfigurer" class="com.saike.grape.base.configure.CustomizedPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:#{T(com.saike.grape.base.BaseEnvironment).SYS_ENV}/grape-base-ucm.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="1"/>
+	</bean>
+	
+</beans>

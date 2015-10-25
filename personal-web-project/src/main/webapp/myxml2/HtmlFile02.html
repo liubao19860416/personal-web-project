@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 1、表单格式，16种类型；需要提交的表单，必须指定其对应的name和value属性值；这样系统才能区分提交的数据是那个数据；
+	text：明文，输入的内容是可以显示的；
+	password：输入的是隐式的密码数据；
+	radio:需要将单选的按钮添加到一个组中，给组定义相同的名字sex就可以了；
+	checkbox：复选框；
+	file:选择文件对话框；
+	
+	reset：默认重置按钮；回复默认设置；
+	submit：默认提交查询内容按钮；提交数据表单给服务端；
+	image：具备提交效果的图片；
+	hidden:隐藏组件，提交的时候，也会提交对应的数据；数据不需要客户端知道，但是可以将其提交给服务器端的数据；
+	button：按钮组件；
+	search：搜索文本输入框；
+	color：
+	
+ 	-->
+	<form>
+		输入名称：<input type="text" name="user" value="default"/><br> 
+		输入密码：<input type="password" name="password" value="000000"/><br>
+		选择性别：<input type="radio" name="sex" value="nan"/>男 
+				 <input type="radio" name="sex" checked="checked" value="nv"/>女<br> 
+		专业技能：<input type="checkbox" checked="checked"/ name="tech" value="java">JAVA 
+				 <input type="checkbox" name="tech" value="C++"/>C++ 
+				 <input type="checkbox" name="tech" value="VB"/>VB<br> 		 
+		选择文件：<input type="file" name="file" value="111.jpg"/><br> 
+		图片提交按钮：<input type="image" name="taobao.ico" value="none"/><br> 
+		隐藏组件：<input type="hidden" name="myname" value="myvalue"/><br> 
+		一个按钮：<input type="button" name="mybutton" value="我的按钮" onclick="alert('按钮点击效果显示')"/><br> 
+		
+		查找内容：<input type="search" name="search" value="请输入查找内容"/><br>
+		输入颜色：<input type="color" name="color" value=""/><br>
+		输入日期：<input type="date" name="date" value=""/><br>
+		当地时间：<input type="datetime-local" name="datetime-local" value="2014年3月15日"/><br>
+		输入月份：<input type="month" name="month" value="3月"/><br>
+		输入时间：<input type="datetime" name="datetime" value="18：00"/><br>
+		输入时间：<input type="time" name="time" value="18：30"/><br>
+		输入周数：<input type="week" name="week" value="22"/><br>
+		输入邮箱：<input type="email" name="email" value="18611478781@163.com"/><br>
+		输入数字：<input type="number" name="number" value="1234567890"/><br>
+		输入电话：<input type="tel" name="tel" value="18611478781"/><br>
+		输入网址：<input type="url" name="url" value="http://www.baidu.com"/><br>
+		
+		<!-- 2、下拉菜单select标签，默认选项使用selected="selected"实现；
+			 3、textarea：文本输入区域；可以指定行数和列数；
+		 -->
+		 
+		 选择国家：
+		 <select>
+			 <option value="none">--选择国家--</option>
+			 <option value="cn" selected="selected">中国 </option>
+			 <option value="usa">美国</option>
+			 <option value="en">英国</option>
+			 <option value="none">--选择国家--</option>
+		 </select><br>
+		 
+		 文本输入区域：<textarea rows="3" cols="16"name="textarea" value=""></textarea><br>
+		  
+		<input type="reset" value="清除数据" /><input type="submit" value="提交数据" /><hr><hr>
+		</form>
+	
+	
+	
+	
+		
+		<!-- 4、表单格式化输出显示 ；
+		在form标签端可以指定客户端的数据提交位置；form action="http://192.168.1.100:20011" method="get"表示了数据提交的方式、目的和端口号；
+		并添加数据信息完全的本地校验功能；
+		-->	
+		
+		<form action="http://192.168.1.100:20011" method="get">
+			<table border=5 bordercolor="pink" cellpadding=4 cellspacing=0 width=450px>
+			<caption>表格化数据显示范例</caption>
+				<tbody>
+					<tr>
+						<th>注册表单</th>
+					</tr>
+					<tr>
+						<td>用户名称:</td>
+						<td><input type="text" name="user" value=""/><br></td>
+					</tr>
+					<tr>
+						<td>输入密码：</td>
+						<td><input type="password" name="password" value=""/></td>
+					</tr>
+					<tr>
+						<td>确认密码：</td>
+						<td><input type="password" name="password" value=""/></td>
+					</tr>
+					<tr>
+						<td>选择性别：</td>
+						<td>
+							<input type="radio" name="sex" value="nan" checked="checked"/>男 
+					 		<input type="radio" name="sex" value="nv"/>女
+				 		</td>
+					</tr>
+					<tr>
+						<td>选择技术：</td>
+						<td><input type="checkbox" checked="checked" name="tech" value="java" />JAVA 
+				 			<input type="checkbox" name="tech" value="C++"  checked="checked"/>C++ 
+							 <input type="checkbox" name="tech" value="VB"/>VB
+				 		</td>
+					</tr>
+					<tr>
+						<td>选择国家：</td>
+						<td>
+							<select>
+					 			<option value="none">--选择国家--</option>
+								 <option value="cn" selected="selected">中国 </option>
+								 <option value="usa">美国</option>
+								 <option value="en">英国</option>
+								 <option value="none">--选择国家--</option>
+							 </select>
+							 <select>
+					 			<option value="none">--选择地区--</option>
+								 <option value="cn">东部 </option>
+								 <option value="usa">西部</option>
+								 <option value="en">北部</option>
+								 <option value="none">--选择地区--</option>
+							 </select>
+						 </td>
+					</tr>
+					<tr>
+						<th colspan=2>
+							<input type="reset" name="reset" value="清除数据" />
+							<input type="submit" name="submit" value="提交数据" />
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		
+		
+</body>
+</html>

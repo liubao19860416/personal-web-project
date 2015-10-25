@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta charset="UTF-8">
+<title>my20140106_04</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		//原型对象prototype属性(针对函数来说的，因为js中类是函数，函数是对象，所以具有属性)
+		//但是prototype同时也会对最原始的类的构造函数Person中添加了该属性。
+		function Person(name, age) {
+			this.name = name;
+			this.age = age;
+			this.say = function() {
+				alert(name + "speaking……")
+			}
+		}
+
+		//console.debug(Person.prototype);//Person {}
+
+		Person.prototype.country = "CN";
+
+		var p = new Person("wangwu", 100);
+		//console.debug("p:", p.constructor);
+
+		//console.debug("p:", p);
+
+		p.country = "EN";
+		//console.debug("p:", p);
+
+		var p1 = new Person("zhangliu", 22);
+		//console.debug("p1:", p1);
+
+		var p2 = new Person("zhangliu", 22);
+		//console.debug("p2:", p2);
+		alert(p.country);//EN
+		alert(p1.country);
+		alert(p2.country);
+	</script>
+</body>
+</html>

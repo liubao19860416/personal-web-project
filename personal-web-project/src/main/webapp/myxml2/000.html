@@ -1,0 +1,202 @@
+<!--下面是所有的学习的html的笔记部分，在代码里面；
+-->
+
+<html>
+	<head>
+		<!--1、这里是网页的标题；
+		-->
+		<title>这是一个刘保的网页标题！</title>
+	</head>
+
+	<body>
+		<!--2、换行符号为<br/>；水平线是<hr/>
+		属性值可以用单引号，双引号或不引，但是单引号和双引号可以嵌套使用；
+		-->
+		<font color='red' >欢迎光临<font color='yellow' size=33>刘保</font>的网站！</font><hr/>
+
+		<hr />
+		<a name="top">顶部位置（会显示）</a>
+		<hr />
+		<a href="#id01">跳到底部位置</a>
+		<a href="#center">跳到中间位置</a>
+		<hr/>
+
+
+		<!--3、演示图片内容，自闭和标签；
+		当图片不存在的时候，显示alt中标注的文字。
+		-->
+		<img src="d:\\temp\\socket数据接受过程.jpg" height=350 width=500 border=10 alt="啊，一个美女！"  /><hr/>
+
+		<!--4、这里是自动换行的；
+		但一行中有多个空格的时候，系统默认只记录一个空格的位置，多个空格需要用多个&nbsp表示实现；
+		-->
+		<h1>这是一级                    &nbsp标题<h1/>
+		<h2>这是二级标题<h2/>
+		<h3>这是三级标题<h3/><hr/>
+
+		<!--5、这里将<dz>默认为一个标签来处理的，系统不认识的标签，界面默认不显示，不会报错；但是标签不能为数字，所以<57>为普通文本正常显示；
+		如果想要显示<>符号，需要使用转义字符实现，放到“&  ；”的中间位置即可；小于号用lt表示，大于号用gt表示；
+		-->
+		c&lt;dz&gt;<hr/>a3<57>2<hr/>
+		
+		<!--6、列表标签；
+		列表标签：dl；
+		上层项目dt；
+		下层项目dd；其中dd带有自动缩进的功能；
+		-->
+		<dl>
+			<dt>上层项目</dt>
+				<dd>下层项目</dd>
+				<dd>下层项目</dd>
+				<dd>下层项目</dd>
+		</dl>
+
+		<!--
+		7、有序的和无需的项目列表标签：
+		有序：<ol>；
+		无需：<ul>；
+		无论有序还是无序，条目的封装用的都是<li>；
+		type=disc，circle，square，在无序的地方才有用；他们都有自己的缩进效果；
+		-->
+
+		<hr />
+		<a name=center>中间位置（会显示）</a>
+		<hr />
+		<a href="#id01">跳到底部位置</a>
+		<a href="#top">回到顶部位置</a>
+		<hr/>
+
+		<ul type="disc">
+			<li>无序项目1</li>
+			<li>无序项目2</li>
+			<li>无序项目3</li>
+			<li>无序项目4</li><br/>
+		</ul>
+
+		<ol type="square">
+			<li>有序项目1</li>
+			<li>有序项目2</li>
+			<li>有序项目3</li>
+			<li>有序项目4</li><hr/>
+		</ol>
+
+		<!--表格标签：table，tr，td；
+		分横行排列和纵向排列；
+		-->
+		<table border=1>
+		<caption>表格标题0</caption>
+			<tr>
+				<td>姓名：张三</td>
+			</tr>
+			<tr>
+				<td>年龄：24</td>
+			</tr>
+			<tr>
+				<td>性别：男</td>
+			</tr>
+		</table><br/>
+
+		<!--8、表格标签：table，tr，td；
+		分横行排列和纵向排列；
+		th：代表加粗并居中；
+		-->
+		<table border=1 width=500 height=100>
+			<caption>表格标题1</caption>
+			<tr>
+				<th>姓名  </th>
+				<th>年龄  </th>
+				<th>性别  </th>
+			</tr>
+			<tr>
+				<td>  张三  </td>
+				<td>  24  </td>
+				<td>  男  </td>
+			</tr>
+			
+		</table>
+
+		<!--9、表格标签：新格式自定义；colspan代表所占的列数；rowspan代表所占的行数；
+		-->
+		<table border=1 width=500 height=100>
+			<caption>表格标题2</caption>
+			<tr>
+				<th colspan=3>个人信息</th>
+			</tr>
+			<tr>
+				<th>张三</th>
+				<th>24岁</th>
+				<th>男性</th>
+			</tr>
+			
+		</table><hr/>
+
+		<!--10、表格标签：新格式自定义；rowspan代表所占的行数；
+		table的下一级标签是tbody，解析的时候会用到这个层级关系，必须明确；
+		tbody也是一个默认的标签，可以省略不定义；
+		可以有多个tbody存在；
+		-->
+		<table border=1 width=500 height=100>
+			<caption>表格标题3</caption>
+			<tbody>
+
+				<tr>
+					<th rowspan=3>个人信息1</th>
+					<th>张三</th>
+				</tr>
+				<tr>
+					<th>24岁</th>
+				</tr>
+				<tr>
+					<th>男性</th>
+				</tr>	
+			</tbody>
+			<tbody>
+				<tr>
+					<th rowspan=3>个人信息2</th>
+					<th>王丽</th>
+				</tr>
+				<tr>
+					<th>25岁</th>
+				</tr>
+				<tr>
+					<th>女性</th>
+				</tr>	
+			</tbody>
+		</table><hr/>
+
+		<!--11、超链接设置；当具有herf属性，才会有点击效果；href属性值的不同，解析的饭还是也不一样；
+		如果在该值中没有制定过任何协议，浏览器解析的时候，是通过默认的文件file协议来解析该值的；
+		所以需要添加http协议；
+		target=_blank代表打开一个新窗口；
+		-->
+		<a href = "http://www.baidu.com" target=_blank>超链接地址（百度）</a>
+		<hr />
+		<a href = "d:\\temp\\socket数据接受过程.jpg" target=_blank>一张图片</a><hr />
+		<hr />
+		<a href = "thunder://ygdy8:ygdy8@d201.dygod.org:9163/[阳光电影www.ygdy8.com].大话天仙.HD.720p.国语中字.rmvb">《大话天仙》下载地址</a><hr />
+		<hr />
+		<a href = "mailto:18611478781@163.com">联系我们</a><hr />
+
+		<!--12、自定义超链接效果！
+		-->
+		<a href = "javascript:void(0)" onclick="alert('自定义弹窗！')">自定义超链接效果</a><hr />
+
+		<!--13、自定义返回某一位置（例如返回顶部位置等）！这里可以自定义对应的位置标记！下面的id01就是这样的。
+		定位标记，专业术语叫锚；
+		-->
+
+		<hr />
+		<a name=id01>底部位置（会显示）</a>
+		<hr />
+		<a href="#top">回到顶部位置</a>
+		<a href="#center">回到中间位置</a>
+
+
+
+
+
+
+
+
+	</body>
+</html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/mvc    
+          http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- 注解驱动，使用注解拦截器需要开启，会使下面这两个bean会进行自动注册； -->
+	<mvc:annotation-driven />
+	
+	<!-- 使用默认的Servlet，对静态资源文件的访问 -->
+	<!-- <mvc:default-servlet-handler/> -->
+
+	<!--  静态资源访问处理方式3:对静态资源文件的访问 （二选一）,匹配 /images/** 的URL被当做静态资源，由Spring读出到内存中再响应http请求 -->
+	<mvc:resources mapping="/images/**" location="/images/**" cache-period="31556926"/>
+	<mvc:resources mapping="/css/**.css" location="/css/**" cache-period="31556926" />
+	<mvc:resources mapping="/js/**.js" location="/js/**" cache-period="31556926"/>
+
+	<context:component-scan base-package="base.**.interceptor" />
+	<context:component-scan base-package="base.controller.**" use-default-filters="true"/>
+	<context:component-scan base-package="base" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	
+	<mvc:view-controller path="/index/ok.htm" view-name="redirect:/index.jsp" />
+	<mvc:view-controller path="/index/ok2.htm" view-name="/base/login" />
+    <mvc:view-controller path="/404" view-name="/error/404"/>  
+    <mvc:view-controller path="/exception" view-name="/exception/uncaughtException"/>  
+	
+
+	<!-- 需要初始化属性参数的bean的定义 -->
+	<bean id="commonInterceptor" class="base.interceptor.CommonInterceptor">
+		<!-- <property name="urlRegex" value="^http://[a-zA-Z_0-9/:\\-]**/simpleUrl/\\d{1}\\.htm$" /> -->
+		<!-- <property name="urlRegex" value="^http://.+/simpleUrl/[0-9].htm$" /> -->
+		<property name="urlRegex" value="^.+/simpleUrl/[0-9].htm$" />
+	</bean>
+	<bean id="workTimeInterceptor" class="base.interceptor.WorkTimeInterceptor">
+		<property name="openingTime" value="9" />
+		<property name="closingTime"  value="23" />
+		<property name="outsideOfficeHoursPage">
+			<value>/#{T(com.saike.grape.base.BaseEnvironment).PROJECT_NAME}/outsideOfficeHours.jsp</value>
+		</property>
+	</bean>
+	<bean id="loginUnCheckURLsInterceptor2" class="base.interceptor.LoginUnCheckURLsInterceptor2">
+		<property name="unCheckURLs">
+			<list>
+				<value>/simpleUrl</value>
+				<value>/doLogin</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="loginUnCheckURLsInterceptor3" class="base.interceptor.LoginUnCheckURLsInterceptor3">
+		<property name="unCheckURLs">
+			<list>
+				<value>/simpleUrl</value>
+				<value>/css</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="timeWatcherInterceptor" class="base.interceptor.TimeWatcherInterceptor">
+		<property name="recordTimePoint" value="100"/>
+	</bean>
+	<bean id="loginUnCheckURLsInterceptor1" class="base.interceptor.LoginUnCheckURLsInterceptor1"/>
+	
+	<!-- 拦截器的配置方式1 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />
+			<mvc:exclude-mapping path="/simpleUrl/**" />
+			<ref bean="commonInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/simpleUrl/**" />
+			<mvc:mapping path="/**/work/**" />
+			<!-- <mvc:exclude-mapping path="/**/**" /> -->
+			<ref local="timeWatcherInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/simpleUrl/**" />			
+			<mvc:mapping path="/**/work/**" />
+			<mvc:exclude-mapping path="/**/simpleUrl/**" />
+			<ref bean="workTimeInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/order1/**" />
+			<mvc:mapping path="/**/*.json" />
+			<mvc:exclude-mapping path="/**/**" />
+			<ref local="loginUnCheckURLsInterceptor1"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/order2/**" />
+			<mvc:exclude-mapping path="/**" />
+			<ref local="loginUnCheckURLsInterceptor2"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/order3/**" />
+			<mvc:exclude-mapping path="/*/**" />
+			<ref local="loginUnCheckURLsInterceptor3"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+	<!--视图解析器1：通用视图解析器,视图解析器策略 和 视图解析器 ，对JSTL提供良好的支持-->
+	<bean  id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="-1"/>
+		<property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" /> 
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=utf-8" />
+	</bean>
+	
+	<!-- DefaultAnnotationHandlerMapping，处理在Controller类级别上的@RequestMapping注解,这里是使用注解驱动 -->
+	<!-- 处理Method方法级别上的@RequestMapping注解 ,主要用来解析JSON数据使用的-->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<!-- 覆盖注解驱动自动注册的AnnotationMethodHandlerAdapter -->
+		<property name="order" value="-1" />
+		<property name="cacheSeconds" value="0" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+
+	<!-- 自定义注册属性编辑器 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="base.converters.DateConverter" />
+				<bean class="base.converters.DatetimeConverter" />
+				<bean class="base.converters.StringTrimConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 自定义全局异常处理器1 -->
+	<!-- <bean id="handlerExceptionResolver1" class="base.controller.handler.MyHandlerExceptionResolver">
+		<property name="order" value="-2" />
+		<property name="jsonMessageConverter" ref="mappingJacksonHttpMessageConverter" />
+	</bean> -->
+	
+	<!-- 其中ExceptionHandlerExceptionResolver优先级最高1，ResponseStatusExceptionResolver第二，DefaultHandlerExceptionResolver第三。 -->
+	<!-- HandlerExceptionResolver异常处理接口 ,SimpleMappingExceptionResolver是他的一个实现类； -->
+	<bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="order" value="-1" />
+    	<property name="exceptionAttribute" value="exception"/>
+		<property name="defaultErrorView" value="/base/errorDefault"/>
+		<property name="defaultStatusCode" value="404"/>
+        <property name="warnLogCategory" value="warn"/>
+		<property name="exceptionMappings">
+			<props>
+				<!-- 下面的4种url写法-->
+				<prop key="base.controller.exception.SessionTimeoutException">redirect:/error.jsp</prop>
+				<prop key="java.lang.NumberFormatException">forward:/error.jsp</prop>
+				<prop key="java.io.IOException">forward:/WEB-INF/jsp/base/error.jsp</prop>
+				<prop key="java.lang.NullPointerException">/base/login</prop>
+			</props>
+		</property>
+		 <!--  TODO 优先级居中，为2，如何使用？？？ -->
+		<property name="statusCodes">
+            <props>  
+                <prop key="/base/errorDefault">500</prop>  
+                <prop key="/base/errorDefault">404</prop>  
+            </props>  
+        </property>
+	</bean>
+	
+	<!-- 属性文件读取 -->
+	<bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!-- <property name="useCodeAsDefaultMessage" value="true" />   -->
+		<property name="defaultEncoding" value="UTF-8" />  
+        <property name="cacheSeconds" value="100"/>  
+		<property name="basenames">
+			<list>
+				<value>anonymousUrls</value>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean> 
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="resourceBundleMessageSource"/>
+    </bean>
+	
+	
+	<!-- 文件上传 设置上传文件的最大尺寸为5MB-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5242880"/>
+      	<property name="maxInMemorySize" value="40960" />
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+</beans>
+

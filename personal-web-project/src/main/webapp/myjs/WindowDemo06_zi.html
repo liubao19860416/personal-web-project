@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：window对象的常用方法；
+父子窗口模拟演示子窗口操作父窗口中的数据，使用opener进行操作；
+关键语句：var fu_doc=window.opener.document;//获取父窗口document类；
+		fu_doc.fu_form.result.value=city;//设置该城市到父窗口中；
+-->
+<script lang="JavaScript">
+	function returnCity(){
+		var city=document.zi_form.city.value;//获取子窗口设置城市值；
+		var fu_doc=window.opener.document;//获取父窗口document类；
+		fu_doc.fu_form.result.value=city;//设置该城市到父窗口中；
+		fu_doc.fu_form.id001.value=city;//设置该城市到父窗口中；
+		//window.close();//关闭子窗口；
+	}
+</script>
+</head>
+<body>
+
+<form action="#" method="post" name="zi_form">
+	<select name="city">
+		<option value="NULL">--请选择城市--</option>
+		<option value="上海">上海</option>
+		<option value="北京">北京</option>
+		<option value="天津">天津</option>
+		<option value="广州">广州</option>
+	</select><br />
+	<input type="button" value="返回所选择的城市到父页面" onclick="returnCity()"><br />
+	<input type="button" value="关闭窗口" onclick="window.close()"><br />
+</form>	
+</body>
+</html>

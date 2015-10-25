@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>POI、DWR等及其他很多工具类集合</display-name>
+	
+	<!-- Listener配置信息必须在Filter和Servlet配置之前，Listener的初始化（ServletContentListener初始化）比Servlet和Filter都优先，而销毁比Servlet和Filter都慢。 -->
+	<!-- 正确加载顺序：context-param -> listener -> filter -> servlet；与它们在 web.xml 文件中的先后顺序无关。即不会因为 filter 写在 listener 的前面而会先加载 filter。 -->
+	
+	<!-- 监听器：它主要负责处理由JavaBeans Introspector的使用而引起的缓冲和内存泄露；-->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<!-- 初始化参数的监听器-->
+	<listener>
+		<listener-class>base.listener.InitParamtersListener</listener-class>
+	</listener>
+	
+	<!-- 监听器：加载spring的配置文件 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:conf/springmvc-import.xml,
+		</param-value>
+	</context-param>
+	
+	<!-- 在线监听人数的监听器 ,自定义一个Listener，放在Spring的Listener之后去完成我们的初始化-->
+	<!-- <listener>
+		<listener-class>base.listener.HttpSessionListenerImpl</listener-class>
+	</listener> -->
+	
+	<!-- 字符编码过滤器 -->
+	<filter>
+		<filter-name>genericEncodingFilter</filter-name>
+		<filter-class>base.filter.GenericEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>genericEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- spring的字符编码过滤器 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 静态资源访问处理方式1：激活Tomcat的defaultServlet来处理静态文件，不拦截默认的css，js等资源文件 -->
+	<!-- 要写在DispatcherServlet的前面， 让defaultServlet先拦截请求，这样请求就不会进入Spring了，我想性能是最好的吧 -->
+	<!-- Tomcat, Jetty, JBoss, and GlassFish 自带的默认Servlet的名字 "default" -->
+	<!-- Google App Engine 自带的默认Servlet的名字 "_ah_default" -->
+	<!-- Resin 自带的默认Servlet的名字 "resin-file" -->
+	<!-- WebLogic自带的 默认Servlet的名字  "FileServlet" -->
+	<!-- WebSphere 自带的默认Servlet的名字 "SimpleFileServlet" -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<!-- <url-pattern>/static/*</url-pattern> -->
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.swf</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.exe</url-pattern>
+		<url-pattern>*.apk</url-pattern>
+	</servlet-mapping>
+	
+	<!-- DWR请求相关的配置信息，实际上也是一个servlet -->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<!-- <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class> -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowScriptTagRemoting</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config-1</param-name>
+			<param-value>WEB-INF/dwr.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- springmvc请求转发的转发器（servlet），即前端控制器  -->
+	<servlet>
+		<description>spring mvc servlet</description>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<description>spring mvc 配置文件</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:conf/applicationContext-interceptors3.xml</param-value>
+			<!-- <param-value>classpath:conf/springmvc-servlet.xml</param-value> -->
+		</init-param>
+		<!-- 屏蔽自动注册异常处理器，固定使用bean的id为handlerExceptionResolver的异常处理 ，name是源码中写死的，固定的-->
+		<init-param>
+			<param-name>detectAllHandlerExceptionResolvers</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.json</url-pattern>
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.do</url-pattern>
+		<!-- <url-pattern>/*</url-pattern> -->
+	</servlet-mapping>
+	
+	<!-- 两种错误类型异常页面配置,这里只能捕获异常，不能进行其他异常处理操作，采用的是请求转发的方式 -->
+	<!-- 处理的相当于是该url没有被转发的情况下的那种404未找到等错误信息 -->
+	<error-page>   
+      <error-code>404</error-code>   
+      <!-- <location>/404/404.html</location> -->
+      <!-- <location>/404/404-2.html</location> -->
+      <location>/404/5/404.html</location>
+    </error-page>  
+	<error-page>   
+      <error-code>500</error-code>   
+      <location>/500.html</location>
+   </error-page>  
+   <error-page>   
+       <exception-type>java.lang.NullException</exception-type>   
+       <location>/error.jsp</location>   
+   </error-page> 
+   
+   	<!-- 默认的访问主页 -->
+	<!-- <welcome-file-list>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list> -->
+	
+	
+	
+	<!-- URL重写filter,用于将访问静态资源http://localhost/foo.css 转为http://localhost/static/foo.css -->
+	<!-- <filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param>
+	</filter> -->
+	
+</web-app>

@@ -1,0 +1,90 @@
+获取方式1：System.getProperty("file.separator")，如下：
+ 键         相关值的描述
+java.version Java      运行时环境版本
+java.vendor Java      运行时环境供应商
+java.vendor.url Java     供应商的 URL
+java.home Java       安装目录
+java.vm.specification.version Java  虚拟机规范版本
+java.vm.specification.vendor Java  虚拟机规范供应商
+java.vm.specification.name Java  虚拟机规范名称
+java.vm.version Java     虚拟机实现版本
+java.vm.vendor Java     虚拟机实现供应商
+java.vm.name Java      虚拟机实现名称
+java.specification.version Java  运行时环境规范版本
+java.specification.vendor Java   运行时环境规范供应商
+java.specification.name Java   运行时环境规范名称
+java.class.version Java    类格式版本号
+java.class.path Java     类路径
+java.library.path      加载库时搜索的路径列表
+java.io.tmpdir       默认的临时文件路径
+java.compiler       要使用的 JIT 编译器的名称
+java.ext.dirs       一个或多个扩展目录的路径
+os.name        操作系统的名称
+os.arch        操作系统的架构
+os.version        操作系统的版本
+file.separator       文件分隔符（在 UNIX 系统中是“/”）
+path.separator       路径分隔符（在 UNIX 系统中是“:”）
+line.separator       行分隔符（在 UNIX 系统中是“/n”）
+user.name        用户的账户名称
+user.home        用户的主目录
+user.dir        用户的当前工作目录
+
+
+JAVA代码：
+//基本不用
+            Map<String, String> envs = System.getenv();
+            for (String key1 : envs.keySet()) {
+                String value1 = envs.get(key1);
+                //System.out.println(key1+"====>"+value1);
+            }
+            //System.out.println("===============================");
+            Properties p = System.getProperties();
+            Enumeration<Object> e = p.elements();
+            while(e.hasMoreElements()){
+                String key = (String) e.nextElement();  
+                //System.out.println(key+"====>"+p.getProperty(key));
+            }
+
+
+方式2：基本不用，Map<String, String> envs = System.getenv();值如下
+USERPROFILE====>C:\Users\admin
+PATHEXT====>.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+JAVA_HOME====>D:\devtools\Java\jdk1.7.0_60\
+PROGRAMDATA====>C:\ProgramData
+MAVEN_HOME====>D:\devtools\apache-maven-3.0.5
+PROGRAMFILES(X86)====>C:\Program Files (x86)
+WINDOWS_TRACING_LOGFILE====>C:\BVTBin\Tests\installpackage\csilogfile.log
+TEMP====>C:\Users\admin\AppData\Local\Temp
+COMMONPROGRAMFILES====>C:\Program Files\Common Files
+HOMEDRIVE====>C:
+PROCESSOR_REVISION====>2502
+SYSTEMDRIVE====>C:
+USERDOMAIN====>LIUBAO
+ALLUSERSPROFILE====>C:\ProgramData
+PROGRAMW6432====>C:\Program Files
+COMMONPROGRAMFILES(X86)====>C:\Program Files (x86)\Common Files
+PROCESSOR_IDENTIFIER====>Intel64 Family 6 Model 37 Stepping 2, GenuineIntel
+TESSDATA_PREFIX====>C:\Program Files (x86)\Tesseract-OCR\
+SESSIONNAME====>Console
+TMP====>C:\Users\admin\AppData\Local\Temp
+PSMODULEPATH====>C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+LOGONSERVER====>\\LIUBAO
+PROCESSOR_ARCHITECTURE====>AMD64
+FP_NO_HOST_CHECK====>NO
+OS====>Windows_NT
+PATH====>D:\devtools\Java\jdk1.7.0_60\jre\bin;D:/devtools/Java/jdk1.7.0_60//bin/../jre/bin/server;D:/devtools/Java/jdk1.7.0_60//bin/../jre/bin;D:/devtools/Java/jdk1.7.0_60//bin/../jre/lib/amd64;D:\devtools\Java\jdk1.7.0_60\\bin;D:\devtools\Java\jdk1.7.0_60\\jre\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\Program Files\TortoiseSVN\bin;D:\devtools\apache-maven-3.0.5\bin;C:\Program Files\VanDyke Software\Clients\;C:\Program Files (x86)\MySQL\MySQL Server 5.0\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\Tesseract-OCR;D:\mongodb-win32-x86_64-2.4.3\bin;D:\devtools\AppServ\Apache2.2\bin;D:\devtools\AppServ\php5;D:\eclipse-20141015;
+HOMEPATH====>\Users\admin
+PROMPT====>$P$G
+COMSPEC====>C:\Windows\system32\cmd.exe
+COMMONPROGRAMW6432====>C:\Program Files\Common Files
+PROCESSOR_LEVEL====>6
+PROGRAMFILES====>C:\Program Files
+LOCALAPPDATA====>C:\Users\admin\AppData\Local
+COMPUTERNAME====>LIUBAO
+NUMBER_OF_PROCESSORS====>4
+WINDOWS_TRACING_FLAGS====>3
+USERNAME====>admin
+SYSTEMROOT====>C:\Windows
+PUBLIC====>C:\Users\Public
+WINDIR====>C:\Windows
+APPDATA====>C:\Users\admin\AppData\Roaming

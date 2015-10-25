@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<!DOCTYPE schools SYSTEM "student.dtd">
+<!-- 外部引用的方式： 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	 -->
+
+<!-- 内部引用的方式：
+
+
+<!DOCTYPE schools[ <!ELEMENT schools (classroom+)> <!ELEMENT 
+	classroom (student+)> <!ELEMENT student (name,age,province,school)> <!ELEMENT 
+	name (#PCDATA)> <!ELEMENT age (#PCDATA)> <!ELEMENT province (#PCDATA)> <!ELEMENT 
+	school (#PCDATA)> <!ATTLIST classroom id CDATA #REQUIRED> <!ENTITY SCHOOLNAME 
+	"上海传智播客"> <!ENTITY SCHOOLNAME1 "上海传智播客1"> ]>
+ -->
+
+<!-- 
+css文件如何引入？
+<xml type="text/css">
+name{color:red;}
+</xml>
+ -->
+<schools>
+	<classroom id="room1">
+		<student>
+			<name>刘保</name>
+			<age>28</age>
+			<province>河北</province>
+			<school>&SCHOOLNAME;
+			</school>
+		</student>
+		<student>
+			<name>王丽</name>
+			<age>24</age>
+			<province>江西</province>
+			<school>&SCHOOLNAME;
+			</school>
+		</student>
+	</classroom>
+	<classroom id="room2">
+		<student>
+			<name>刘保1</name>
+			<age>28</age>
+			<province>河北1</province>
+			<school>&SCHOOLNAME1;
+			</school>
+		</student>
+		<student>
+			<name>王丽1</name>
+			<age>24</age>
+			<province>江西1</province>
+			<school>&SCHOOLNAME1;
+			</school>
+		</student>
+	</classroom>
+</schools>

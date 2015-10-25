@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试</title>
+<script type="text/javascript">
+	
+	function test(){
+		alert(this);//不会报错；
+	}
+	//test();
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		alert("求和");
+		//可变长度的求和函数；
+		var getSum = function(arr) {
+			//alert(arguments.length);
+			var sum = 0;
+			//alert(typeof sum);
+			for (var i = 0; i < arr.length; i++) {
+				sum += arr[i];
+			}
+			return sum
+		}
+		
+		alert("求最大值");
+		//求最大值；
+		var getMax = function(arr) {
+			var max = arr[0];
+			for (var i = 1; i < arr.length; i++) {
+				max = (max > arr[i] ? max : arr[i]);
+			}
+			return max
+		}
+
+		alert("获取信息");
+		
+		//获取信息；
+		var getInfo = function(key) {
+			var arr2 = [ [ "张三", 22, "nan" ], [ "李四", 33, "nv" ],
+					[ "王武", 45, "zhong" ] ];
+			for (var i = 0; i < arr2.length; i++) {
+				if (arr2[i][0] == key) {
+					return arr2[i];
+				}
+			}
+			return "您搜索的信息不存在！";
+		}
+
+		//搜索函数；
+		function search() {
+			//alert(getInfo(document.myform.name1.value));
+			document.myform.name2.value = getInfo(document.myform.name1.value);
+			document.myform.name3.value = getInfo(document.myform.name1.value);
+
+		}
+
+		//var arr = [ 111, 2, 35, 7, 9, 22 ];
+		//alert(getSum(arr));
+		//alert(getMax(arr));
+		//alert("hello");
+
+		//document.write(getInfo("张三"));
+		//style="width: 100px; height: 40px; margin: 10px; padding: 6px"
+	</script>
+	<form name="myform">
+	<table border="1">
+	<tr><td>
+		请输入搜索用户名： <input type="text" name="name1" value="" size="12" /><br />
+		<input type="button" name="button" value="搜索" onclick="search()" style="width: 60px; height: 30px; margin: 10px; padding: 6px"  />
+		<input type="reset" name="reset" value="清除" style="width: 60px; height: 30px; margin: 10px; padding: 6px" /><br /> 用户信息：
+		<input type="text" name="name2" value="" size="22" /><br />
+		<textarea name="name3" rows="5" cols="30"></textarea>
+		</td></tr>
+	</table>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>函数部分</title>
+<script type="text/javascript">
+	function getSum(x, y) {
+		//alert(arguments.length);
+		return x + y;
+	}
+	alert(getSum());//NaN
+	alert(getSum(3));//NaN
+	alert(getSum(3, 6));//9
+	alert(getSum(3, 6, 7));//9
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		alert(arguments.length);//不显示
+	</script>
+
+</body>
+</html>

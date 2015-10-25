@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom练习-select标签遍历输出(文本节点的数据遍历输出方式使用innerHTML)</title>
+<script type="text/javascript">
+	window.onload = function() {
+		var list=document.getElementsByTagName("option");
+		//alert(list);
+		for(var i=0;i<list.length;i++){
+			//document.write(list[i].innerHTML);
+			alert(list[i].innerHTML);
+			console.debug(list[i].innerHTML);
+		}
+	}
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		
+	</script>
+	<select name="edu" id="edu">
+		<option value="bachelor">本科</option>
+		<option value="college">专科</option>
+		<option value="undergraduate">研究生</option>
+		<option value="doctor">博士</option>
+
+	</select>
+
+
+</body>
+</html>

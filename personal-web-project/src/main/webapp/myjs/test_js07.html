@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试</title>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		//测试断点，firefox
+
+		function Person() {
+
+		}
+		var p=new Person();
+		p.country="CN";//非原型属性；
+		
+		//定义Person的原型属性；
+		Person.prototype.name="zhangsan";
+		Person.prototype['age']=22;
+		Person.prototype.say=function(){
+			alert(this.name+":"+this.age);
+		}
+		
+		Zi_Person=function(){}
+		//Zi_Person.prototype=Person.prototype;//共享了父类中的------原型-------属性和属性值；★★★★★
+		Zi_Person.prototype=p;//共享了父类中的----------所有--------  属性和属性值；★★★★★
+		
+		p.say();
+		
+		var p1=new Zi_Person();
+		p1.say();
+		
+		alert("over")
+		
+	</script>
+
+</body>
+</html>

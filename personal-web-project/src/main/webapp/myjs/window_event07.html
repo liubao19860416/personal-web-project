@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习-给普通变量扩展属性（这样是不可以的）</title>
+<!--  是不能给普通变量添加扩展属性的，因为它不是通过new声明的对象；这点很关键！ -->
+<script type="text/javascript">
+	
+</script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		//window.alert("start");
+		var a ="12a";
+		a['1'] = "zhangsan";
+		a.name="lisi";
+		alert(a['1']);//2(输出的是角标为1的元素，即a[1])；
+		alert(a.name);//undefined
+		//alert(a.constructor);
+		alert(a.toString());//12a
+		//alert("end");
+	</script>
+
+
+</body>
+</html>

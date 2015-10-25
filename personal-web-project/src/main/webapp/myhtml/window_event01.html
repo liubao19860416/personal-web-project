@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>带暂停和继续等按钮的小时钟</title>
+
+</head>
+<!-- 
+	<p>带暂停和继续等按钮的小时钟！</p>
+ -->
+<body>
+	<form>
+		<!-- 时钟显示小程序；更新时间为50ms启动按钮，暂停按钮，更新按钮 -->
+		<!--t=t.toLocaleTimeString();-->
+		TIME：<input type="text" id="clockid" size="35" value="请点击查看时间按钮。" />
+		<script lang=javascript>
+			var flag1, flag2 = true;
+			function clock() {
+				var t = new Date();
+				t = t.toLocaleString();
+				document.getElementById("clockid").value = t;
+			}
+			function StartTime() {
+				if (flag2) {
+					flag1 = self.setInterval("clock()", 50);
+				}
+			}
+			function StopTime() {
+				self.clearInterval(flag1);
+				flag2 = false;
+			}
+			function reGetTime() {
+				flag1 = self.setInterval("clock()", 50);
+				flag2 = false;
+			}
+		</script>
+	</form>
+	<button onclick="StartTime()" style="width: 80px; height: 30px">Start</button>
+	<button onclick="StopTime()" style="width: 80px; height: 30px">Stop</button>
+	<button onclick="reGetTime()" style="width: 80px; height: 30px">Continue</button>
+
+
+</body>
+</html>

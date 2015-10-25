@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<!-- OK -->
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>font标签的使用</title>
+</head>
+<!-- 
+<body bgcolor="blue">
+ -->
+<body>
+	我今天很
+	<font color="red" size="33">开心</font>!
+	<h1 align="center">
+		我今天很<font color="red" size="33">开心</font>!
+	</h1>
+	<p>段落测试1</p>
+	<p>段落测试2</p>
+	<p>段落测试3</p>
+	<p>段落测试4</p>
+
+	<a href="http://www.baidu.com">这是在a标签里面的超链接1</a><br />
+	<a href="www.baidu.com">这是在a标签里面的超链接2</a><br />
+	<br />
+	<img src="d:\temp\111.jpg" width="200" height="200" alt="图片错误的时候显示的文字">这是一个图片
+	<br />
+
+	<!-- 
+	 //提示信息
+	 -->
+	
+	<abbr title="完整的描述内容……">SSS</abbr><br />
+
+	<acronym title="World Wide Web">WWW</acronym>
+
+	<address>
+		<a href="mailto:service@w3school.com.cn"><font color="red">用户服务信箱</font></a><br />
+		上海赢科投资有限公司<br /> 金桥开发区 789 号<br />
+	</address>
+
+
+	<img src="d:\temp\111.jpg" width="200" height="200"
+		alt="图片不能显示的提示文字信息" usemap="#planetmap" />
+
+	<map name="planetmap">
+		<area shape="rect" coords="0,0,110,260" href="sun.htm" alt="Sun" />
+		<area shape="circle" coords="300,300,10" href="mercur.htm"
+			alt="圆形提示信息区域" />
+		<area shape="circle" coords="180,139,14" href="venus.htm" alt="Venus" />
+	</map><br />
+
+
+	<button type="button" name="button" value="anniu">一个按钮</button>
+	<form action="#" method="get">
+		<h1>表格头信息</h1>
+		<input type="text" name="text" value="">
+		<input type="password" name="password" value="">
+		 <input type="submit" name="button" value="提交 ">
+	</form>
+
+	<!-- 表格的使用练习； -->
+
+	<table width="50%"  border="1" bordercolor="red"
+		cellpadding="2" cellspacing="0">
+		<caption>这是表格的标题</caption>
+
+		<colgroup align="center" style="color: black;"></colgroup>
+		<colgroup span="1" align="left"></colgroup>
+		<colgroup span="1" align="right"></colgroup>
+
+
+		<col align="center" />
+		<col align="left" />
+		<col align="justify" />
+		<col align="center" />
+
+		<tr>
+			<th colspan="3">这是表格的标题</th>
+		</tr>
+		<tr>
+			<th abbr="描述信息">姓名</th>
+			<th>年龄</th>
+			<th>籍贯</th>
+		</tr>
+		<tr>
+			<td>张三</td>
+			<td>33</td>
+			<td>河北</td>
+		</tr>
+	</table>
+
+	<p>
+		一打有
+		<del>二十</del>
+		<ins>十二</ins>件。
+	</p>
+	<p>大多数浏览器会改写为删除文本和下划线文本。</p>
+
+<!-- 悬浮窗口 -->
+	<fieldset>
+		<legend style="color: red">健康信息：</legend>
+		<form>
+			<label style="color: pink">身高：<input type="text" /></label> 
+			<label>体重：<input type="text" /></label>
+		</form>
+	</fieldset>
+
+
+	<form action="mailto:someone@w3school.com.cn" method="get"
+		enctype="text/plain">
+		<h3>这个表单会把电子邮件发送到 W3School。</h3>
+		姓名：<br> <input type="text" name="name" value="yourname" size="20">
+		<br> 电邮：<br> <input type="text" name="mail" value="yourmail"
+			size="20"> <br> 内容：<br> <input type="text"
+			name="content" value="content" size="40"> <br>
+		<br> <input type="submit" value="发送"> <input type="reset"
+			value="重置">
+
+	</form>
+
+
+
+
+
+</body>
+</html>

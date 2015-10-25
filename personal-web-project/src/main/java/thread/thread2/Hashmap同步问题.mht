@@ -1,0 +1,1032 @@
+From: <ÓÉ Windows Internet Explorer 7 ±£´æ>
+Subject: =?gb2312?B?0/PNt7XEucrKwiA6IFdlYmxvZw==?=
+Date: Tue, 3 Nov 2009 16:38:01 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CA5CA4.023B40B0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CA5CA4.023B40B0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://developers.sun.com.cn/blog/yutoujava/entry/16
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" =
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!--
+Unless otherwise indicated, all code below was written by Eric Costello,
+and you are free to use, modify and distribute it. Please leave this
+comment block intact so that people can find the original unmodified
+version at: http://www.glish.com/css/blogger/
+
+Also see:
+http://www.schwa.com
+http://www.glish.com
+--><!--
+This template requires the existence of two auxilliary files on your web =
+server:
+blogger.js and blogger.css. Those files should be placed in the same =
+directory as
+your blog page, if you put them somwhere else, just adjust the paths for =
+those files below.
+--><HTML><HEAD><TITLE>=E8=8A=8B=E5=A4=B4=E7=9A=84=E6=95=85=E4=BA=8B : =
+Weblog</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dutf-8"><LINK title=3DRSD=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/rsd" =
+type=3Dapplication/rsd+xml=20
+rel=3DEditURI><LINK title=3D"Recent Entries (Atom)"=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/atom"=20
+type=3Dapplication/atom+xml rel=3Dalternate><LINK title=3D"Recent =
+Entries (RSS)"=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/rss"=20
+type=3Dapplication/rss+xml rel=3Dalternate><LINK title=3D"Recent =
+Comments (Atom)"=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/comments/atom"=20
+type=3Dapplication/atom+xml rel=3Dalternate><LINK title=3D"Recent =
+Comments (RSS)"=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/comments/rss"=20
+type=3Dapplication/rss+xml rel=3Dalternate>
+<STYLE type=3Dtext/css>BODY {
+	BACKGROUND: white; FONT-FAMILY: "Lucida Grande", lucida, Geneva, Arial, =
+sans-serif
+}
+.img {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: =
+0px; MARGIN: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.entryTitle {
+	FONT-WEIGHT: bold
+}
+.entryInfo {
+	FONT-SIZE: 80%; COLOR: #999
+}
+DIV.dayTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 120%
+}
+DIV.next-previous {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; PADDING-TOP: 0.5em; TEXT-ALIGN: center
+}
+.category-chooser {
+	MARGIN: -50%; WIDTH: 100%
+}
+.rCategory LI {
+	PADDING-RIGHT: 20px; DISPLAY: inline; FONT-SIZE: 80%; LIST-STYLE-TYPE: =
+none
+}
+LI.selected {
+	FONT-WEIGHT: bold
+}
+UL.rNavigationBar {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rMenu {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rFolder {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rFeeds {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rReferersList {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rEntriesList {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 80%; PADDING-BOTTOM: =
+0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+UL.rFeeds LI {
+	BACKGROUND-POSITION: 0px 0.2em; PADDING-LEFT: 1.4em; BACKGROUND-IMAGE: =
+url(http://developers.sun.com.cn/blog/images/feed-icon-12x12.gif); =
+LINE-HEIGHT: 1.5em; BACKGROUND-REPEAT: no-repeat
+}
+.hCalendarDay {
+	FONT-SIZE: small; TEXT-ALIGN: center
+}
+TH.hCalendarDayNameRow {
+	FONT-WEIGHT: bold; FONT-SIZE: small; TEXT-ALIGN: center
+}
+TD.hCalendarDayCurrent {
+	FONT-WEIGHT: bold; FONT-SIZE: small; TEXT-ALIGN: center
+}
+TD.hCalendarDayLinked {
+	FONT-WEIGHT: bold; FONT-SIZE: small; TEXT-ALIGN: center
+}
+P.comment-details {
+	FONT-SIZE: 80%; COLOR: #999
+}
+.comments-syntax-indicator {
+	FONT-WEIGHT: bold
+}
+.comments-syntax-indicator SPAN.enabled {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: green; =
+FONT-STYLE: italic
+}
+.comments-syntax-indicator SPAN.disabled {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: red; =
+FONT-STYLE: italic
+}
+FORM UL {
+	WIDTH: 100%; LIST-STYLE-TYPE: none; POSITION: relative
+}
+FORM LI {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 9px; PADDING-BOTTOM: 6px; MARGIN: =
+0px; LINE-HEIGHT: 2em; PADDING-TOP: 1px
+}
+FORM LI.focused {
+	BACKGROUND-COLOR: #fff7c0! important
+}
+FORM LI P {
+	FONT-SIZE: 9px; COLOR: #444; LINE-HEIGHT: 13px
+}
+FORM LI {
+	DISPLAY: inline-block
+}
+FORM[id] LI {
+	DISPLAY: block
+}
+FORM LI DIV {
+	DISPLAY: inline-block
+}
+FORM[id] LI DIV {
+	DISPLAY: inline
+}
+FORM .left {
+	FLOAT: left! important; MARGIN: 0px
+}
+FORM .right {
+	FLOAT: right! important; MARGIN: 0px
+}
+FORM .clear {
+	CLEAR: both
+}
+FORM LI DIV P {
+	MARGIN: 0px 0px 5px
+}
+FORM DIV.left {
+	MARGIN-RIGHT: 2px! important
+}
+FORM DIV[class].left {
+	MARGIN-RIGHT: 4px! important
+}
+FORM DIV.left IMG {
+	MARGIN: 0px 0px -2px
+}
+FORM H2 {
+	CLEAR: left; FONT-SIZE: 1.8em
+}
+FORM .info {
+	PADDING-RIGHT: 0px; DISPLAY: inline-block; PADDING-LEFT: 0px; =
+PADDING-BOTTOM: 4px; MARGIN: 0px 0px 10px; PADDING-TOP: 0px; =
+BORDER-BOTTOM: #ccc 1px dotted
+}
+FORM [class].info {
+	DISPLAY: block
+}
+FORM .info P {
+	FONT-SIZE: 1em; MARGIN: 0px 0px 8px; LINE-HEIGHT: 1.3em
+}
+TEXTAREA.textarea {
+	MARGIN-BOTTOM: 1px
+}
+TEXTAREA[class].textarea {
+	FONT-FAMILY: "Lucida Grande", Tahoma, "Trebuchet MS", Verdana, =
+sans-serif
+}
+SELECT.select {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 1px =
+0px 3px; PADDING-TOP: 1px
+}
+SELECT[class].select {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 1px; MARGIN: =
+0px; PADDING-TOP: 1px
+}
+FORM .small {
+	WIDTH: 70px
+}
+FORM .medium {
+	WIDTH: 170px
+}
+FORM .large {
+	WIDTH: 340px
+}
+FORM TEXTAREA.textarea {
+	WIDTH: 340px
+}
+FORM .tags {
+	WIDTH: 320px
+}
+FORM TEXTAREA.small {
+	HEIGHT: 5.5em
+}
+FORM TEXTAREA.medium {
+	HEIGHT: 10em
+}
+FORM TEXTAREA.large {
+	HEIGHT: 20em
+}
+.choices INPUT {
+	WIDTH: 200px; MARGIN-RIGHT: 3px
+}
+.choices OL {
+	MARGIN: 10px 0px 0px
+}
+[class].choices OL {
+	MARGIN: 0px
+}
+.choices IMG {
+	MARGIN: 0px 0px 1px
+}
+FIELDSET OL LI {
+	PADDING-RIGHT: 0px! important; DISPLAY: list-item! important; =
+PADDING-LEFT: 0px! important; LIST-STYLE-POSITION: inside; =
+PADDING-BOTTOM: 0px! important; MARGIN: 0px 5px 2px 3px; PADDING-TOP: =
+0px! important; LIST-STYLE-TYPE: decimal
+}
+INPUT.button {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 6em; =
+PADDING-TOP: 2px
+}
+BUTTON {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 6em; =
+PADDING-TOP: 2px
+}
+LI > INPUT.button {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+LI > BUTTON {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.button > INPUT.button {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+BUTTON > BUTTON {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+LABEL.desc {
+	BORDER-TOP-WIDTH: 0px; DISPLAY: block; FONT-WEIGHT: bold; =
+BORDER-LEFT-WIDTH: 0px; FONT-SIZE: 1em; BORDER-BOTTOM-WIDTH: 0px; =
+MARGIN: 4px 0px 3px; COLOR: #444; LINE-HEIGHT: 1.3em; =
+BORDER-RIGHT-WIDTH: 0px
+}
+INPUT.text {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.number {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.url {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.email {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.password {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.file {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+TEXTAREA.textarea {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+SELECT.select {
+	BORDER-RIGHT: #c3c3c3 1px solid; BORDER-TOP: #7c7c7c 1px solid; =
+FONT-SIZE: 1.2em; BORDER-LEFT: #c3c3c3 1px solid; COLOR: #333; =
+BORDER-BOTTOM: #ddd 1px solid
+}
+INPUT.text {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.number {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.url {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.email {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.password {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.file {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; =
+PADDING-TOP: 2px
+}
+INPUT.currency {
+	TEXT-ALIGN: right
+}
+INPUT.checkbox {
+	DISPLAY: block; MARGIN: 8px 0px 0px 3px; WIDTH: 13px; LINE-HEIGHT: =
+1.4em; HEIGHT: 13px
+}
+INPUT.radio {
+	DISPLAY: block; MARGIN: 8px 0px 0px 3px; WIDTH: 13px; LINE-HEIGHT: =
+1.4em; HEIGHT: 13px
+}
+INPUT.focus {
+	BACKGROUND: #ffd; COLOR: #000
+}
+TEXTAREA.focus {
+	BACKGROUND: #ffd; COLOR: #000
+}
+LABEL.choice {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: =
+5px; MARGIN: -19px 0px 0px 25px; WIDTH: 80%; COLOR: #444; LINE-HEIGHT: =
+1.4em; PADDING-TOP: 4px
+}
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: white; =
+PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+A {
+	FONT-WEIGHT: bold; BACKGROUND: none transparent scroll repeat 0% 0%; =
+COLOR: #0000ff; TEXT-DECORATION: none; outline: none
+}
+A:visited {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: blue
+}
+A:hover {
+	BACKGROUND: white; COLOR: black; TEXT-DECORATION: underline
+}
+LABEL {
+	outline: none
+}
+INPUT {
+	outline: none
+}
+SELECT {
+	outline: none
+}
+#centercontent {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; BACKGROUND: =
+#fff; MARGIN-BOTTOM: 4px; MARGIN-LEFT: 5px; BORDER-LEFT: #000 1px solid; =
+MARGIN-RIGHT: 232px; BORDER-BOTTOM: #000 1px solid; POSITION: relative; =
+TOP: 10px
+}
+#rightcontent {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; Z-INDEX: 1; =
+RIGHT: 6px; BACKGROUND: #fff; BORDER-LEFT: #000 1px solid; WIDTH: 220px; =
+BORDER-BOTTOM: #000 1px solid; POSITION: absolute; TOP: 5px
+}
+#banner {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; BACKGROUND: =
+#6666cc; MARGIN-LEFT: 5px; BORDER-LEFT: #000 1px solid; COLOR: #ffff66; =
+MARGIN-RIGHT: 232px; BORDER-BOTTOM: #000 1px solid; POSITION: relative; =
+TOP: 5px
+}
+DIV.padded {
+	MARGIN: 0px 10px 10px
+}
+H1 {
+	MARGIN: 0px 10px 10px
+}
+H2 {
+	MARGIN: 0px 10px 10px
+}
+H3 {
+	MARGIN: 0px 10px 10px
+}
+H4 {
+	MARGIN: 0px 10px 10px
+}
+H5 {
+	MARGIN: 0px 10px 10px
+}
+H6 {
+	MARGIN: 0px 10px 10px
+}
+#rightcontent H2 {
+	BORDER-RIGHT: #000 5px solid; PADDING-RIGHT: 5px; BORDER-TOP: #000 1px =
+solid; PADDING-LEFT: 5px; FONT-SIZE: medium; BACKGROUND: #ffff66; =
+PADDING-BOTTOM: 2px; MARGIN: 0px -2px 10px 0px; BORDER-LEFT: #000 1px =
+solid; COLOR: #6666cc; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid
+}
+.rFolder {
+	DISPLAY: none
+}
+P {
+	MARGIN: 10px 0px 0px
+}
+H1 {
+	MARGIN-TOP: 10px
+}
+H2 {
+	MARGIN-TOP: 10px
+}
+#banner H1 {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; PADDING-TOP: 10px
+}
+#banner H4 {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; PADDING-TOP: 0px
+}
+DIV.footer {
+	BORDER-RIGHT: #6666cc thin solid; PADDING-RIGHT: 10px; BORDER-TOP: =
+#6666cc thin; MARGIN-TOP: 0px; PADDING-LEFT: 10px; MARGIN-LEFT: 40px; =
+BORDER-LEFT: #6666cc thin solid; COLOR: #666; MARGIN-RIGHT: 40px; =
+BORDER-BOTTOM: #6666cc thin solid; BORDER-COLLAPSE: collapse
+}
+DIV.post {
+	BORDER-RIGHT: #6666cc thin solid; PADDING-RIGHT: 10px; BORDER-TOP: =
+#6666cc thin solid; PADDING-LEFT: 10px; MARGIN-BOTTOM: 0px; =
+PADDING-BOTTOM: 10px; MARGIN-LEFT: 40px; BORDER-LEFT: #6666cc thin =
+solid; MARGIN-RIGHT: 40px; PADDING-TOP: 10px; BORDER-BOTTOM: #6666cc =
+thin solid; BORDER-COLLAPSE: collapse
+}
+INPUT.textSizer {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; BACKGROUND: black; WIDTH: 40px; =
+COLOR: white
+}
+LABEL {
+	CURSOR: hand
+}
+.rBookmark {
+	FONT-SIZE: small
+}
+.quote {
+	MARGIN-LEFT: 10%; FONT-STYLE: italic
+}
+.hCalendarMonthYearRow {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #0000aa
+}
+.hCalendarDayNameRow {
+	FONT-WEIGHT: bold; FONT-SIZE: small
+}
+.hCalendarDay {
+	FONT-SIZE: small
+}
+.hCalendarDayLinked {
+	FONT-SIZE: small
+}
+.hCalendarDayCurrent {
+	BORDER-RIGHT: #0000aa thin dashed; BORDER-TOP: #0000aa thin dashed; =
+FONT-WEIGHT: bold; FONT-SIZE: small; BORDER-LEFT: #0000aa thin dashed; =
+COLOR: #0000aa; BORDER-BOTTOM: #0000aa thin dashed
+}
+.hCalendarNextPrev {
+	FONT-WEIGHT: bold; FONT-SIZE: small
+}
+DIV#copyrightnotice {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; FONT-SIZE: =
+x-small; BACKGROUND: #fff; MARGIN: 10px 232px 4px 5px; BORDER-LEFT: #000 =
+1px solid; BORDER-BOTTOM: #000 1px solid; POSITION: relative; =
+TEXT-ALIGN: center
+}
+.comments {
+	MARGIN: 15px
+}
+.comments-form {
+	FONT-WEIGHT: normal; FONT-SIZE: 10px; BACKGROUND: #fff; MARGIN: 15px; =
+COLOR: #999; FONT-FAMILY: verdana, arial, sans-serif
+}
+.comments-head {
+	MARGIN-TOP: 10px; FONT-WEIGHT: bold; FONT-SIZE: 10px; TEXT-TRANSFORM: =
+uppercase; COLOR: #999; BORDER-BOTTOM: #666 1px dotted; FONT-FAMILY: =
+verdana, arial, sans-serif
+}
+.entryBox {
+	BORDER-RIGHT: #6666cc 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: =
+#6666cc 1px solid; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 10px =
+5% 5px; BORDER-LEFT: #6666cc 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: =
+#6666cc 1px solid
+}
+.dayBox {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; =
+PADDING-TOP: 0px
+}
+DIV.catChooser {
+	TEXT-ALIGN: center
+}
+</STYLE>
+
+<META content=3D"MSHTML 6.00.6000.16735" name=3DGENERATOR></HEAD>
+<BODY class=3Dall id=3Dbody>
+<DIV id=3Dbanner>
+<H1>=E8=8A=8B=E5=A4=B4=E7=9A=84=E6=95=85=E4=BA=8B</H1>
+<H2>Java=E6=8A=80=E6=9C=AF=E4=B8=93=E9=A2=98</H2></DIV>
+<DIV id=3Drightcontent>
+<DIV class=3Dpadded>
+<TABLE class=3DhCalendarTable cellSpacing=3D0 =
+summary=3D=E6=97=A5=E5=BF=97=E5=BD=92=E6=A1=A3=E6=97=A5=E5=8E=86 =
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD class=3DhCalendarMonthYearRow align=3Dmiddle colSpan=3D7><A=20
+      class=3DhCalendarNavBar title=3D=E5=89=8D=E9=A1=B5=20
+      =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/date/200709">=C2=AB</=
+A> =E5=8D=81=E4=B8=80=E6=9C=88=20
+      2009</TD></TR>
+  <TR>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E6=97=A5</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E4=B8=80</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E4=BA=8C</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E4=B8=89</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E5=9B=9B</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E4=BA=94</TH>
+    <TH class=3DhCalendarDayNameRow =
+align=3Dmiddle>=E6=98=9F=E6=9C=9F=E5=85=AD</TH></TR>
+  <TR>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>1</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>2</DIV></TD>
+    <TD class=3DhCalendarDayCurrent>
+      <DIV class=3DhCalendarDayTitle>3</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>4</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>5</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>6</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>7</DIV></TD></TR>
+  <TR>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>8</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>9</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>10</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>11</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>12</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>13</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>14</DIV></TD></TR>
+  <TR>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>15</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>16</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>17</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>18</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>19</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>20</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>21</DIV></TD></TR>
+  <TR>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>22</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>23</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>24</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>25</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>26</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>27</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>28</DIV></TD></TR>
+  <TR>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>29</DIV></TD>
+    <TD class=3DhCalendarDay>
+      <DIV class=3DhCalendarDayTitle>30</DIV></TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD></TR>
+  <TR>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD>
+    <TD class=3DhCalendarDayNotInMonth>&nbsp;</TD></TR>
+  <TR class=3DhCalendarNextPrev>
+    <TD align=3Dmiddle colSpan=3D7><A class=3DhCalendarNavBar=20
+      =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/">=E4=BB=8A=E5=A4=A9<=
+/A></TD></TR></TBODY></TABLE></DIV>
+<DIV class=3Dpadded>
+<UL class=3DrFeeds>
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/atom">=E5=
+=85=A8=E9=83=A8</A>=20
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/atom?cat=
+=3D%2FSolaris">/Solaris</A>=20
+
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/atom?cat=
+=3D%2FGeneral">/General</A>=20
+
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/entries/atom?cat=
+=3D%2FJava">/Java</A>=20
+
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/feed/comments/atom">C=
+omments</A>=20
+  </LI></UL></DIV>
+<DIV class=3Dpadded>
+<FORM id=3DsearchForm=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; =
+MARGIN: 0px; PADDING-TOP: 0px"=20
+onsubmit=3D"return validateSearch(this)" action=3D/blog/yutoujava/search =
+method=3Dget>
+<P><INPUT id=3Dq maxLength=3D255 size=3D10 name=3Dq> <INPUT =
+class=3Dbutton type=3Dsubmit value=3D=E6=90=9C=E7=B4=A2> </P></FORM>
+<SCRIPT type=3Dtext/javascript>=0A=
+        function validateSearch(form) {=0A=
+            if (form.q.value =3D=3D "") {=0A=
+                =
+alert("=E8=AF=B7=E8=BE=93=E5=85=A5=E6=90=9C=E7=B4=A2=E6=9D=A1=E7=9B=AE.")=
+;=0A=
+                form.q.focus();=0A=
+                return false;=0A=
+            }=0A=
+            return true;=0A=
+        }=0A=
+    </SCRIPT>
+</DIV><!-- This section is optional and can be removed if
+         you do not have other pages on your site -->
+<H2>Blog::Navigation</H2>
+<DIV class=3Dpadded>
+<UL class=3DrNavigationBar>
+  <LI class=3DrNavItem><A =
+href=3D"http://developers.sun.com.cn/blog/"><SPAN>Sun=20
+  =E4=B8=AD=E5=9B=BD=E6=8A=80=E6=9C=AF=E7=A4=BE=E5=8C=BA =
+=E4=B8=93=E5=AE=B6=E5=8D=9A=E5=AE=A2 =EF=BC=8D =
+=E9=A6=96=E9=A1=B5</SPAN></A>=20
+  <LI class=3DrNavItem><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/"><SPAN>Weblog</SPAN>=
+</A>=20
+  <LI class=3DrNavItem><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/page/comments"><SPAN>=
+comments</SPAN></A>=20
+
+  <LI class=3DrNavItem><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/roller-ui/login-redirect.rol"><=
+SPAN>=E7=99=BB=E5=BD=95</SPAN></A>=20
+  </LI></UL></DIV>
+<H2>Blog::Editing</H2>
+<DIV class=3Dpadded></DIV>
+<H2>Bookmarks::Blogroll</H2>
+<DIV class=3Dpadded>
+<UL class=3DrFolder>
+  <LI class=3DrFolderItem><A class=3DrBookmark0 title=3D""=20
+  href=3D"http://211.151.94.21/blog">Blog of SDN China</A>=20
+  <LI class=3DrFolderItem><A class=3DrBookmark0 title=3D""=20
+  href=3D"http://developers.sun.com.cn/">SDN China</A>=20
+  <LI class=3DrFolderItem><A class=3DrBookmark0 title=3D""=20
+  href=3D"http://blogs.sun.com/">blogs.sun.com</A> </LI></UL></DIV>
+<H2>Blog::Referers</H2>
+<DIV class=3Dpadded><!-- Referrers --></DIV><!--
+    You don't have to keep the link to the w3c validator, but if you do =
+you'll
+    be helping to support web standards! You should leave the link to =
+webstandards.org
+    for users who view the page using older browsers. If you leave the =
+link to my CSS site
+    you'll help other people find information about coding standards =
+compliant web sites
+    -->
+<H2>Site notes</H2>
+<DIV class=3Dpadded>
+<P><A title=3D"Validate this page"=20
+href=3D"http://validator.w3.org/check/referer">This page validates as =
+XHTML=20
+1.0</A>, and will look much better in a browser that supports <A=20
+title=3D"Download a browser that complies with Web standards."=20
+href=3D"http://www.webstandards.org/upgrade/">web standards</A>, but it =
+is=20
+accessible to any browser or Internet device. It was created using =
+techniques=20
+detailed at <A href=3D"http://www.glish.com/css/">glish.com/css/</A>. =
+</P></DIV><!-- You can link to other sites that you like here
+    <h2>Other  sites</h2>
+    <div class=3D"padded">
+    <a href=3D"">duck</a>
+    </div>
+    -->
+<DIV class=3Dpadded>Powered by <A =
+href=3D"http://rollerweblogger.org/">Roller=20
+Weblogger</A>. </DIV></DIV>
+<DIV id=3Dcentercontent>
+<DIV class=3Dpadded>
+<DIV class=3DcatChooser>
+<UL class=3DrCategory>
+  <LI class=3Dselected>=E5=85=A8=E9=83=A8=E5=88=86=E7=B1=BB=20
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/category/Solaris">Sol=
+aris</A>=20
+
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/category/General">Gen=
+eral</A>=20
+
+  <LI><A=20
+  =
+href=3D"http://developers.sun.com.cn/blog/yutoujava/category/Java">Java</=
+A>=20
+</LI></UL></DIV></DIV>
+<DIV class=3Dnext-previous>=C2=AB <A=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/entry/15">=E4=BD=A0=E7=
+=9A=84=E7=B3=BB=E7=BB=9F=E8=90=A5=E5=85=BB=E8=BF=87=E5=89=A9=E5=90=97=EF=BC=
+=9F</A> | <A=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/">Main</A> | <A=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/entry/14">mpstat=E6=92=
+=92=E8=B0=8E=E4=BA=86=EF=BC=81</A> =C2=BB=20
+</DIV>
+<DIV class=3DdayBox>
+<DIV class=3DdayTitle>=E6=98=9F=E6=9C=9F=E4=BA=8C =E4=B9=9D=E6=9C=88 11, =
+2007 </DIV>
+<DIV class=3DentryBox><A id=3D16 name=3D16></A>
+<P class=3DentryTitle>Race =
+Condition=E5=BC=95=E8=B5=B7=E7=9A=84=E6=80=A7=E8=83=BD=E9=97=AE=E9=A2=98<=
+/P>
+<P class=3DentryContent>
+<P>Race=20
+Condition=EF=BC=88=E4=B9=9F=E5=8F=AB=E5=81=9A=E8=B5=84=E6=BA=90=E7=AB=9E=E4=
+=BA=89=EF=BC=89=EF=BC=8C=E6=98=AF=E5=A4=9A=E7=BA=BF=E7=A8=8B=E7=BC=96=E7=A8=
+=8B=E4=B8=AD=E6=AF=94=E8=BE=83=E5=A4=B4=E7=96=BC=E7=9A=84=E9=97=AE=E9=A2=98=
+=E3=80=82=E7=89=B9=E5=88=AB=E6=98=AFJava=E5=A4=9A=E7=BA=BF=E7=A8=8B=E6=A8=
+=A1=E5=9E=8B=E5=BD=93=E4=B8=AD=EF=BC=8C=E7=BB=8F=E5=B8=B8=E4=BC=9A=E5=9B=A0=
+=E4=B8=BA=E5=A4=9A=E4=B8=AA=E7=BA=BF=E7=A8=8B=E5=90=8C=E6=97=B6=E8=AE=BF=E9=
+=97=AE=E7=9B=B8=E5=90=8C=E7=9A=84=E5=85=B1=E4=BA=AB=E6=95=B0=E6=8D=AE=EF=BC=
+=8C=E8=80=8C=E9=80=A0=E6=88=90=E6=95=B0=E6=8D=AE=E7=9A=84=E4=B8=8D=E4=B8=80=
+=E8=87=B4=E6=80=A7=E3=80=82=E4=B8=BA=E4=BA=86=E8=A7=A3=E5=86=B3=E8=BF=99=E4=
+=B8=AA=E9=97=AE=E9=A2=98=EF=BC=8C=E9=80=9A=E5=B8=B8=E6=9D=A5=E8=AF=B4=E9=9C=
+=80=E8=A6=81=E5=8A=A0=E4=B8=8A=E5=90=8C=E6=AD=A5=E6=A0=87=E5=BF=97=E2=80=9C=
+<SPAN=20
+lang=3DEN-US=20
+style=3D"FONT-SIZE: 10.5pt; FONT-FAMILY: =E4=BB=BF=E5=AE=8B_GB2312; =
+mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-size: 12.0pt; =
+mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 1.0pt; =
+mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; =
+mso-bidi-language: =
+AR-SA">synchronized</SPAN>=E2=80=9D=EF=BC=8C=E6=9D=A5=E4=BF=9D=E8=AF=81=E6=
+=95=B0=E6=8D=AE=E7=9A=84=E4=B8=B2=E8=A1=8C=E8=AE=BF=E9=97=AE=E3=80=82=E4=BD=
+=86=E6=98=AF=E2=80=9C<SPAN=20
+lang=3DEN-US=20
+style=3D"FONT-SIZE: 10.5pt; FONT-FAMILY: =E4=BB=BF=E5=AE=8B_GB2312; =
+mso-hansi-font-family: 'Times New Roman'; mso-bidi-font-size: 12.0pt; =
+mso-bidi-font-family: 'Times New Roman'; mso-font-kerning: 1.0pt; =
+mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; =
+mso-bidi-language: =
+AR-SA">synchronized</SPAN>=E2=80=9D=E6=98=AF=E4=B8=AA=E6=80=A7=E8=83=BD=E6=
+=9D=80=E6=89=8B=EF=BC=8C=E8=BF=87=E5=A4=9A=E7=9A=84=E4=BD=BF=E7=94=A8=E4=BC=
+=9A=E5=AF=BC=E8=87=B4=E6=80=A7=E8=83=BD=E4=B8=8B=E9=99=8D=EF=BC=8C=E7=89=B9=
+=E5=88=AB=E6=98=AF=E6=89=A9=E5=B1=95=E6=80=A7=E4=B8=8B=E9=99=8D=EF=BC=8C=E4=
+=BD=BF=E5=BE=97=E4=BD=A0=E7=9A=84=E7=B3=BB=E7=BB=9F=E4=B8=8D=E8=83=BD=E4=BD=
+=BF=E7=94=A8=E5=A4=9A=E4=B8=AACPU=E8=B5=84=E6=BA=90=E3=80=82&nbsp;=20
+=E8=BF=99=E6=98=AF=E6=88=91=E4=BB=AC=E5=9C=A8=E6=80=A7=E8=83=BD=E6=B5=8B=E8=
+=AF=95=E4=B8=AD=E7=BB=8F=E5=B8=B8=E9=81=87=E8=A7=81=E7=9A=84=E9=97=AE=E9=A2=
+=98=E3=80=82</P>
+<P><IMG src=3D"http://blog.rockyear.com/user/3/photo_3.gif"></P>
+<P>=E5=8F=AF=E6=98=AF=E4=B8=8A=E4=B8=AA=E6=98=9F=E6=9C=9F=E6=88=91=E5=8D=B4=
+=E9=81=87=E8=A7=81=E4=BA=86=E7=9B=B8=E5=8F=8D=E7=9A=84=E6=83=85=E5=86=B5=EF=
+=BC=9A=E5=9B=A0=E4=B8=BA=E7=BC=BA=E5=B0=91=E5=90=8C=E6=AD=A5=E6=A0=87=E5=BF=
+=97=E4=B9=9F=E5=90=8C=E6=A0=B7=E4=BC=9A=E4=BD=BF=E6=80=A7=E8=83=BD=E5=8F=97=
+=E5=BD=B1=E5=93=8D=E3=80=82</P>
+<P>=E9=82=A3=E6=98=AF=E4=B8=80=E4=B8=AAERP=E7=B3=BB=E7=BB=9F=EF=BC=8C=E8=BF=
+=90=E8=A1=8C=E5=9C=A8=E6=88=91=E4=BB=AC=E7=9A=84T2000=E6=9C=8D=E5=8A=A1=E5=
+=99=A8=EF=BC=888=E6=A0=B832=E7=BA=BF=E7=A8=8B=EF=BC=89=E4=B8=8A=E3=80=82=E5=
+=BD=93500=E4=B8=AA=E5=B9=B6=E5=8F=91=E7=94=A8=E6=88=B7=E7=9A=84=E6=97=B6=E5=
+=80=99=E5=B1=85=E7=84=B6=E6=8A=8A=E6=89=80=E6=9C=89=E7=9A=84CPU=E9=83=BD=E5=
+=8E=8B=E5=BE=97=E6=BB=A1=E6=BB=A1=E7=9A=84=EF=BC=8890%=E4=BB=A5=E4=B8=8A=E7=
+=9A=84=E5=BF=99=E7=A2=8C=EF=BC=89=E3=80=82=E8=BF=99=E6=98=AF=E5=BE=88=E5=B0=
+=91=E6=9C=89=E7=9A=84=E7=8E=B0=E8=B1=A1=EF=BC=8C=E5=9C=A8=E6=88=91=E6=B5=8B=
+=E8=AF=95=E7=9A=84=E6=89=80=E6=9C=89=E9=A1=B9=E7=9B=AE=E4=B8=AD=E5=BE=88=E5=
+=B0=91=E6=9C=89=E6=89=A9=E5=B1=95=E6=80=A7=E8=BF=99=E4=B9=88=E5=A5=BD=E7=9A=
+=84=E7=B3=BB=E7=BB=9F=E8=83=BD=E6=8A=8AT2000=E7=9A=8432=E4=B8=AA=E7=BA=BF=
+=E7=A8=8B=E9=83=BD=E5=8D=A0=E6=BB=A1=E7=9A=84=E3=80=82=E6=88=91=E7=8B=A0=E7=
+=8B=A0=E7=9A=84=E5=A4=B8=E4=BA=86=E4=BB=96=E4=BB=AC=E7=9A=84=E5=BA=94=E7=94=
+=A8=E3=80=82=E8=AF=9D=E9=9F=B3=E6=B2=A1=E8=90=BD=EF=BC=8C=E5=8D=B4=E5=8F=91=
+=E7=8E=B0=E6=B5=8B=E8=AF=95=E7=BB=93=E6=9E=9C=E5=BE=88=E5=B7=AE=EF=BC=8C=E5=
+=B9=B3=E5=9D=87=E5=93=8D=E5=BA=94=E6=97=B6=E9=97=B4=E5=BE=88=E9=95=BF=E3=80=
+=82=E4=B8=8D=E5=8F=AF=E8=83=BD=E5=91=80=EF=BC=8C=E6=89=80=E6=9C=89=E7=9A=84=
+CPU=E9=83=BD=E5=9C=A8=E5=B9=B2=E6=B4=BB=EF=BC=8C=E8=80=8C=E4=B8=94=E9=83=BD=
+=E5=9C=A8=E7=94=A8=E6=88=B7=E6=80=81=EF=BC=88=E5=A6=82=E6=9E=9C=E5=9C=A8=E7=
+=B3=BB=E7=BB=9F=E6=80=81=E5=B9=B2=E5=A4=AA=E5=A4=9A=E7=9A=84=E6=B4=BB=E5=B0=
+=B1=E6=9C=89=E9=97=AE=E9=A2=98=E4=BA=86=EF=BC=89=EF=BC=8C=E7=BB=93=E6=9E=9C=
+=E6=80=8E=E4=B9=88=E8=BF=98=E4=BC=9A=E5=B7=AE=E5=91=A2=E3=80=82CPU=E9=83=BD=
+=E5=9C=A8=E5=B9=B2=E5=98=9B=E5=91=A2=EF=BC=9F</P>
+<P>=E9=80=9A=E8=BF=87=E5=B7=A5=E5=85=B7=E5=8F=91=E7=8E=B0=EF=BC=88Dtrace =
+for=20
+Java=EF=BC=89=EF=BC=8C=E6=88=91=E4=BB=AC=E5=8F=91=E7=8E=B0=E5=BE=88=E5=A4=
+=9A=E7=9A=84CPU=E9=83=BD=E5=9C=A8=E5=81=9A=E4=B8=80=E4=BB=B6=E4=BA=8B=E6=83=
+=85=EF=BC=8C=E9=82=A3=E5=B0=B1=E6=98=AF=E4=B8=8D=E5=81=9C=E7=9A=84=E6=89=A7=
+=E8=A1=8C=E4=B8=80=E6=9D=A1Java=E8=AF=AD=E5=8F=A5=EF=BC=88HashMap.get()=EF=
+=BC=89=E3=80=82=E8=B1=A1=E6=98=AF=E8=BF=9B=E5=85=A5=E4=BA=86=E6=AD=BB=E5=BE=
+=AA=E7=8E=AF=E3=80=82=E6=88=91=E4=BB=AC=E8=BF=9B=E8=A1=8C=E4=BA=86=E8=BF=9B=
+=E4=B8=80=E6=AD=A5=E8=AF=95=E9=AA=8C=EF=BC=8C=E8=AE=A9=E5=B9=B6=E5=8F=91=E7=
+=94=A8=E6=88=B7=E6=95=B0=E9=87=8F=E4=B8=BA1=EF=BC=8C=E4=B8=8D=E5=81=9C=E7=
+=9A=84=E8=BF=90=E8=A1=8C10=E5=88=86=E9=92=9F=EF=BC=8C=E7=BB=93=E6=9E=9C=E6=
+=B2=A1=E6=9C=89=E5=8F=91=E7=8E=B0=E8=BF=99=E7=A7=8D=E6=83=85=E5=86=B5=EF=BC=
+=9B=E6=8E=A5=E7=9D=80=E6=88=91=E4=BB=AC=E8=AE=A950=E4=B8=AA=E5=B9=B6=E5=8F=
+=91=E7=94=A8=E6=88=B7=E5=90=8C=E6=97=B6=E8=BF=90=E8=A1=8C=EF=BC=8C=E4=BD=86=
+=E6=98=AF=E5=8F=AA=E8=BF=90=E8=A1=8C=E5=9C=A8=E4=B8=80=E4=B8=AACPU=E4=B8=8A=
+=EF=BC=88=E9=80=9A=E8=BF=87psrset=EF=BC=89=EF=BC=8C=E7=BB=93=E6=9E=9C=E4=B9=
+=9F=E6=B2=A1=E6=9C=89=E5=87=BA=E7=8E=B0=E6=AD=BB=E5=BE=AA=E7=8E=AF=E7=8A=B6=
+=E6=80=81=E3=80=82=E5=8F=AA=E8=A6=81=E5=B9=B6=E5=8F=91=E7=94=A8=E6=88=B7=E6=
+=95=B0=E9=87=8F=E8=B6=85=E8=BF=8710=E4=B8=AA=EF=BC=8C=E8=BF=90=E8=A1=8C=E7=
+=9A=84CPU=E8=B6=85=E8=BF=87=E4=B8=A4=E4=B8=AA=EF=BC=8C=E4=B8=8D=E5=88=B02=
+=E5=88=86=E9=92=9F=E5=B0=B1=E5=87=BA=E7=8E=B0=E6=AD=BB=E5=BE=AA=E7=8E=AF=E3=
+=80=82=E4=B8=80=E6=97=A6=E6=AD=BB=E5=BE=AA=E7=8E=AF=E5=87=BA=E7=8E=B0=EF=BC=
+=8C=E5=A4=A7=E9=87=8FCPU=E8=B5=84=E6=BA=90=E8=A2=AB=E7=99=BD=E7=99=BD=E6=B5=
+=AA=E8=B4=B9=EF=BC=8C=E6=80=A7=E8=83=BD=E8=87=AA=E7=84=B6=E5=BE=88=E5=B7=AE=
+=E3=80=82</P>
+<P>=E9=80=9A=E8=BF=87=E4=B8=8A=E9=9D=A2=E7=9A=84=E8=AF=95=E9=AA=8C=E6=88=91=
+=E4=BB=AC=E5=8F=AF=E4=BB=A5=E5=BE=88=E8=82=AF=E5=AE=9A=E7=9A=84=E5=88=A4=E6=
+=96=AD=EF=BC=8C=E6=98=AF=E7=94=B1=E4=BA=8E=E5=B9=B6=E5=8F=91=E6=8E=A7=E5=88=
+=B6=E4=B8=8D=E5=A5=BD=EF=BC=8C=E5=AF=BC=E8=87=B4=E6=95=B0=E6=8D=AE=E7=9A=84=
+=E4=B8=8D=E4=B8=80=E8=87=B4=EF=BC=8C=E5=BC=95=E8=B5=B7=E7=9A=84=E6=AD=BB=E5=
+=BE=AA=E7=8E=AF=E3=80=82=E5=80=BC=E5=BE=97=E4=B8=80=E6=8F=90=E7=9A=84=E6=98=
+=AF=EF=BC=8CHashMap=E4=B8=8D=E6=98=AF=E4=B8=80=E4=B8=AA=E7=BA=BF=E7=A8=8B=
+=E5=AE=89=E5=85=A8=E7=9A=84=E6=95=B0=E6=8D=AE=E7=BB=93=E6=9E=84=EF=BC=8C=E8=
+=A6=81=E7=94=A8=E5=88=B0=E5=A4=9A=E4=B8=AA=E7=BA=BF=E7=A8=8B=E4=B8=AD=E5=8E=
+=BB=EF=BC=8C=E9=9C=80=E8=A6=81=E8=87=AA=E5=B7=B1=E5=8A=A0=E4=B8=8A=E5=90=8C=
+=E6=AD=A5=E6=A0=87=E5=BF=97=EF=BC=8C=E4=B8=BA=E4=BB=80=E4=B9=88=E4=BC=9A=E6=
+=AD=BB=E5=BE=AA=E7=8E=AF=E5=91=A2=EF=BC=8C=E7=9C=8B=E7=9C=8B=E4=B8=8B=E9=9D=
+=A2HashMap=E4=B8=ADget=E5=87=BD=E6=95=B0=E7=9A=84=E6=BA=90=E4=BB=A3=E7=A0=
+=81=EF=BC=9A</P>
+<P>public V get(Object key) {<BR>&nbsp;if (key =3D=3D=20
+null)<BR>&nbsp;&nbsp;&nbsp;&nbsp; return=20
+getForNullKey();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int hash =
+=3D=20
+hash(key.hashCode());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for=20
+(Entry&lt;K,V&gt; e =3D table[indexFor(hash,=20
+table.length)];<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;=20
+e !=3D=20
+null;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;=20
+e =3D e.next)=20
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+Object=20
+k;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+if=20
+(e.hash =3D=3D hash &amp;&amp; ((k =3D e.key) =3D=3D key ||=20
+key.equals(k)))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+return e.value;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return=20
+null;<BR>&nbsp;&nbsp;&nbsp; }</P>
+<P>get=E5=87=BD=E6=95=B0=E4=BC=9A=E6=A0=B9=E6=8D=AEkey=E7=9A=84hashcode=E6=
+=9D=A5=E9=94=81=E5=AE=9A=E5=A4=9A=E4=B8=AA=E5=AF=B9=E8=B1=A1=EF=BC=8C=E5=B9=
+=B6=E4=B8=94=E9=81=8D=E5=8E=86=E8=BF=99=E4=BA=9B=E5=AF=B9=E8=B1=A1=E6=9D=A5=
+=E6=89=BE=E5=88=B0key=E6=89=80=E5=AF=B9=E5=BA=94=E7=9A=84=E5=AF=B9=E8=B1=A1=
+=E3=80=82=E5=BD=93=E5=A4=9A=E4=B8=AA=E7=BA=BF=E7=A8=8B=E4=B8=8D=E5=AE=89=E5=
+=85=A8=E7=9A=84=E4=BF=AE=E6=94=B9HanshMap=E6=95=B0=E6=8D=AE=E7=BB=93=E6=9E=
+=84=E7=9A=84=E6=97=B6=E5=80=99=EF=BC=8C=E6=9C=89=E5=8F=AF=E8=83=BD=E4=BD=BF=
+=E5=BE=97=E8=BF=99=E4=B8=AA=E5=87=BD=E6=95=B0=E8=BF=9B=E5=85=A5=E6=AD=BB=E5=
+=BE=AA=E7=8E=AF=E3=80=82</P>
+<P>=E6=88=91=E4=BB=AC=E5=BB=BA=E8=AE=AE=E5=AE=A2=E6=88=B7=E4=BD=BF=E7=94=A8=
+ConcurrentHashMap=E6=88=96=E5=9C=A8=E4=BD=BF=E7=94=A8HanshMap=E7=9A=84=E6=
+=97=B6=E5=80=99=E5=8A=A0=E4=B8=8A=E5=90=8C=E6=AD=A5=E6=A0=87=E5=BF=97=EF=BC=
+=8C=E9=97=AE=E9=A2=98=E5=BE=97=E5=88=B0=E8=A7=A3=E5=86=B3=EF=BC=81</P>
+<P></P>
+<P class=3DentryInfo>Posted at <A=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/entry/16">06:59=E4=B8=
+=8B=E5=8D=88 =E4=B9=9D=E6=9C=88 11,=20
+2007</A> by =E7=8E=8B=E6=98=B1 in <SPAN class=3Dcategory>Java</SPAN> =
+&nbsp;|&nbsp; <A=20
+class=3DcommentsLink=20
+href=3D"http://developers.sun.com.cn/blog/yutoujava/entry/16#comments">=E8=
+=AF=84=E8=AE=BA[0]</A>=20
+</P><!--=0A=
+<rdf:RDF xmlns:rdf=3D"http://www.w3.org/1999/02/22-rdf-syntax-ns#"=0A=
+         =
+xmlns:trackback=3D"http://madskills.com/public/xml/rss/module/trackback/"=0A=
+         xmlns:dc=3D"http://purl.org/dc/elements/1.1/">=0A=
+<rdf:Description=0A=
+    rdf:about=3D"http://developers.sun.com.cn/blog/yutoujava/entry/16"=0A=
+    =
+trackback:ping=3D"http://developers.sun.com.cn/blog/yutoujava/entry/16"=0A=
+    dc:title=3D"Race =
+Condition=E5=BC=95=E8=B5=B7=E7=9A=84=E6=80=A7=E8=83=BD=E9=97=AE=E9=A2=98"=0A=
+    =
+dc:identifier=3D"http://developers.sun.com.cn/blog/yutoujava/entry/16"=0A=
+    dc:subject=3D"Java"=0A=
+    dc:description=3D"Race =
+Condition=E5=BC=95=E8=B5=B7=E7=9A=84=E6=80=A7=E8=83=BD=E9=97=AE=E9=A2=98"=0A=
+    dc:creator=3D"yuwang"=0A=
+    dc:date=3D"2007-09-11 18:59:10.0" />=0A=
+</rdf:RDF>=0A=
+--></DIV></DIV><A=20
+name=3Dcomments></A>
+<DIV class=3Dcomments id=3Dcomments>
+<DIV class=3Dcomments-head>=E8=AF=84=E8=AE=BA:</DIV><BR></DIV>
+<DIV class=3Dcomments-form>
+<DIV =
+class=3Dcomments-head>=E5=8F=91=E8=A1=A8=E4=B8=80=E6=9D=A1=E8=AF=84=E8=AE=
+=BA=EF=BC=9A</DIV><A name=3Dcomment-form></A><SPAN=20
+class=3Dstatus>=E8=AF=A5=E6=97=A5=E5=BF=97=E8=AF=84=E8=AE=BA=E5=8A=9F=E8=83=
+=BD=E8=A2=AB=E7=A6=81=E7=94=A8=E4=BA=86=E3=80=82</SPAN> </DIV></DIV>
+<DIV id=3Dcopyrightnotice>Copyright (C) 2003, <A=20
+href=3D"mailto:yuwang881-AT-gmail-DOT-com">=E7=8E=8B=E6=98=B1</A> =
+</DIV></BODY></HTML>
+
+------=_NextPart_000_0000_01CA5CA4.023B40B0
+Content-Type: image/gif
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://blog.rockyear.com/user/3/photo_3.gif
+
+<!--
+=B4=CB=CE=C4=BC=FE=D3=C3=D3=DA=D3=C9lighttpd=BB=F2nginx=D7=AA=B7=A2=B9=FD=
+=C0=B4=B5=C4=C7=EB=C7=F3
+-->
+
+
+
+
+
+
+<html>
+	<head>
+		<TITLE>=D3=F2=C3=FB=BE=C0=B4=ED=CF=B5=CD=B3</TITLE>
+	</head>
+	<body leftmargin=3D"0" topmargin=3D"0" rightmargin=3D"0" =
+bottommargin=3D"0">
+	=09
+		<table width=3D"100%" border=3D"0" cellpadding=3D"0" =
+cellspacing=3D"0">
+			<tr>
+				<td>
+					<iframe name=3D_parent border=3D0 =
+src=3Dissueunziped/baidubj090927n2/index.jsp?sf=3D&UserUrl=3Dblog.rockyea=
+r.com frameSpacing=3D0
+						marginHeight=3D0 frameBorder=3D0 noResize width=3D100% =
+scrolling=3Dno
+						height=3D1600 vspale=3D0>
+					</iframe>
+					<iframe
+						=
+src=3D"counter/counter.jsp?pc=3D50001&dn=3Dblog.rockyear.com&ip=3D123.118=
+.5.47"
+						width=3D"0" height=3D"0">
+					</iframe>
+				</td>
+			</tr>
+		</table>
+	=09
+	</body>
+</html>
+
+------=_NextPart_000_0000_01CA5CA4.023B40B0--

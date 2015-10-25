@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><bookstore>
+	<book category="CHILDREN" bid="001">
+		<title lang="en">Harry Potter</title>
+		<author>J K. Rowling</author>
+		<year>2005</year>
+		<price>100</price>
+	</book>
+	<book category="PARANT">
+		<title lang="zh">xxxx</title>
+		<author>J K. Rowling</author>
+		<year>2005</year>
+		<price>29.99</price>
+	</book>	
+</bookstore>

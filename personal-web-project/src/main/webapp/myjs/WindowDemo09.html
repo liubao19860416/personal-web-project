@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>我的网页</title>
+<!--  -->
+<script lang="JavaScript">
+	
+</script>
+</head>
+<body>
+	<script type="text/javascript">
+		function getSum() {
+			return 100;
+		}
+		alert(getSum());
+		alert(getSum);
+
+		<!--自定义的函数，使用newFunction（）进行初始化；-->
+		var methodss = new Function("x,y", "var sum=x+y;return sum;");
+		alert(methodss(3, 6));
+		alert(methodss);
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+	
+	<!-- <import resource="classpath:conf/springmvc-import.xml" /> -->
+	
+	<mvc:annotation-driven/>
+	
+	<mvc:default-servlet-handler/>
+	<bean id="defaultServletHttpRequestHandler" class="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler"/>
+	
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	
+	<context:component-scan base-package="base.**.controller" />
+	<context:component-scan base-package="base.dwr" /> 
+	
+	<!-- activeUser 参数解析器 -->
+	<mvc:annotation-driven conversion-service="conversionService">
+		<mvc:argument-resolvers>
+			<bean class="base.converters.UserArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF8" />
+	</bean>
+
+	<!-- 自定义注册属性编辑器 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="base.converters.DateConverter" />
+				<bean class="base.converters.DatetimeConverter" />
+				<bean class="base.converters.StringTrimConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- spring自带的扫描注解配置的url路径请求解析器 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="order" value="-1" />
+		<property name="cacheSeconds" value="0" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter"/>
+			</list>
+		</property>
+	</bean>
+	<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 全局异常处理器 -->
+	<bean id="handlerExceptionResolver1" class="base.exception.MyExceptionResolver">
+		<!-- jsonmessageConverter负责进行json转换 -->
+		<property name="jsonMessageConverter" ref="mappingJacksonHttpMessageConverter" />
+	</bean>
+	
+	<!-- 其中ExceptionHandlerExceptionResolver优先级最高1，ResponseStatusExceptionResolver第二，DefaultHandlerExceptionResolver第三。 -->
+	<!-- -全剧异常处理方式2：SimpleMappingExceptionResolver这个类用来处理全局异常 -->
+	<bean id="handlerExceptionResolver2" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="order" value="-1" />
+		<!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+    	<property name="exceptionAttribute" value="exception"/>
+		<!-- 默认异常信息处理url映射地址，优先级最低，为3；当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
+		<property name="defaultErrorView" value="/base/errorDefault"/>
+		<!-- 默认HTTP状态码 --> 
+		<property name="defaultStatusCode" value="404"/>
+		<!-- <property name="warnLogCategory">
+			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
+		</property> -->
+		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->  
+        <property name="warnLogCategory" value="warn"/>
+        <!-- 优先级最高，为1 -->
+		<property name="exceptionMappings">
+			<props>
+				<!-- 在这里配置各种异常，对应的跳转页面信息 ，参加下面的4种url写法-->
+				<!-- <prop key="base.exception.SessionTimeoutException">redirect:/error.jsp</prop> -->
+				<!-- <prop key="base.exception.SessionTimeoutException">forward:/error.jsp</prop> -->
+				<!-- <prop key="base.exception.SessionTimeoutException">forward:/WEB-INF/jsp/base/error.jsp</prop> -->
+				<!-- <prop key="java.lang.NullPointerException">/base/login</prop> -->
+			</props>
+		</property>
+		 <!-- 优先级居中，为2，如何使用？？？ -->
+		<property name="statusCodes">
+            <props>  
+                <prop key="/base/errorDefault">500</prop>  
+                <prop key="/base/errorDefault">404</prop>  
+            </props>  
+        </property>
+	</bean>
+
+	<!-- 文件上传 设置上传文件的最大尺寸为5MB-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5242880"/>
+		<property name="defaultEncoding" value="utf-8" />
+      	<property name="maxInMemorySize" value="40960" />
+	</bean>
+
+</beans>

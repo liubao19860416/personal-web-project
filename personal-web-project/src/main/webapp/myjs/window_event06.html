@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习-在窗体文本区域中单击，颜色交替发生变化的例子</title>
+<script type="text/javascript">
+	var flag = false;
+	function ChangeColor() {
+		if (flag) {
+			document.body.bgColor = "yellow";
+			flag = false;
+		} else {
+			document.body.bgColor = "red";
+			flag = true;
+		}
+	}
+</script>
+
+</head>
+<body onclick="ChangeColor()">Click on this document!
+</body>
+</html>

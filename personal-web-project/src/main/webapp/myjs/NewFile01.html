@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Insert title here</title>
+<!--内容：数组的定义和简单使用；
+循环语句；
+输出语句document.write语句；
+-->
+<script language="JavaScript">
+	function hello() {
+		alert("欢迎您的光临！");
+	}
+	function byebye() {
+		alert("您要走了？下次别来了！");
+	}
+<!--显示文本框输入的内容-->
+	function show() {
+		alert(document.myform.name.value);
+	}
+</script>
+</head>
+<!-- 
+<body onLoad="hello()" onUnload="byebye()">
+ -->
+<body>
+	<form action="" method="get" name="myform">
+		请输入文本：<input type="text" name="name"> 
+		请点击按钮：<input type="button" value="显示" onclick="alert(document.myform.name.value)">
+	</form>
+
+</body>
+</html>

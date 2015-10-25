@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GB2312" ?> 
+<?xml-stylesheet type="text/css" href="book.css" ?> 
+
+<bookstore>
+	<book>
+		<bookname>&lt;就业指导书&gt;</bookname><br />
+		<author>Liubao</author><br />
+		<price>33元</price><br />
+	</book>
+	
+	<book>
+		<bookname>&lt;就业指导书&gt;</bookname>
+		<author>Liubao</author>
+		<price>33元</price>
+		<price>33元</price>
+	</book>
+</bookstore>
+

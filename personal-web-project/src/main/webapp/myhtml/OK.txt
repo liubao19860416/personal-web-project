@@ -1,0 +1,7 @@
+//该工程建立的是“动态web工程”，之前创建的都是静态web工程；静态web工程不能实现某些点击效果切换功能；
+window_event01.html：带暂停和继续等按钮的小时钟
+window_event02.html：练习-更改窗口大小
+window_event03.html：带暂停和继续等按钮的小时钟和一个计时器（//点击多次，会启动多次计时器，这个问题未解决；）；
+window_event04.html：indow.opener属性练习；
+window_event01.html：
+window_event01.html：

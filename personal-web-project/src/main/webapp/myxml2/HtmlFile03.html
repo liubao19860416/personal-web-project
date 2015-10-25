@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- style样式标签,里面通过标签名+｛属性名：属性值｝的方式设定style的作用区域；
+注意这里用的是冒号而不是等号；属性和属性之间使用分号隔开；
+type代表可以识别的文本区域代码语言类型；
+下面的是通过@IMPORT url("CSS_File01.css");语句引入在css中创建的样式文件；
+ -->
+<style type="text/css">
+
+@IMPORT url("CSS_File01.css");
+
+div.class01 {
+	background-color: green;
+	color: white;
+}
+#id01{
+	background-color: black;
+	color: silver;
+}
+
+
+
+
+
+</style>
+
+
+</head>
+<body>
+
+	<!-- 1、标签div表示的是一个区域，自动换行；
+			span表示区域，不会自动换行；
+			p表示段落，会自动在前面空一个行； 
+		2、块级标签（元素）标签结束后，都自动有换行，例如：div p dl table title ol ul等；
+		       行内标签（元素）标签结束后，都没有换行，例如：select font span img input a等；
+		3、class类名选择器：在标签内定义class的选择器名称，专门给指定的部分标签添加CSS格式使用的；
+			他对不同标签，可以设定相同的class是同时生效的；
+		4、id选择器：类似上面的class选择器，但是id的取值在页面中是唯一的；
+		因为该名称可以被javascript和css都使用了；它一般都是为了去标识页面中的特殊区域的；
+		
+		他们的优先级如下：标签选择器<class类选择器<id选择器<style属性；
+-->
+
+	<div style="background-color: red">这是一个区域1</div>
+	<div class="class01">这是一个区域2</div>
+	<div id="id01">这是一个区域3</div>
+	<span>这是一个区域4</span>
+	<br />
+	<span id="id01">这是一个区域5</span>
+	<p>这是一个段落1</p>
+	<p>这是一个段落2</p>
+	<p>这是一个段落3</p>
+
+	<!-- 2、这是动态显示的标签marquee，可以设置多种显示方式 
+	里面是哟个img标签，添加了一张图片，让其动态显示；<img src="socket数据接受过程.jpg" height="100" width="200">一张图片<br />
+	alternate：上下或左右来回移动
+	slide：这个比较常用，停止在底端显示；-->
+	<marquee direction="down" behavior="slide">
+		<img src="socket数据接受过程.jpg" height="100" width="200">一张图片<br />
+		这是一个动态显示的标签
+	</marquee>
+
+	<!-- 3、标签</pre>可以原样输出标签内的数据内容；
+	 -->
+	<pre>
+	class Demo{
+		public static void main(String[] args)
+		{
+			System.outy.println("Hello World!");
+		}
+	}
+	</pre>
+
+	<!-- 4、超链接的4中状态（伪元素设计）：
+	例如在<a>标签中有一个超链接，<a href="www.baidu.com">用来设置它的点击样式的；
+	a:link{}设置默认未点击状态效果；
+	a:visited{}设置访问后效果；
+	a:hover{}设置鼠标悬浮上效果；
+	a:active{}设置点击超链接时的效果；
+	
+	 -->
+
+
+
+</body>
+</html>
