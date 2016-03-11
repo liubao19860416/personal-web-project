@@ -43,14 +43,20 @@
 			<groupId>com.saike.project</groupId>
 			<artifactId>project-base</artifactId>
 			<version>1.1.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.meidusa.toolkit</groupId>
+					<artifactId>fastjson</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- 上汽图片上传 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.saic.ebiz.mediastorage</groupId>
 			<artifactId>mediastorage</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- 依赖的project-dao（+service）工程的jar包-->
 		<!-- <dependency>
@@ -504,10 +510,15 @@
 			<version>1.6.1</version>
 		</dependency>
 		<!-- 转换json的工具类 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.meidusa.toolkit</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.3.17</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.8</version>
 		</dependency>
 		<!-- 转换gson的工具类 -->
 		<dependency>
