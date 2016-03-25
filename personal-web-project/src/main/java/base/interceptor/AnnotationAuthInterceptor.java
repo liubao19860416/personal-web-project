@@ -18,7 +18,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import base.annotation.Auth;
 import base.entiy.User;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 /**
  * 通过请求的方法的注解信息，进行拦截器；
  * 当包含注解信息@Auth的时候，进行拦截

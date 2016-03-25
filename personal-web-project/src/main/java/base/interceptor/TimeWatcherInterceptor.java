@@ -18,7 +18,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import base.entiy.User;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 /**
  * 性能监控（执行时间）拦截器
  * 

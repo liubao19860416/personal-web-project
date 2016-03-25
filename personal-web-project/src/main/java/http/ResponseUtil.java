@@ -2,7 +2,7 @@ package http;
 
 import java.util.Map;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 
 public class ResponseUtil {
 

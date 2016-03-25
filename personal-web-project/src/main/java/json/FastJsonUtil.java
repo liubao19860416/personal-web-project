@@ -3,8 +3,8 @@ package json;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.meidusa.fastjson.JSON;
-import com.meidusa.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * javaBean转化为字符串公共类

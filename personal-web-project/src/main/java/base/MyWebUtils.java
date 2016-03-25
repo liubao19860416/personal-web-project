@@ -28,7 +28,7 @@ import org.springframework.web.util.WebUtils;
 
 import base.entiy.User;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 /**
  * WEB相关的一些快捷获取操作方法(最新版-20150128)
  * 

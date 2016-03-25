@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.WeakHashMap;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 
 
 public class TestMany {

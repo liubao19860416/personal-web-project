@@ -15,7 +15,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.meidusa.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 /**
  * 记录日志信息的拦截器
  * 

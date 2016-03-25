@@ -17,8 +17,8 @@ import org.hamcrest.Description;
 
 import base.controller.result.ResultInfo;
 
-import com.meidusa.fastjson.JSON;
-import com.meidusa.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 测试用例Matcher抽象基类，用来对response JSON对象做检查

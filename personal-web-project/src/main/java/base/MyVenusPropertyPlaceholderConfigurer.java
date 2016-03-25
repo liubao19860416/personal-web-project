@@ -12,7 +12,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 
-import com.meidusa.toolkit.common.bean.config.ConfigUtil;
+//import com.meidusa.toolkit.common.bean.config.ConfigUtil;
 /**
  * 也可以使用base项目中的同名类，该类只是复制品
  * @author Liubao
@@ -42,7 +42,7 @@ public class MyVenusPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
 
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties props) throws BeansException {
-        ConfigUtil.addProperties(props);
+        //ConfigUtil.addProperties(props);
         super.processProperties(beanFactory, props);
     }
 

@@ -9,8 +9,8 @@ import org.junit.Test;
 import _test.Person;
 import _test.Son;
 
-import com.meidusa.fastjson.JSON;
-import com.meidusa.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public class TestToJSON {
 
