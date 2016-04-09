@@ -3,6 +3,7 @@ package base.listener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -30,6 +31,9 @@ import org.springframework.web.util.WebUtils;
 public class HttpSessionListenerImpl implements HttpSessionListener {
     
     private static Logger logger = LoggerFactory.getLogger(HttpSessionListenerImpl.class);
+    
+    //原子操作
+    private static AtomicLong ATOMIC_COUNT=new AtomicLong(0);
 
     /**
      * 监听Session创建的时候
@@ -150,6 +154,9 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
         if(context.getAttribute("onLineCount")!=null){
             count = Integer.parseInt(String.valueOf(context.getAttribute("onLineCount")));
         }
+        
+        //自增原子操作实现
+        ATOMIC_COUNT.incrementAndGet();
         context.setAttribute("onLineCount",  ++count);
         logger.info("监听Session创建的了，当前在线人数为："+count );
         if (count >= maxOnLineCount) {
@@ -177,6 +184,9 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
         if(context.getAttribute("onLineCount")!=null){
             count = Integer.parseInt(String.valueOf(context.getAttribute("onLineCount")));
         }
+        
+        //自减原子操作实现
+        ATOMIC_COUNT.decrementAndGet();
         context.setAttribute("onLineCount", --count);
         logger.info("监听Session销毁了，当前在线人数为："+count );
     }
