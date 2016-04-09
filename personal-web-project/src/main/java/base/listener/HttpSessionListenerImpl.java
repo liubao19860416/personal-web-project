@@ -7,13 +7,10 @@ import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -39,6 +36,10 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
      */
     @SuppressWarnings({ "unused" })
     public void sessionCreated(HttpSessionEvent event) {
+        //获取用户会话的sessioonId和创建时间信息
+        HttpSession session = event.getSession();
+        String id = session.getId();
+        long creationTime = session.getCreationTime();
         
         //测试代码开始=============需要实现ServletContextListener的监听器方式有稍微差别========================
        
@@ -50,7 +51,7 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
          * 执行方法的时候，这里会导致循环调用 ，死循环
          */
         //获取ServletContext对象的3种方式
-        ServletContext servletContext1 = event.getSession().getServletContext();
+        ServletContext servletContext1 = session.getServletContext();
         //ServletContext servletContext2 = request1.getSession().getServletContext();
         //ServletContext servletContext3 = ServletActionContext.getServletContext();
         
@@ -139,7 +140,7 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
         //测试代码结束=====================================
         
         
-        ServletContext context = event.getSession().getServletContext();
+        ServletContext context = session.getServletContext();
         //获取session中的在线人数属性值
         int maxOnLineCount = 10;
         int count = 0;
@@ -166,7 +167,12 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
      *  监听session注销、超时时候调用，停止tomcat不会调用该方法
      */
     public void sessionDestroyed(HttpSessionEvent event) {
-        ServletContext context = event.getSession().getServletContext();
+        //获取用户会话的sessioonId和创建时间信息
+        HttpSession session = event.getSession();
+        String id = session.getId();
+        long creationTime = session.getCreationTime();
+        
+        ServletContext context = session.getServletContext();
         int count = 0;
         if(context.getAttribute("onLineCount")!=null){
             count = Integer.parseInt(String.valueOf(context.getAttribute("onLineCount")));

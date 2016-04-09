@@ -10,13 +10,13 @@
 	<description>保存了所有的工具类方法的war工程</description>
 
 	<!-- 当前项目有效的中央仓库配置 -->
-	<repositories>
+	<!-- <repositories>
 		<repository>
 			<id>central</id>
 			<url>http://repo1.maven.org/maven2/</url>
 			<name>central</name>
 		</repository>
-	</repositories>
+	</repositories> -->
 
 	<!-- 编码及内存设置 -->
 	<properties>
@@ -34,12 +34,13 @@
 		<junit.version>4.11</junit.version>
 		<mysql.version>5.1.29</mysql.version>
 		<oracle.version>10.2.0.4.0</oracle.version>
+		<logback.version>1.1.3</logback.version>
 	</properties>
 
 	<dependencies>
 
 		<!-- 添加base依赖jar包 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.saike.project</groupId>
 			<artifactId>project-base</artifactId>
 			<version>1.1.0-SNAPSHOT</version>
@@ -49,7 +50,7 @@
 					<artifactId>fastjson</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> -->
 		
 		<!-- 上汽图片上传 -->
 		<!-- <dependency>
@@ -79,6 +80,12 @@
 		    <artifactId>utility</artifactId>
 		    <version>3.20-geoapi-3.0</version>
 		</dependency> -->
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.3</version>
+		</dependency>
 		
 		<!-- DWR测试依赖jar包 -->
 		<dependency>
@@ -499,16 +506,17 @@
 			<version>2.12.3</version>
 		</dependency>
 		<!-- OCR依赖的jar包 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.sun.media</groupId>
 			<artifactId>jai_imageio</artifactId>
 			<version>1.1</version>
-		</dependency>
+		</dependency>  -->
 		<dependency>
 			<groupId>org.swinglabs</groupId>
 			<artifactId>swingx</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		
 		<!-- 转换json的工具类 -->
 		<!-- <dependency>
 			<groupId>com.meidusa.toolkit</groupId>
@@ -567,6 +575,29 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+		
+		<!-- 日志 -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+    				<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency> -->
 		
 		
 		<!-- mq依赖的jar包 -->

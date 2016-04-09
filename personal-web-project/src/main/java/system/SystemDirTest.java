@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import com.saike.grape.base.BaseEnvironment;
+//import com.saike.grape.base.BaseEnvironment;
 
 public class SystemDirTest {
     
@@ -45,15 +45,15 @@ public class SystemDirTest {
         System.out.println("1:"+path);
         path=Thread.currentThread().getContextClassLoader().getResource("").getPath(); 
         System.out.println("2:"+path);//D:/eclipse-20141015/workspace/personal-web-project/target/classes/
-        path=BaseEnvironment.class.getClassLoader().getResource("").getPath();  
-        System.out.println("3:"+path);///D:/eclipse-20141015/workspace/personal-web-project/target/classes/
-        path=BaseEnvironment.class.getResource("/").getFile().toString(); 
-        System.out.println("4:"+path);//D:/eclipse-20141015/workspace/personal-web-project/target/classes/
-        path=BaseEnvironment.class.getResource(".").getFile().toString(); 
-        System.out.println("5:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/base/
-        path=BaseEnvironment.class.getResource("").getFile().toString(); 
-        System.out.println("6:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/base/
-        path=BaseEnvironment.class.getResource("../").getFile().toString();
+//        path=BaseEnvironment.class.getClassLoader().getResource("").getPath();  
+//        System.out.println("3:"+path);///D:/eclipse-20141015/workspace/personal-web-project/target/classes/
+//        path=BaseEnvironment.class.getResource("/").getFile().toString(); 
+//        System.out.println("4:"+path);//D:/eclipse-20141015/workspace/personal-web-project/target/classes/
+//        path=BaseEnvironment.class.getResource(".").getFile().toString(); 
+//        System.out.println("5:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/base/
+//        path=BaseEnvironment.class.getResource("").getFile().toString(); 
+//        System.out.println("6:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/base/
+//        path=BaseEnvironment.class.getResource("../").getFile().toString();
         System.out.println("7:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/
         System.out.println("7:"+path);//D:/eclipse-20141015/workspace/project-base/target/classes/com/saike/grape/
    

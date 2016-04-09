@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import _test.Person;
 
-import com.saike.grape.base.BaseEnvironment;
+//import com.saike.grape.base.BaseEnvironment;
 
 /**
  * 获取类加载器（3种类型Bootstrap ClassLoader、Extension ClassLoader、Application
@@ -27,8 +27,8 @@ public class ClassLoaderDemo {
         Person stu = new Person();
         System.out.println("类加载器1："
                 + stu.getClass().getClassLoader().getClass().getName());
-        System.out.println("类加载器1："
-                + BaseEnvironment.class.getClassLoader().getClass().getName());
+//        System.out.println("类加载器1："
+//                + BaseEnvironment.class.getClassLoader().getClass().getName());
         System.out.println("类加载器1："
                 +  new Thread().getContextClassLoader().getClass().getName());
     }

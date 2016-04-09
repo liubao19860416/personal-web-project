@@ -2,7 +2,7 @@ package beancompare;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import com.saike.grape.util.DatetimeUtils;
+import time.DatetimeUtils;
 
 
 /**
